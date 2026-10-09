@@ -1,0 +1,17 @@
+# Fins de linha: o Git normaliza arquivos de texto para LF no repositório.
+* text=auto
+
+# Arquivos executados ou lidos em Linux (contêineres Docker e VPS) precisam de LF
+# também na cópia de trabalho, mesmo quando o repositório é clonado no Windows.
+*.sh text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+docker-compose.yml text eol=lf
+*.conf text eol=lf
+*.conf.example text eol=lf
+.env.example text eol=lf
+
+# Binários
+*.png binary
+*.ico binary
+*.dump binary
