@@ -13,6 +13,8 @@
     "test:e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node scripts/migrate.mjs",
+    "db:dev:up": "docker run -d --name decida-voto-dev-db --restart unless-stopped -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=decida_voto -p 127.0.0.1:55433:5432 -v decida-voto-dev-data:/var/lib/postgresql/data postgres:16-alpine",
+    "db:dev:down": "docker rm -f decida-voto-dev-db",
     "db:test:up": "docker run -d --name decida-voto-test-db -e POSTGRES_PASSWORD=teste -e POSTGRES_DB=decida_voto_teste -p 127.0.0.1:55432:5432 --tmpfs /var/lib/postgresql/data postgres:16-alpine",
     "db:test:down": "docker rm -f decida-voto-test-db",
     "admin:hash": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/admin-hash.mjs",

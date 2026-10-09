@@ -35,11 +35,22 @@ Ferramenta informativa e independente que compara as respostas do eleitor a 10 p
 
 ```bash
 npm install
-npm run db:test:up                 # PostgreSQL de teste em Docker (porta 127.0.0.1:55432, dados em memória)
-DATABASE_URL=postgres://postgres:teste@127.0.0.1:55432/decida_voto_teste npm run db:migrate
-cp .env.example .env               # preencha; para dev use APP_ORIGIN=http://localhost:3000
-npm run dev
+npm run db:dev:up                  # PostgreSQL de desenvolvimento em Docker (127.0.0.1:55433, dados persistentes)
+DATABASE_URL=postgres://postgres:dev@127.0.0.1:55433/decida_voto npm run db:migrate
+cp .env.example .env               # preencha (veja abaixo)
+npm run dev                        # http://localhost:3000
 ```
+
+No `.env` de desenvolvimento, use:
+
+- `DATABASE_URL=postgres://postgres:dev@127.0.0.1:55433/decida_voto`
+- `APP_ORIGIN=http://localhost:3000`
+- `FORM_TOKEN_SECRET` e `RATE_LIMIT_SECRET` com valores aleatórios (`openssl rand -hex 32`)
+- `ADMIN_USERNAME` e `ADMIN_PASSWORD_HASH` (gere com `npm run admin:hash`)
+
+Acesse sempre por `http://localhost:3000`, e não por `127.0.0.1`: envios de outra origem são recusados.
+
+Para parar o banco de desenvolvimento, use `npm run db:dev:down`. Os dados ficam no volume `decida-voto-dev-data`.
 
 ## Testes
 
