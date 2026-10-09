@@ -5,22 +5,39 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "prebuild": "vitest run",
+    "start": "node scripts/start-standalone.mjs",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:integration": "vitest run -c vitest.integration.config.ts",
+    "test:e2e": "playwright test",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:test:up": "docker run -d --name decida-voto-test-db -e POSTGRES_PASSWORD=teste -e POSTGRES_DB=decida_voto_teste -p 127.0.0.1:55432:5432 --tmpfs /var/lib/postgresql/data postgres:16-alpine",
+    "db:test:down": "docker rm -f decida-voto-test-db",
+    "admin:hash": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/admin-hash.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
+    "drizzle-orm": "^0.45.4",
     "next": "16.4.0",
+    "postgres": "^3.4.9",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

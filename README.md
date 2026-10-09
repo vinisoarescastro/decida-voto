@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Decida Voto
 
-## Getting Started
+Ferramenta informativa e independente que compara as respostas do eleitor a 10 perguntas com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026. Não é pesquisa eleitoral nem recomendação de voto.
 
-First, run the development server:
+## Arquitetura
+
+- **Next.js 16 (App Router)** em modo servidor (`output: "standalone"`), executado em Docker atrás do Nginx. As páginas públicas continuam pré-renderizadas.
+- **PostgreSQL 16** em Docker, sem porta exposta, com acesso via Drizzle ORM (consultas parametrizadas e migrações versionadas em `drizzle/`).
+- **Coleta mínima de dados**, com consentimento: UF, município (lista do IBGE), gênero, faixa etária e respostas. A afinidade é recalculada no servidor. Não guardamos idade exata, IP, horário nem identificadores.
+- **Painel `/admin`** com autenticação (senha com hash scrypt, sessão em cookie `HttpOnly`/`SameSite=Strict`, bloqueio de tentativas). Mostra só estatísticas agregadas e oculta grupos com menos de `PRIVACY_MIN_GROUP` participações.
+- **Antiabuso:**
+  - token assinado e de uso único;
+  - tempo mínimo de preenchimento;
+  - campo-isca contra robôs;
+  - limite de envios por hash diário de IP;
+  - cookie que impede repetir o envio por 30 dias;
+  - verificação de origem e limites no Nginx.
+
+## Estrutura
+
+| Caminho | Conteúdo |
+|---|---|
+| `src/data/` | Perguntas, posições, notícias e municípios do IBGE |
+| `src/lib/affinity.ts` | Cálculo de afinidade (função pura, usada no navegador e no servidor) |
+| `src/lib/perfil.ts`, `participacao-schema.ts` | Regras do perfil (idade de 16 a 120, faixas) e validação do envio |
+| `src/server/db/` | Esquema do banco e conexão |
+| `src/server/services/` | Gravação de participações, estatísticas, sessões e tokens |
+| `src/server/security/` | Criptografia (hashes, tokens, senha) e limite de requisições |
+| `src/app/api/` | Rotas: municípios, token, participações, login e logout |
+| `src/app/admin/` | Painel administrativo |
+| `drizzle/` | Migrações SQL, incluindo a carga dos 5.571 municípios |
+| `deploy/` | Nginx, backup e roteiro de implantação ([deploy/README.md](deploy/README.md)) |
+
+## Desenvolvimento local
 
 ```bash
+npm install
+npm run db:test:up                 # PostgreSQL de teste em Docker (porta 127.0.0.1:55432, dados em memória)
+DATABASE_URL=postgres://postgres:teste@127.0.0.1:55432/decida_voto_teste npm run db:migrate
+cp .env.example .env               # preencha; para dev use APP_ORIGIN=http://localhost:3000
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Testes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm test                  # unitários: cálculo, validação de idade, criptografia, dados (roda antes de todo build)
+npm run test:integration  # integração com PostgreSQL real: gravação, restrições, estatísticas, limites, sessões
+npm run build && npm run test:e2e   # ponta a ponta: fluxo completo, proteções da API, painel e login
+npm run lint
+npm run check:links       # links de fontes e notícias
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Os testes de integração e de ponta a ponta exigem o banco de teste (`npm run db:test:up`). Para desligá-lo: `npm run db:test:down`.
 
-## Learn More
+## Banco de dados
 
-To learn more about Next.js, take a look at the following resources:
+- Alterou `src/server/db/schema.ts`? Gere a migração com `npm run db:generate` e revise o SQL em `drizzle/`.
+- As migrações são aplicadas automaticamente pelo serviço `migrate` do Docker Compose.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Atualizar conteúdo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Edite `src/data/positions.json` ou `news.json`. Toda posição `documented` precisa de ao menos uma fonte `https`.
+2. Incremente `version` e atualize `updatedAt`. A versão é gravada com cada participação, para permitir recálculo.
+3. Rode `npm run check:links` e `npm run build`.
+4. Após a revisão humana, mude `reviewStatus` para `"revisado"`. É um controle interno e não aparece no site.
 
-## Deploy on Vercel
+## Regras de conteúdo e privacidade
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Nunca atribuir posição sem fonte verificável. Na dúvida, use `"status": "insufficient"`.
+- Aplicar os mesmos critérios aos dois candidatos.
+- **Não divulgar** estatísticas do painel: resultados que permitam inferir a ordem dos candidatos podem configurar enquete proibida no período eleitoral (Res. TSE 23.600/2019, art. 23).
+- Não adicionar campos que identifiquem pessoas, como nome, e-mail, CPF, IP ou idade exata.

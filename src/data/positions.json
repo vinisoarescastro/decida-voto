@@ -1,0 +1,801 @@
+{
+  "version": "1.3.0",
+  "updatedAt": "2026-10-09",
+  "reviewStatus": "pendente",
+  "candidates": [
+    {
+      "id": "flavio-bolsonaro",
+      "name": "Flávio Bolsonaro",
+      "fullName": "Flávio Nantes Bolsonaro",
+      "party": "PL"
+    },
+    {
+      "id": "lula",
+      "name": "Lula",
+      "fullName": "Luiz Inácio Lula da Silva",
+      "party": "PT"
+    }
+  ],
+  "positions": [
+    {
+      "questionId": "estatais",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "media",
+      "summary": "O plano de governo propõe retomar o Programa Nacional de Desestatização com avaliação caso a caso e fortalecer a Lei das Estatais. Flávio já falou em privatizar 95% das estatais, inclusive os Correios. Em outubro de 2026, o coordenador econômico da campanha afirmou que Petrobras, Banco do Brasil e Caixa não serão privatizados.",
+      "rationale": "A alternativa 3 é a que melhor resume o plano (desestatização caso a caso, com a Caixa reposicionada como 'Banco da Prosperidade') e a fala de que 'não dá para privatizar tudo'. A declaração sobre 95% das estatais aponta para a alternativa 4, mas a campanha a relativizou depois, excluindo Petrobras, BB e Caixa. A alternativa 2 contempla o fortalecimento da Lei das Estatais, mas não as privatizações propostas. A confiança é média por causa dessas sinalizações divergentes.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso (Diretrizes do Plano de Governo Flávio Bolsonaro 2027-2030, versão final)",
+          "publisher": "Campanha Flávio Bolsonaro/PL (PDF hospedado pela Agência Brasil)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "\"vamos retomar o Programa Nacional de Desestatização com critério, avaliando caso a caso onde a presença do Estado deixou de fazer sentido.\" Sobre a Lei das Estatais: \"Tentaram enfraquecê-la; nós vamos fortalecê-la.\""
+        },
+        {
+          "title": "As promessas de Flávio Bolsonaro: privatização de 95% das estatais e corte de gastos e de impostos",
+          "publisher": "NeoFeed",
+          "url": "https://neofeed.com.br/economia/as-promessas-de-flavio-bolsonaro-privatizacao-de-95-das-estatais-e-corte-de-gastos-e-de-impostos/",
+          "publishedAt": "2026-02-11",
+          "type": "declaracao",
+          "excerpt": "Na CEO Conference do BTG Pactual, segundo a reportagem, Flávio disse pretender privatizar 95% das estatais. Falas citadas: \"Não dá para privatizar tudo\" e \"onde puder privatizar, nós vamos privatizar\"."
+        },
+        {
+          "title": "Flávio Bolsonaro afirma que Correios têm de ser privatizados",
+          "publisher": "O Liberal (Estadão Conteúdo)",
+          "url": "https://www.oliberal.com/politica/flavio-bolsonaro-afirma-que-correios-tem-de-ser-privatizados-1.1128935",
+          "publishedAt": "2026-06-02",
+          "type": "declaracao",
+          "excerpt": "\"Os Correios têm que ser privatizados, para começar.\" E: \"temos que partir para a privatização de outras empresas também que continuam ineficientes\"."
+        },
+        {
+          "title": "Petrobras, BB e Caixa Serão Privatizados? Veja o Que Diz Coordenador de Flávio Bolsonaro",
+          "publisher": "Forbes Brasil",
+          "url": "https://forbes.com.br/forbes-money/2026/10/petrobras-bb-e-caixa-serao-privatizados-veja-o-que-diz-coordenador-de-flavio-bolsonaro/",
+          "publishedAt": "2026-10-08",
+          "type": "declaracao",
+          "excerpt": "O coordenador econômico Adolfo Sachsida disse, sobre Petrobras, BB e Caixa: \"não existirão privatizações de empresas. Nenhuma dessas empresas será tocada\". A reportagem observa que o plano prevê a retomada de privatizações caso a caso."
+        }
+      ]
+    },
+    {
+      "questionId": "estatais",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 1,
+      "confidence": "alta",
+      "summary": "O programa de governo de 2026 prevê que a Petrobras amplie investimentos e volte ao segmento de distribuição de combustíveis. O governo retirou os Correios e outras estatais dos programas de desestatização em 2023, e Lula declarou que não haverá privatização dos Correios enquanto for presidente.",
+      "rationale": "A alternativa 1 corresponde à proposta de expandir a Petrobras para distribuição e refino e à reversão das privatizações. A alternativa 2 enfatiza regras contra a interferência política, o que não aparece como eixo no programa. Ressalva: em dezembro de 2025, Lula admitiu parcerias com empresas privadas e a hipótese de transformar os Correios em empresa de economia mista.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Programa de Transformação do Brasil: um país soberano, democrático, desenvolvido, sustentável e criativo (Programa de Governo Lula 2026)",
+          "publisher": "Coligação Lula/PT (PDF divulgado pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "\"A Petrobras deverá retornar ao segmento de distribuição de combustíveis, expandindo sua capacidade de refino e ampliando a atuação da Transpetro para logística de GNL.\" O texto prevê ainda que a Petrobras continue ampliando investimentos em exploração \"para recuperar participação no controle de reservas nacionais\"."
+        },
+        {
+          "title": "Governo Lula retira Correios e mais nove estatais de programas de privatização",
+          "publisher": "Bloomberg Línea",
+          "url": "https://www.bloomberglinea.com.br/2023/04/07/governo-lula-retira-correios-e-mais-nove-estatais-de-programas-de-privatizacao/",
+          "publishedAt": "2023-04-07",
+          "type": "noticia",
+          "excerpt": "Ato publicado em edição extra do DOU retirou do PND os Correios, EBC, Dataprev, Nuclep, Serpro, ABGF e Ceitec, e retirou do PPI ativos da Conab, a PPSA e a Telebras."
+        },
+        {
+          "title": "Correios: 'Enquanto eu for presidente, não haverá privatização', diz Lula",
+          "publisher": "Money Times (Estadão Conteúdo)",
+          "url": "https://www.moneytimes.com.br/correios-enquanto-eu-for-presidente-nao-havera-privatizacao-diz-lula-igdl/",
+          "publishedAt": "2025-12-18",
+          "type": "declaracao",
+          "excerpt": "\"Enquanto eu for presidente não tem privatização. O que pode ter é construção de parceria com empresas.\""
+        },
+        {
+          "title": "Plano de governo de Lula em 2026 troca \"reconstrução\" por legado",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-eleicoes-2026/plano-de-governo-de-lula-em-2026-troca-reconstrucao-por-legado/",
+          "publishedAt": "2026-08-21",
+          "type": "noticia",
+          "excerpt": "Segundo a reportagem, seguem inalteradas em relação a 2022 as bases do programa, entre elas a \"oposição à privatização de estatais estratégicas\", citando Petrobras e Correios."
+        }
+      ]
+    },
+    {
+      "questionId": "impostos",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 4,
+      "confidence": "alta",
+      "summary": "O plano propõe um \"Tesouraço\", descrito como \"um corte profundo e por todos os lados\" nos gastos. Também prevê rever a reforma tributária e a \"majoração de impostos efetuada pelo atual governo\", reduzir o IVA e os impostos sobre energia e combustíveis. Flávio declarou que buscará reduzir a carga tributária e os impostos sobre a folha de pagamento. Ele também defende a isenção do IR até R$ 5 mil, \"sem precisar aumentar ou criar impostos\".",
+      "rationale": "A alternativa 4 corresponde ao texto do plano, que vincula o corte profundo de gastos à redução de impostos. A alternativa 3 também prevê simplificar e não aumentar tributos de nenhum grupo, mas fala em reduzir 'aos poucos', enquanto o plano propõe cortes amplos e revisão de aumentos recentes. Ponto de atenção: reportagem da Gazeta do Povo (08/10/2026) afirma, em paráfrase, que Flávio prometeu 'tributar a distribuição de dividendos', o que seria um elemento da alternativa 2. Não localizei a fala original.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso (Diretrizes do Plano de Governo Flávio Bolsonaro 2027-2030, versão final)",
+          "publisher": "Campanha Flávio Bolsonaro/PL (PDF hospedado pela Agência Brasil)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "\"Nossa bandeira é um grande TESOURAÇO: um corte profundo e por todos os lados, que enxuga a máquina, coloca as contas em ordem e reduz os impostos que pesam sobre quem produz.\" Também: \"Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo\" e \"reduzir o IVA\"."
+        },
+        {
+          "title": "Flávio diz que buscará reduzir imposto sobre folha de pagamento e carga tributária",
+          "publisher": "InfoMoney (Reuters)",
+          "url": "https://www.infomoney.com.br/politica/flavio-diz-que-buscara-reduzir-imposto-sobre-folha-de-pagamento-e-carga-tributaria/",
+          "publishedAt": "2026-10-06",
+          "type": "declaracao",
+          "excerpt": "Segundo a reportagem, Flávio \"pretende reduzir os impostos sobre a folha de pagamento e perseguir uma diminuição da carga tributária do país\"."
+        },
+        {
+          "title": "Flávio Bolsonaro defende Bolsa Família e isenção de IR até R$ 5.000",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-eleicoes/flavio-bolsonaro-defende-bolsa-familia-e-isencao-de-ir-ate-r-5-000/",
+          "publishedAt": "2026-06-15",
+          "type": "declaracao",
+          "excerpt": "Flávio disse ser favorável à isenção até R$ 5 mil e que, no governo Bolsonaro, haveria compensação \"sem precisar aumentar ou criar impostos\". Ele criticou o atual governo por \"elevadíssima carga tributária\"."
+        },
+        {
+          "title": "O que Flávio Bolsonaro pode mudar na reforma tributária",
+          "publisher": "Gazeta do Povo",
+          "url": "https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-reforma-tributaria/",
+          "publishedAt": "2026-10-08",
+          "type": "noticia",
+          "excerpt": "Flávio afirmou que \"O principal ponto é definir o tamanho do IVA\". A reportagem diz, em paráfrase, que ele prometeu manter a faixa de isenção de R$ 5 mil e tributar a distribuição de dividendos."
+        }
+      ]
+    },
+    {
+      "questionId": "impostos",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 2,
+      "confidence": "alta",
+      "summary": "O governo sancionou em 2025 a isenção do Imposto de Renda para quem ganha até R$ 5 mil, compensada por uma tributação mínima de até 10% sobre altas rendas, incluindo dividendos. O programa de 2026 mantém a diretriz \"colocar o pobre no orçamento e o rico no Imposto de Renda\" e fala em seguir promovendo justiça tributária.",
+      "rationale": "A alternativa 2 descreve quase literalmente a Lei 15.270/2025 e a diretriz do programa. A alternativa 1 não foi adotada porque o programa não propõe imposto sobre grandes fortunas nem novo aumento líquido de arrecadação. A proposta de taxar grandes fortunas aparece apenas numa agenda de entidades da sociedade civil entregue à campanha.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Programa de Transformação do Brasil: um país soberano, democrático, desenvolvido, sustentável e criativo (Programa de Governo Lula 2026)",
+          "publisher": "Coligação Lula/PT (PDF divulgado pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "\"Tributamos a renda dos super ricos e fechamos diversas brechas [...] como a tributação de offshores e fundos exclusivos. Ao mesmo tempo, reduzimos o peso dos impostos sobre os mais pobres\". O resultado fiscal virá, entre outros fatores, \"da promoção de justiça tributária e do combate aos privilégios e às distorções\"."
+        },
+        {
+          "title": "Lula sanciona isenção do Imposto de Renda para salários de até R$ 5 mil",
+          "publisher": "Exame",
+          "url": "https://exame.com/brasil/lula-sanciona-isencao-do-imposto-de-renda-para-salarios-de-ate-r-5-mil",
+          "publishedAt": "2025-11-26",
+          "type": "ato-oficial",
+          "excerpt": "A sanção isenta salários de até R$ 5 mil e reduz o imposto até R$ 7.350. A compensação vem de uma alíquota mínima progressiva de até 10% sobre altas rendas, incluindo dividendos, a partir de R$ 600 mil por ano."
+        },
+        {
+          "title": "Lula 2026: conheça as propostas do candidato à Presidência",
+          "publisher": "Estado de Minas",
+          "url": "https://www.em.com.br/politica/2026/08/7490597-lula-2026-conheca-as-propostas-do-candidato-a-presidencia.html",
+          "publishedAt": "2026-08-31",
+          "type": "noticia",
+          "excerpt": "Segundo a reportagem, o programa propõe consolidar a isenção do IR para salários de até R$ 5.000, compensada pela taxação de super-ricos, fundos exclusivos e offshores."
+        }
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 2,
+      "confidence": "media",
+      "summary": "O plano promete \"manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes\". Também dá prioridade aos beneficiários em qualificação e primeiro emprego e garante o retorno imediato ao benefício após o seguro-desemprego. Flávio disse que manteria o piso reajustado e defende prolongar o pagamento a quem conseguir emprego formal.",
+      "rationale": "A alternativa 2 é a mais próxima: o compromisso central do plano é manter os programas com combate a fraudes. A alternativa 3 não foi escolhida porque o plano não propõe regras de permanência mais rígidas nem contrapartidas obrigatórias. A qualificação é oferecida como prioridade voluntária, e a regra de saída proposta é mais flexível (retorno sem fila, permanência estendida após o emprego). A alternativa 1 não se aplica, porque não há proposta de ampliar valores ou cobertura. A confiança é média porque o plano também propõe mudanças nas regras de saída, enquanto a alternativa 2 fala em manter o programa 'como está'.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso (Diretrizes do Plano de Governo Flávio Bolsonaro 2027-2030, versão final)",
+          "publisher": "Campanha Flávio Bolsonaro/PL (PDF hospedado pela Agência Brasil)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "\"vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes.\" E: \"garantiremos o retorno imediato e sem fila ao benefício após o seguro-desemprego, mantidas as condições de elegibilidade\"."
+        },
+        {
+          "title": "Flávio Bolsonaro defende Bolsa Família e isenção de IR até R$ 5.000",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-eleicoes/flavio-bolsonaro-defende-bolsa-familia-e-isencao-de-ir-ate-r-5-000/",
+          "publishedAt": "2026-06-15",
+          "type": "declaracao",
+          "excerpt": "Flávio chamou o programa de \"direito adquirido\" e anunciou que proporá \"a criação de um programa para garantir que as pessoas permaneçam ganhando o Bolsa Família\" ao conseguir emprego formal ou abrir empresa."
+        },
+        {
+          "title": "O que Flávio Bolsonaro e Lula propõem sobre o Bolsa Família",
+          "publisher": "BBC News Brasil (republicado por O POVO)",
+          "url": "https://www.opovo.com.br/agencia/bbc/2026/10/08/o-que-flavio-bolsonaro-e-lula-propoem-sobre-o-bolsa-familia.html",
+          "publishedAt": "2026-10-08",
+          "type": "noticia",
+          "excerpt": "Flávio criticou o reajuste de 2026, mas disse que manteria o novo valor. Não há proposta de ampliação, e o foco está em qualificação, emprego formal e combate a fraudes."
+        }
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 1,
+      "confidence": "alta",
+      "summary": "O programa de 2026 afirma que se deve \"manter, aperfeiçoar e ampliar as políticas de proteção social\". Em setembro de 2026, o governo reajustou o Bolsa Família em 15,04%, pela inflação acumulada, elevando o piso de R$ 600 para R$ 691.",
+      "rationale": "A alternativa 1 corresponde ao compromisso explícito de ampliar a proteção social e ao reajuste de valores feito por decreto. A alternativa 2 não descreve a proposta, que fala em ampliação. Ressalvas: o programa não fixa novo valor nem meta de cobertura, e o reajuste de 2026 repôs a inflação acumulada desde 2023, sem ganho real.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Programa de Transformação do Brasil: um país soberano, democrático, desenvolvido, sustentável e criativo (Programa de Governo Lula 2026)",
+          "publisher": "Coligação Lula/PT (PDF divulgado pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "\"Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.\" O texto também afirma: \"Recriamos e expandimos o Bolsa Família.\""
+        },
+        {
+          "title": "Governo reajusta Bolsa Família em 15% e eleva valor mínimo para R$ 691",
+          "publisher": "Mercado&Consumo (com informações da Agência Brasil)",
+          "url": "https://mercadoeconsumo.com.br/17/09/2026/economia/governo-reajusta-bolsa-familia-em-15-e-eleva-valor-minimo-para-r-691/",
+          "publishedAt": "2026-09-17",
+          "type": "ato-oficial",
+          "excerpt": "O Decreto nº 13.120, de 17/09/2026, reajustou os valores pelo INPC acumulado (15,04%). O piso foi de cerca de R$ 600 para R$ 691 e o benefício médio, de R$ 675 para R$ 777, com efeitos a partir de 1º de outubro."
+        },
+        {
+          "title": "O que Flávio Bolsonaro e Lula propõem sobre o Bolsa Família",
+          "publisher": "BBC News Brasil (republicado por O POVO)",
+          "url": "https://www.opovo.com.br/agencia/bbc/2026/10/08/o-que-flavio-bolsonaro-e-lula-propoem-sobre-o-bolsa-familia.html",
+          "publishedAt": "2026-10-08",
+          "type": "noticia",
+          "excerpt": "O plano de Lula fala em continuar a expansão, com destaque para crianças e adolescentes, sem definir novo valor. Fala de Lula: \"Mas, enquanto precisar, no meu governo vai ter\"."
+        }
+      ]
+    },
+    {
+      "questionId": "saude",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 2,
+      "confidence": "media",
+      "summary": "O plano propõe contratar serviços e exames da rede privada em horários ociosos para reduzir filas, apresentados como aproveitamento de capacidade existente, e corrigir a tabela SUS. Também prevê ampliar a Estratégia Saúde da Família, ampliar e construir postos de saúde, modernizar os hospitais universitários federais (EBSERH) e expandir a telessaúde. Flávio declarou que não pretende acabar com os pisos constitucionais da saúde.",
+      "rationale": "Pelo mesmo critério aplicado a Lula, a alternativa 2 é a mais próxima: o plano trata a rede privada como complemento ('aproveitar essa capacidade é atender mais sem construir do zero'), limitado a horários ociosos e voltado a filas. Ao lado disso, propõe expandir serviços públicos (Saúde da Família, postos de saúde, EBSERH). A alternativa 3 não foi escolhida porque o plano não indica uso em larga escala nem substituição da prestação pública. A alternativa 4 também não, porque não há proposta sobre planos de saúde privados. A confiança é média porque o plano não traz compromisso explícito de ampliar o investimento total no SUS. Ele propõe um corte amplo de gastos ('Tesouraço'), e houve relato de bastidores (Correio Braziliense, 22/04/2026) sobre estudo para corrigir o piso da saúde só pela inflação, negado por Flávio em 19/06/2026 e ausente do plano. Um especialista ouvido pelo WSCOM vê 'ênfase maior na atenção privada' no plano.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso (Diretrizes do Plano de Governo Flávio Bolsonaro 2027-2030, versão final)",
+          "publisher": "Campanha Flávio Bolsonaro/PL (PDF hospedado pela Agência Brasil)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "\"vamos contratar serviços e exames na rede privada nos horários ociosos: há aparelho parado enquanto gente espera meses pelo mesmo exame, e aproveitar essa capacidade é atender mais sem construir do zero.\" Também: \"Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS\", \"Vamos ampliar a Estratégia Saúde da Família\" e \"postos de saúde que vamos ampliar e construir\"."
+        },
+        {
+          "title": "Plano de governo de Flávio Bolsonaro contradiz montagens espalhadas na web",
+          "publisher": "Jovem Pan",
+          "url": "https://jovempan.com.br/politica/plano-de-governo-de-flavio-bolsonaro-contradiz-montagens-espalhadas-na-web/",
+          "publishedAt": "2026-10-07",
+          "type": "checagem",
+          "excerpt": "A reportagem afirma que o plano propõe contratar serviços da rede privada em horários ociosos para reduzir filas, sem substituir o SUS nem cobrar dos pacientes, e que não há trecho determinando o fim da Farmácia Popular."
+        },
+        {
+          "title": "Flávio diz não pretender atacar pisos da saúde e educação, vinculação do mínimo e Previdência",
+          "publisher": "Correio do Estado (Estadão Conteúdo)",
+          "url": "https://correiodoestado.com.br/politica/flavio-diz-nao-pretender-atacar-pisos-da-saude-e-educacao-vinculacao/468377/",
+          "publishedAt": "2026-06-19",
+          "type": "declaracao",
+          "excerpt": "Perguntado sobre o fim dos pisos constitucionais, respondeu: \"Não, não pretendo\". Também disse: \"Quem precisa de proteção do Estado, no meu governo, vai continuar protegido\"."
+        }
+      ]
+    },
+    {
+      "questionId": "saude",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 2,
+      "confidence": "alta",
+      "summary": "O programa de 2026 prevê seguir ampliando a rede pública (hospitais, policlínicas e equipamentos via Novo PAC, terceiro turno, carretas e mutirões). Também prevê dar continuidade à parceria com hospitais privados, que oferecem exames e cirurgias ao SUS em troca de créditos financeiros ou abatimento de dívidas, no âmbito do Agora Tem Especialistas (Lei 15.233/2025).",
+      "rationale": "A alternativa 2 corresponde ao programa: ele prevê expandir a rede pública (hospitais, policlínicas, equipamentos, terceiro turno, carretas, mutirões) e manter a parceria com hospitais privados como complemento para exames e cirurgias. A alternativa 3 não se aplica, porque a contratação privada é limitada por lei a R$ 2 bilhões/ano em créditos e não é o eixo principal. A alternativa 1 também não, porque o candidato mantém e formalizou a contratação privada.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Programa de Transformação do Brasil: um país soberano, democrático, desenvolvido, sustentável e criativo (Programa de Governo Lula 2026)",
+          "publisher": "Coligação Lula/PT (PDF divulgado pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "\"Daremos continuidade à parceria com hospitais privados para assegurar, em troca de créditos financeiros ou de dívidas, a oferta de exames e cirurgias para o SUS.\" E: \"Continuaremos investindo para garantir à rede pública equipamentos modernos e em número suficiente\"."
+        },
+        {
+          "title": "Lei nº 15.233, de 7 de outubro de 2025 (Institui o Programa Agora Tem Especialistas)",
+          "publisher": "Câmara dos Deputados – Legislação Informatizada",
+          "url": "https://www2.camara.leg.br/legin/fed/lei/2025/lei-15233-7-outubro-2025-798103-publicacaooriginal-176649-pl.html",
+          "publishedAt": "2025-10-07",
+          "type": "ato-oficial",
+          "excerpt": "A lei institui o programa, com adesão de hospitais privados com ou sem fins lucrativos. Os atendimentos ao SUS geram créditos financeiros para compensar tributos federais, limitados a R$ 2 bilhões por ano."
+        },
+        {
+          "title": "O que os candidatos à Presidência propõem para a saúde",
+          "publisher": "Futuro da Saúde",
+          "url": "https://futurodasaude.com.br/planos-para-a-saude-candidatos-presidencia/",
+          "publishedAt": "2026-08-19",
+          "type": "noticia",
+          "excerpt": "Segundo a reportagem, o plano de Lula promete ampliar o Agora Tem Especialistas (terceiro turno, Carretas da Saúde, mutirões) e manter os acordos com hospitais privados."
+        }
+      ]
+    },
+    {
+      "questionId": "educacao",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "media",
+      "summary": "O plano de governo registrado no TSE ('Para o Brasil vencer o atraso') afirma 'Vamos ampliar as Escolas Cívico-Militares', propõe o método fônico, repasses vinculados a metas de aprendizagem, apoio à escola em tempo integral e voucher para escola ou creche privada apenas onde faltar vaga na rede pública. Como senador, criticou em 2023 o fim do programa federal de escolas cívico-militares.",
+      "rationale": "A alternativa 3 (mais disciplina e regras mais rígidas nas escolas) é a mais próxima da proposta central do plano para a educação básica: ampliar as escolas cívico-militares, modelo baseado em disciplina e gestão compartilhada com militares. Como a pergunta não cita esse modelo pelo nome, a correspondência depende de interpretação, e por isso a confiança é média. A alternativa 4 foi descartada porque o vale previsto é restrito à falta de vagas na rede pública e o plano não menciona ensino em casa. O plano também tem elementos das alternativas 1 e 2 (apoio ao tempo integral; metas de aprendizagem), mas sem a mesma prioridade.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso – Diretrizes do Plano de Governo 2027-2030",
+          "publisher": "Campanha de Flávio Bolsonaro (PL) – documento registrado no TSE; cópia publicada pelo Poder360",
+          "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
+          "publishedAt": "2026-08-13",
+          "type": "plano-de-governo",
+          "excerpt": "p. 35-36: 'Vamos ampliar as Escolas Cívico-Militares, que uniram disciplina e bom desempenho onde foram implantadas'; 'Apoiamos a escola em tempo integral'; 'onde faltar vaga na rede pública, a família receberá um voucher educacional para matricular o filho em outra escola'."
+        },
+        {
+          "title": "Educação: o que Flávio propõe em plano de governo",
+          "publisher": "SBT News",
+          "url": "https://sbtnews.sbt.com.br/noticia/eleicoes/educacao-o-que-flavio-propoe-em-plano-de-governo",
+          "publishedAt": "2026-09-03",
+          "type": "noticia",
+          "excerpt": "Reportagem resume as propostas do plano: ampliar escolas cívico-militares, priorizar o método fônico, apoiar a escola em tempo integral, voucher-creche e voucher educacional onde não houver vaga pública e financiamento vinculado a metas de aprendizagem."
+        },
+        {
+          "title": "Educação nas eleições de 2026 – Análise do Todos Pela Educação das propostas para a Educação Básica dos candidatos à presidência da República",
+          "publisher": "Todos Pela Educação",
+          "url": "https://todospelaeducacao.org.br/wordpress/wp-content/uploads/2026/09/analise-educacao-nas-eleicoes-presidenciais-2026-todos-pela-educacao.pdf",
+          "publishedAt": null,
+          "type": "noticia",
+          "excerpt": "Análise de setembro de 2026 registra que o plano de Flávio 'propõe ainda ampliar as escolas cívico-militares' e propõe vouchers para matrícula em instituições privadas 'quando não houver vagas na rede pública'."
+        },
+        {
+          "title": "Flávio, Ciro Nogueira, Bia Kicis: aliados de Bolsonaro criticam fim de escolas cívico-militares",
+          "publisher": "Jornal de Brasília",
+          "url": "https://jornaldebrasilia.com.br/noticias/politica-e-poder/flavio-ciro-nogueira-bia-kicis-aliados-de-bolsonaro-criticam-fim-de-escolas-civico-militares/",
+          "publishedAt": "2023-07-12",
+          "type": "declaracao",
+          "excerpt": "Flávio criticou o encerramento do programa federal, referindo-se a 'Pais e mães, militares e carentes, que podiam matricular seus filhos nas exemplares escolas cívico-militares'."
+        }
+      ]
+    },
+    {
+      "questionId": "educacao",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 1,
+      "confidence": "alta",
+      "summary": "O programa de governo registrado no TSE declara que a expansão da educação em tempo integral terá 'absoluta prioridade', com financiamento via Fundeb e obras do Novo PAC em apoio às redes estaduais e municipais. O candidato afirmou, ao sancionar o PNE em 2026, que o país não precisa expandir escolas cívico-militares, e seu governo criou o Programa Escola em Tempo Integral (Lei 14.640/2023).",
+      "rationale": "A alternativa 1 é a prioridade declarada de forma literal no programa. A alternativa 2 também tem elementos presentes (meta de 80% de alfabetização na idade certa, metas do PNE), mas o plano coloca o tempo integral como eixo prioritário de expansão, e não a manutenção do modelo. As alternativas 3 e 4 são contrárias às declarações e atos documentados (crítica às escolas cívico-militares; nenhuma menção a vouchers ou educação domiciliar).",
+      "evidence": [
+        {
+          "title": "Programa de Governo – Diretrizes para o Programa de Transformação do Brasil (Lula 2026)",
+          "publisher": "Coligação de Lula (PT) – documento registrado no TSE; cópia publicada pelo Congresso em Foco",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "Eixo 4 (p. 30-31): 'O fomento à expansão da educação em tempo integral terá absoluta prioridade no novo mandato.' O texto cita a inclusão do tempo integral no Fundeb a partir de 2026 e recursos do Novo PAC para 686 escolas de tempo integral."
+        },
+        {
+          "title": "Lula diz que país não precisa de escola cívico-militar na educação",
+          "publisher": "Folha de Pernambuco",
+          "url": "https://www.folhape.com.br/politica/lula-diz-que-pais-nao-precisa-de-escola-civico-militar-na-educacao/480789/",
+          "publishedAt": "2026-04-14",
+          "type": "declaracao",
+          "excerpt": "Ao sancionar o novo PNE, Lula disse que o plano mostra que o Brasil não precisa de expansão de escolas cívico-militares na educação pública: 'enquanto eles quiserem estudar, eles têm que estudar a mesma coisa que estudam 220 milhões de brasileiros'."
+        },
+        {
+          "title": "Programa Escola em Tempo Integral é sancionado com vetos",
+          "publisher": "Agência Senado",
+          "url": "https://www12.senado.leg.br/noticias/materias/2023/08/01/programa-escola-em-tempo-integral-e-sancionado-com-vetos",
+          "publishedAt": "2023-08-01",
+          "type": "ato-oficial",
+          "excerpt": "A Lei 14.640/2023, sancionada por Lula, cria o Programa Escola em Tempo Integral, com 'assistência técnica e financeira da União aos entes federados para aumentar matrículas no ensino básico em tempo integral'."
+        },
+        {
+          "title": "Educação nas eleições de 2026 – Análise do Todos Pela Educação das propostas para a Educação Básica dos candidatos à presidência da República",
+          "publisher": "Todos Pela Educação",
+          "url": "https://todospelaeducacao.org.br/wordpress/wp-content/uploads/2026/09/analise-educacao-nas-eleicoes-presidenciais-2026-todos-pela-educacao.pdf",
+          "publishedAt": null,
+          "type": "noticia",
+          "excerpt": "Análise de setembro de 2026: no plano de Lula, a Educação Integral em Tempo Integral tem fomento apresentado como de 'absoluta prioridade', associado ao Fundeb e ao Novo PAC; também há uma 'estratégia nacional permanente de recomposição e aceleração das aprendizagens'."
+        }
+      ]
+    },
+    {
+      "questionId": "armas",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "media",
+      "summary": "O plano de governo registrado no TSE não trata de acesso civil a armas. Reportagens de 2026 relatam que a equipe de campanha estuda revogar o Estatuto do Desarmamento e substituí-lo por regras objetivas que garantiriam o direito a quem cumprir requisitos, e o candidato declarou em outubro que a 'legítima defesa tem que voltar'. Como senador, é autor de projeto de porte de arma para advogados e relatou favoravelmente porte para defensores públicos.",
+      "rationale": "A alternativa 3 é o mínimo que as evidências de 2026 sustentam sem inferência adicional: a proposta atribuída à campanha (Gazeta do Povo) substitui a análise de 'efetiva necessidade' por requisitos objetivos (idade, ocupação lícita, residência, testes), e a declaração do candidato ('legítima defesa tem que voltar') não detalha medidas. A alternativa 4 é vizinha plausível, porque a mesma reportagem fala em revogar integralmente o Estatuto do Desarmamento e o candidato apoia porte para categorias profissionais (advogados, defensores públicos); não foi escolhida porque nenhuma fonte de 2026 verificada descreve porte geral para a população, o plano oficial é silente e o detalhamento da revogação foi feito por um aliado (dep. Marcos Pollon), não pelo candidato. Mesmo critério aplicado a Lula: prevalecem propostas e atos concretos sobre retórica. Confiança média.",
+      "evidence": [
+        {
+          "title": "Fim do Estatuto do Desarmamento: Flávio Bolsonaro planeja nova lei de armas",
+          "publisher": "Gazeta do Povo",
+          "url": "https://www.gazetadopovo.com.br/republica/quem-planeja-o-fim-do-estatuto-do-desarmamento-no-brasil/",
+          "publishedAt": "2026-08-07",
+          "type": "noticia",
+          "excerpt": "Segundo a reportagem, Flávio e sua equipe trabalham em plano para a 'revogação completa da Lei 10.826', substituindo a avaliação de 'efetiva necessidade' pela PF por requisitos objetivos (idade, ocupação lícita, residência fixa, testes técnicos e psicológicos); o detalhamento foi feito pelo deputado Marcos Pollon."
+        },
+        {
+          "title": "Flávio indica retomar agenda armamentista do pai e promete acesso a armas para legítima defesa",
+          "publisher": "ICL Notícias (conteúdo Folhapress)",
+          "url": "https://iclnoticias.com.br/?p=130906",
+          "publishedAt": "2026-10-07",
+          "type": "declaracao",
+          "excerpt": "Questionado pela Folha, Flávio disse que a 'legítima defesa tem que voltar, né? Só quem tá armado é bandido'. Não detalhou medidas nem se revogaria os decretos de Lula; a reportagem registra que o ponto não está no plano de governo."
+        },
+        {
+          "title": "Com parecer de Flávio, comissão aprova porte de arma a defensores",
+          "publisher": "Congresso em Foco",
+          "url": "https://www.congressoemfoco.com.br/noticia/121848/com-parecer-de-flavio-comissao-aprova-porte-de-arma-a-defensores",
+          "publishedAt": "2026-09-01",
+          "type": "votacao",
+          "excerpt": "A Comissão de Segurança Pública do Senado aprovou, com parecer favorável de Flávio, o PL 2.343/2025, que concede porte de arma a defensores públicos, condicionado à comprovação de capacidade técnica e aptidão psicológica."
+        },
+        {
+          "title": "Senado analisa projetos que ampliam porte de arma no Brasil",
+          "publisher": "Congresso em Foco",
+          "url": "https://congressoemfoco.com.br/noticia/107678/senado-analisa-projetos-que-ampliam-porte-de-arma-no-brasil",
+          "publishedAt": "2025-04-13",
+          "type": "noticia",
+          "excerpt": "Flávio é autor do PL 2.734/2021, que 'autoriza o porte de arma de fogo para advogados, para defesa pessoal', aprovado na CSP e enviado à CCJ."
+        },
+        {
+          "title": "Flávio Bolsonaro critica novo decreto de armas: 'Bandidagem agradece'",
+          "publisher": "Estado de Minas",
+          "url": "https://www.em.com.br/app/noticia/politica/2023/07/22/interna_politica,1523694/flavio-bolsonaro-critica-novo-decreto-de-armas-bandidagem-agradece.shtml",
+          "publishedAt": "2023-07-22",
+          "type": "declaracao",
+          "excerpt": "Sobre o Decreto 11.615/2023: 'Lula não assinou um novo decreto de armas, assinou uma sentença de morte para muita gente. A bandidagem agradece'."
+        }
+      ]
+    },
+    {
+      "questionId": "armas",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 2,
+      "confidence": "alta",
+      "summary": "O programa de governo afirma que manterá 'uma política de controle de armas e munições', com rastreabilidade e reforço da fiscalização da Polícia Federal e do Exército sobre segurança privada, defesa pessoal e CACs. O Decreto 11.615/2023 regulamentou o Estatuto do Desarmamento mantendo a aquisição civil com regras mais restritivas, e o candidato tem defendido que o armamento deve se concentrar nas forças de segurança.",
+      "rationale": "A alternativa 2 descreve a política adotada e prometida: o plano e o decreto preveem acesso civil para defesa pessoal e CACs, mas com controle e fiscalização reforçados. A alternativa 1 é compatível com a retórica do candidato ('quem tem que estar bem armado são os policiais'), mas não com os atos e o plano, que não propõem vedar a posse civil. As alternativas 3 e 4 contrariam os atos documentados.",
+      "evidence": [
+        {
+          "title": "Programa de Governo – Diretrizes para o Programa de Transformação do Brasil (Lula 2026)",
+          "publisher": "Coligação de Lula (PT) – documento registrado no TSE; cópia publicada pelo Congresso em Foco",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "Eixo 3 (p. 26-29): 'A revogação dos decretos editados no governo anterior, que facilitavam o acesso a armas de fogo, foi uma medida acertada. Por isso, manteremos uma política de controle de armas e munições', com rastreabilidade e fiscalização da PF e do Exército sobre 'defesa pessoal e registros de caçadores, atiradores e colecionadores'."
+        },
+        {
+          "title": "DECRETO Nº 11.615, DE 21 DE JULHO DE 2023",
+          "publisher": "Câmara dos Deputados – Legislação Informatizada",
+          "url": "https://www2.camara.leg.br/legin/fed/decret/2023/decreto-11615-21-julho-2023-794460-norma-pe.html",
+          "publishedAt": "2023-07-21",
+          "type": "ato-oficial",
+          "excerpt": "Ementa: regulamenta a Lei 10.826/2003 'para estabelecer regras e procedimentos relativos à aquisição, ao registro, à posse, ao porte, ao cadastro e à comercialização nacional de armas de fogo' e disciplina caça, tiro desportivo e colecionamento (decreto validado pelo STF em 2025)."
+        },
+        {
+          "title": "Lula: \"Houve um tempo em que era mais bonito vender armas do que livros\"",
+          "publisher": "Congresso em Foco",
+          "url": "https://www.congressoemfoco.com.br/noticia/116201/lula--houve-tempo-em-que-era-mais-bonito-vender-armas-do-que-livros",
+          "publishedAt": "2026-02-06",
+          "type": "declaracao",
+          "excerpt": "Lula criticou a política anterior: 'Esse país chegou a um tempo em que era mais bonito vender armas do que vender livros' e 'Essas armas iam cair na mão do bandido ou do crime organizado.'"
+        },
+        {
+          "title": "Lula: \"Quem tem que estar bem armada é a polícia brasileira\"",
+          "publisher": "Metrópoles",
+          "url": "https://www.metropoles.com/brasil/lula-quem-tem-que-estar-bem-armado-sao-os-policiais-brasileiros",
+          "publishedAt": "2023-07-21",
+          "type": "declaracao",
+          "excerpt": "No lançamento do decreto de 2023, Lula afirmou: 'Quem tem que estar bem armado são os policiais brasileiros e as Forças Armadas brasileiras.'"
+        }
+      ]
+    },
+    {
+      "questionId": "meio-ambiente",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "alta",
+      "summary": "O plano de governo propõe 'licenciamento ambiental ágil', com concessão da licença caso o órgão não decida no prazo, e combate ao desmatamento ilegal 'sem criar novas obrigações ou custos' ao produtor, com meta de zerar o desmatamento ilegal até 2029 e ampliação do pagamento por serviços ambientais. Como senador, votou a favor da Lei Geral do Licenciamento (PL 2.159/2021) em 2025 e foi coautor, em 2019, de projeto que revogava a reserva legal do Código Florestal (arquivado).",
+      "rationale": "A alternativa 3 corresponde de perto ao plano de 2026: licença concedida se o órgão não decidir no prazo, fiscalização 'sem criar novas obrigações ou custos desnecessários para o produtor rural' e meta de zerar o desmatamento ilegal até 2029; o voto 'Sim' na Lei Geral do Licenciamento (2025) e a declaração em Belém (2026) são coerentes. Ressalva: o plano fala em não criar novas obrigações, e não explicitamente em reduzir as existentes. A alternativa 2 não foi escolhida porque o plano não prevê compensação do desmatamento legal com reflorestamento (o pagamento por serviços ambientais citado é incentivo voluntário). A alternativa 4 tem respaldo apenas no PL 2362/2019, de coautoria do candidato, arquivado e ausente do plano de 2026; pelo critério de priorizar evidências da campanha atual, fica registrada como evidência antiga. Confiança alta pelo mesmo critério aplicado a Lula: programa explícito e coerente com atos recentes (2025-2026); evidência divergente anterior a 2020 não rebaixa a confiança, mas está documentada.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso – Diretrizes do Plano de Governo 2027-2030",
+          "publisher": "Campanha de Flávio Bolsonaro (PL) – documento registrado no TSE; cópia publicada pelo Poder360",
+          "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
+          "publishedAt": "2026-08-13",
+          "type": "plano-de-governo",
+          "excerpt": "p. 49-50: licenciamento 'ágil, moderno e com segurança jurídica'; se o órgão 'não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida'. p. 58: 'meta de zerar o desmatamento ilegal até 2029', fiscalização focada em grilagem e desmatamento ilegal 'sem criar novas obrigações ou custos desnecessários para o produtor rural'."
+        },
+        {
+          "title": "Licença ambiental: 45% dos votos a favor foram da base de Lula",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-congresso/licenca-ambiental-45-dos-votos-a-favor-foram-da-base-de-lula/",
+          "publishedAt": "2025-05-22",
+          "type": "votacao",
+          "excerpt": "O Senado aprovou o PL 2.159/2021 (Lei Geral do Licenciamento Ambiental) por 54 a 13; na lista nominal: 'Flávio Bolsonaro (RJ) – Sim'."
+        },
+        {
+          "title": "Flávio Bolsonaro defende licenciamento ambiental 'sem ideologia' durante visita a Belém",
+          "publisher": "O Liberal",
+          "url": "https://www.oliberal.com/politica/flavio-bolsonaro-defende-licenciamento-ambiental-sem-ideologia-durante-visita-a-belem-1.1168706",
+          "publishedAt": "2026-09-14",
+          "type": "declaracao",
+          "excerpt": "Flávio defendeu exploração responsável dos recursos 'sem ideologizar os licenciamentos ambientais como acontece hoje, que acabam inviabilizando qualquer tipo de progresso', e combate a crimes ambientais 'com fiscalização, com prisão'."
+        },
+        {
+          "title": "PL 2362/2019 – Consulta Pública e-Cidadania",
+          "publisher": "Senado Federal",
+          "url": "https://www12.senado.leg.br/ecidadania/visualizacaomateria?id=136371",
+          "publishedAt": null,
+          "type": "votacao",
+          "excerpt": "Projeto de autoria de Flávio Bolsonaro e Marcio Bittar que 'Revoga o Capítulo IV - Da Reserva Legal, da Lei nº 12.651' (Código Florestal). Tramitação encerrada; não é mais passível de votação."
+        }
+      ]
+    },
+    {
+      "questionId": "meio-ambiente",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 2,
+      "confidence": "alta",
+      "summary": "O programa de governo reafirma a meta de 'desmatamento líquido zero até 2030', promete fortalecer a fiscalização e o monitoramento, cita 3,4 milhões de hectares em restauração florestal e combina isso com expansão do Plano Safra, recuperação de pastagens e incentivo a sistemas integrados (ILPF). Em 2025, o presidente vetou 63 dispositivos da Lei Geral do Licenciamento Ambiental, a maioria depois derrubada pelo Congresso.",
+      "rationale": "A alternativa 2 descreve o conjunto do plano: meta de desmatamento 'líquido' zero (desmatamento remanescente compensado por recuperação de vegetação), reforço da fiscalização, restauração florestal e incentivos à agropecuária sustentável. A alternativa 1 não foi escolhida porque o plano não propõe regras de licenciamento mais rígidas que as atuais (os vetos de 2025 defenderam regras existentes contra a flexibilização) nem aceita limitar a expansão agrícola; ao contrário, promete ampliar crédito e produção. As alternativas 3 e 4 contrariam os vetos de 2025 e o plano. Confiança alta: programa explícito e coerente com os atos de governo.",
+      "evidence": [
+        {
+          "title": "Programa de Governo – Diretrizes para o Programa de Transformação do Brasil (Lula 2026)",
+          "publisher": "Coligação de Lula (PT) – documento registrado no TSE; cópia publicada pelo Congresso em Foco",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": "2026-08-08",
+          "type": "plano-de-governo",
+          "excerpt": "Eixo 11 (p. 69-72): 'continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030' e 'Seguiremos fortalecendo e aprimorando as ações de fiscalização'. Eixo 9 (p. 58-62): ampliar recursos do Plano Safra, recuperação de pastagens degradadas e fomento à Integração Lavoura-Pecuária-Floresta."
+        },
+        {
+          "title": "Congresso derruba vetos de Lula ao licenciamento ambiental",
+          "publisher": "Agência Câmara de Notícias",
+          "url": "https://www.camara.leg.br/noticias/1227650-congresso-derruba-vetos-de-lula-ao-licenciamento-ambiental/",
+          "publishedAt": "2025-11-27",
+          "type": "ato-oficial",
+          "excerpt": "O Congresso derrubou os vetos de Lula à Lei Geral do Licenciamento (exceto os relativos à LAE, objeto da MP 1308/25). O Executivo alegou, entre outros pontos, possibilidade de implantar projetos sem análise de impactos e enfraquecimento da proteção de unidades de conservação."
+        },
+        {
+          "title": "Meio ambiente: o candidato menos pior",
+          "publisher": "O POVO+ (coluna de opinião)",
+          "url": "https://mais.opovo.com.br/colunistas/fabio-angeoletto/2026/09/23/meio-ambiente-o-candidato-menos-pior.html",
+          "publishedAt": "2026-09-23",
+          "type": "noticia",
+          "excerpt": "Coluna registra que o plano de Lula inclui 'propostas para garantir a efetividade do Código Florestal e da Lei da Mata Atlântica', pagamento por serviços ambientais e incentivos à agricultura de baixo carbono, como a integração lavoura-pecuária-floresta."
+        }
+      ]
+    },
+    {
+      "questionId": "corrupcao",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "media",
+      "summary": "O plano de governo de Flávio Bolsonaro propõe o fim das competências criminais originárias do STF, de modo que parlamentares passem a ser julgados por outros tribunais, como STJ ou TRFs. Em setembro de 2025, ele defendeu na CCJ do Senado a PEC da Blindagem, que ampliava proteções a parlamentares e estendia o foro a presidentes de partidos.",
+      "rationale": "A proposta do plano corresponde à alternativa 3: tirar os processos criminais do STF e passá-los a outros tribunais. Não corresponde à 4, porque o plano mantém julgamento em tribunais (STJ/TRFs) e não na primeira instância. Declarações de 2017-2019 contra o foro ('Eu sou contra o foro') apontariam para a 4, mas são anteriores e menos específicas que o plano de 2026. A defesa da PEC da Blindagem em 2025 aponta em sentido oposto (ampliação de prerrogativas), por isso a confiança é média.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso - Diretrizes do Plano de Governo 2027-2030",
+          "publisher": "Flávio Bolsonaro / PL (cópia hospedada pelo Poder360)",
+          "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "p. 65, 'Reforma do Judiciário: o STF como Corte Constitucional': 'Fim das competências criminais originárias do STF, permitindo que parlamentares sejam julgados por instâncias inferiores, como o STJ ou os TRFs, para que exerçam seus mandatos com mais altivez, sem que isso represente qualquer contrapartida de impunidade.'"
+        },
+        {
+          "title": "CCJ do Senado rejeita PEC da Blindagem por unanimidade",
+          "publisher": "InfoMoney",
+          "url": "https://www.infomoney.com.br/politica/ccj-do-senado-rejeita-pec-da-blindagem-por-unanimidade/",
+          "publishedAt": "2025-09-24",
+          "type": "noticia",
+          "excerpt": "Na discussão da CCJ, Flávio defendeu a PEC como forma de proteger o Congresso de ministros do STF, a quem chamou de 'categoria que está acima da lei'; a comissão rejeitou a PEC por unanimidade (a reportagem não detalha o voto individual)."
+        },
+        {
+          "title": "Família Bolsonaro pediu o fim do foro privilegiado 9 vezes antes de decisão que beneficiou Flávio",
+          "publisher": "Aos Fatos",
+          "url": "https://www.aosfatos.org/noticias/familia-bolsonaro-pediu-o-fim-do-foro-privilegiado-9-vezes-antes-de-decisao-que-beneficiou-flavio/",
+          "publishedAt": "2020-06-26",
+          "type": "checagem",
+          "excerpt": "Registra declarações de Flávio contra o foro, como 'Eu sou contra o foro, mas não é uma escolha minha' (Record, 18/01/2019), e o pedido de foro especial feito por ele ao TJ-RJ em 2020 no caso das 'rachadinhas'."
+        }
+      ]
+    },
+    {
+      "questionId": "corrupcao",
+      "candidateId": "lula",
+      "status": "insufficient",
+      "value": null,
+      "confidence": null,
+      "summary": "Não foi localizada posição pública de Lula sobre manter, restringir ou extinguir o foro privilegiado. O programa de governo 2027-2030 não trata do tema. Há apenas críticas de Lula, em setembro de 2025, à PEC da Blindagem, que ampliava a imunidade parlamentar e estendia o foro a presidentes de partidos.",
+      "rationale": "A crítica à PEC da Blindagem refere-se principalmente à imunidade ('da prerrogativa garantindo imunidade [...] até para presidente de partido') e, no máximo, indica oposição a ampliar o foro (afastaria a alternativa 1). Ela não permite distinguir entre as alternativas 2, 3 e 4. Não foram encontradas declarações de Lula sobre a PEC 333/2017 (fim do foro) nem sobre a decisão do STF de 2025. Posições do líder do PT na Câmara não foram atribuídas ao candidato.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Desenvolvimento do Plano de Governo 2027-2030 (Programa de Governo Lula 2026)",
+          "publisher": "Coligação PT/PSB/PV/PCdoB/PDT/PSOL/Rede (cópia hospedada pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "O programa não menciona foro privilegiado ou foro por prerrogativa de função (busca no texto integral). Sobre a Justiça, cita a 'morosidade decisória decorrente da quantidade excessiva de processos e instâncias recursais' e propõe 'diálogo permanente com os atores do judiciário'."
+        },
+        {
+          "title": "'Não é uma coisa séria', diz Lula sobre PEC da Blindagem",
+          "publisher": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/politica/nao-e-uma-coisa-seria-diz-lula-sobre-pec-da-blindagem/",
+          "publishedAt": "2025-09-18",
+          "type": "declaracao",
+          "excerpt": "Lula: 'A votação no Congresso Nacional, sabe, da prerrogativa garantindo imunidade da forma que foi garantida até para presidente de partido, não é uma coisa séria'. A CNN informa que a PEC incluía a ampliação do foro a presidentes nacionais de partidos."
+        }
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 4,
+      "confidence": "media",
+      "summary": "Flávio Bolsonaro defende jornada flexível, prevalência do negociado sobre o legislado e remuneração/salário mínimo por hora trabalhada, além de contratos de menor custo para jovens. Apoia a proposta alternativa do senador Rogério Marinho (PL-RN) em vez da PEC do fim da 6x1, sem declarar como votaria nesta.",
+      "rationale": "Pelo critério da alternativa mais próxima, a 4 é a que melhor corresponde à direção do plano: jornada flexível ('jornada flexível'), acordo entre as partes valendo mais que a lei ('negociado sobre o legislado'), salário mínimo por hora trabalhada e contrato de menor custo para jovens. A alternativa 3 ('deixar como está') foi descartada porque o candidato propõe mudar as regras, e as alternativas 1 e 2 porque não há apoio documentado à redução da jornada por lei. Ressalva importante: nem o plano nem as declarações verificadas falam em permitir jornadas de mais de 50 horas semanais ou em reduzir direitos de forma explícita. Esses elementos da alternativa 4 não são atribuídos ao candidato, e por isso a confiança é média.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso - Diretrizes do Plano de Governo 2027-2030",
+          "publisher": "Flávio Bolsonaro / PL (cópia hospedada pelo Poder360)",
+          "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "p. 44: 'Vamos também dar mais liberdade a quem trabalha, com jornada flexível [...] Por isso defendemos o negociado sobre o legislado'. pp. 43-44: contrato de trabalho para jovens de 18 a 24 anos 'com menor custo na folha'. p. 45 critica o governo por, na discussão de jornada, 'ignorar a prevalência do negociado sobre o legislado'."
+        },
+        {
+          "title": "Flávio Bolsonaro mostra favoritismo da escala 5x2, mas pondera",
+          "publisher": "Diário do Grande ABC",
+          "url": "https://www.dgabc.com.br/Noticia/4320008/flavio-bolsonaro-mostra-favoritismo-da-escala-5x2-mas-pondera",
+          "publishedAt": "2026-05-19",
+          "type": "declaracao",
+          "excerpt": "Na Marcha dos Prefeitos, Flávio chamou o debate sobre a 6x1 de 'válido, mas insuficiente' e afirmou: 'O trabalhador é quem tem que escolher quanto tempo trabalha, e não o governo' e 'O salário mínimo será por hora trabalhada, com todos os direitos garantidos.'"
+        },
+        {
+          "title": "Flávio Bolsonaro foge novamente de responder se votará a favor ou contra PEC 6x1",
+          "publisher": "O Liberal (Estadão Conteúdo)",
+          "url": "https://www.oliberal.com/politica/flavio-bolsonaro-foge-novamente-de-responder-se-votara-a-favor-ou-contra-pec-6x1-1.1163609",
+          "publishedAt": "2026-09-01",
+          "type": "declaracao",
+          "excerpt": "Flávio afirmou: 'Vamos defender o nosso texto, que é a liberdade do trabalhador. Primeiro, vota-se a nossa proposta, depois vê o que faz'; reafirmou apoio à proposta de Rogério Marinho (remuneração por hora trabalhada) e não disse como votaria na PEC."
+        }
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 1,
+      "confidence": "alta",
+      "summary": "Lula defende o fim da escala 6x1 e a redução da jornada máxima para 40 horas semanais por mudança constitucional/legal, sem redução salarial, 'nos termos aprovados na Câmara'. Esse texto vale para os trabalhadores em geral, com transição única de cerca de 12 a 14 meses. O governo também enviou projeto de lei próprio com urgência em abril de 2026.",
+      "rationale": "A alternativa 1 corresponde ao objetivo declarado e ao texto apoiado, que não cria exceções por setor nem prazos maiores para pequenas empresas. As exceções existentes são pontuais: empregados 'hipersuficientes', regimes especiais por acordo coletivo (como 12x36) e prazo próprio para terceirizados de contratos públicos. A alternativa 2 foi descartada porque não há evidência verificada de apoio do candidato a prazos maiores para pequenas empresas ou setores. Integrantes do governo admitiram discutir apoio ao setor produtivo, o que não equivale a exceção de jornada.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Desenvolvimento do Plano de Governo 2027-2030 (Programa de Governo Lula 2026)",
+          "publisher": "Coligação PT/PSB/PV/PCdoB/PDT/PSOL/Rede (cópia hospedada pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados."
+        },
+        {
+          "title": "Fim da escala 6x1: Lula envia projeto de lei ao Congresso em regime de urgência",
+          "publisher": "O Povo",
+          "url": "https://mais.opovo.com.br/jornal/economia/2026/04/14/fim-da-escala-6x1-lula-envia-projeto-de-lei-ao-congresso-em-regime-de-urgencia.html",
+          "publishedAt": "2026-04-14",
+          "type": "ato-oficial",
+          "excerpt": "Projeto do Executivo, com urgência constitucional, fixa limite de 40 horas semanais e 8 horas diárias, consolida a escala 5x2 e veda redução nominal ou proporcional de salários; mensagem publicada em edição extra do DOU."
+        },
+        {
+          "title": "Lula pressiona Congresso pelo fim da escala 6 X 1",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-governo/lula-pressiona-congresso-pelo-fim-da-escala-6-x-1/",
+          "publishedAt": "2026-08-24",
+          "type": "declaracao",
+          "excerpt": "Lula afirmou que 'o nosso governo está mobilizado para a aprovação do fim da escala 6 X 1'; a PEC em análise prevê jornada máxima de 40 horas e 2 dias de descanso remunerado, sem redução salarial."
+        },
+        {
+          "title": "Câmara aprova PEC do fim da 6x1, com redução para 40h e jornada de 5 dias",
+          "publisher": "InfoMoney",
+          "url": "https://www.infomoney.com.br/politica/camara-aprova-pec-do-fim-da-6x1/",
+          "publishedAt": "2026-05-27",
+          "type": "votacao",
+          "excerpt": "PEC aprovada por 472 a 22 (1º turno) e 461 a 19 (2º turno): jornada de 40 horas, dois dias de folga, sem redução salarial, com redução inicial de duas horas 60 dias após a promulgação e até 12 meses para a adoção completa."
+        }
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "candidateId": "flavio-bolsonaro",
+      "status": "documented",
+      "value": 3,
+      "confidence": "alta",
+      "summary": "O plano de Flávio Bolsonaro propõe diplomacia 'pragmática, não ideológica', com reaproximação com Estados Unidos, Argentina e Israel, retomada da adesão à OCDE e abertura comercial, mantendo negociações com China, União Europeia e mercados asiáticos. Em maio de 2026, após encontro com Donald Trump, declarou que o Brasil integraria o 'Escudo das Américas'.",
+      "rationale": "A alternativa 3 corresponde ao plano: reaproximação com EUA, Argentina e Israel e adesão à OCDE, mas 'Negociaremos com todos [...] da China à União Europeia' e sem 'escolher amigos por afinidade ideológica'. A alternativa 4 foi descartada porque o plano mantém a China como parceira e rejeita alinhamento ideológico. A adesão anunciada ao 'Escudo das Américas' é um sinal parcial na direção da 4, aplicando o mesmo critério usado para os sinais parciais de Lula.",
+      "evidence": [
+        {
+          "title": "Para o Brasil vencer o atraso - Diretrizes do Plano de Governo 2027-2030",
+          "publisher": "Flávio Bolsonaro / PL (cópia hospedada pelo Poder360)",
+          "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "p. 62: 'uma diplomacia guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia'; 'as relações com países como Argentina, Estados Unidos e Israel foram levadas ao limite do rompimento. Vamos reverter esse quadro'; 'Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos'. p. 63: retomar a adesão à OCDE e abertura comercial."
+        },
+        {
+          "title": "EUA, 'tesouraço' e presídios: o que prevê o plano de governo de Flávio",
+          "publisher": "Congresso em Foco",
+          "url": "https://www.congressoemfoco.com.br/noticia/121271/eua--tesouraco-e-presidios-o-que-preve-o-plano-de-governo-de-flavio",
+          "publishedAt": "2026-08-14",
+          "type": "noticia",
+          "excerpt": "Resume que o plano propõe reaproximar o Brasil de EUA, Argentina e Israel, negociar com China, UE, EUA e mercados asiáticos conforme os interesses brasileiros, buscar 'soluções diplomáticas' contra sanções e retomar a adesão à OCDE; o texto não menciona o BRICS."
+        },
+        {
+          "title": "Após negar reunião, Flávio Bolsonaro aparece com Trump em foto na Casa Branca",
+          "publisher": "Investidor10",
+          "url": "https://investidor10.com.br/noticias/apos-negar-reuniao-flavio-bolsonaro-aparece-com-trump-em-foto-na-casa-branca-120597/",
+          "publishedAt": "2026-05-26",
+          "type": "declaracao",
+          "excerpt": "Flávio defendeu 'parcerias estratégicas que enriqueçam o nosso povo, gerem empregos, tragam investimento, tecnologia e segurança' e afirmou que, se eleito, o Brasil passará a integrar o 'Escudo das Américas', iniciativa lançada por Trump."
+        }
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "candidateId": "lula",
+      "status": "documented",
+      "value": 2,
+      "confidence": "alta",
+      "summary": "O programa de Lula define uma política externa 'universalista', que negocia 'com todas as regiões do mundo', com prioridade declarada ao BRICS, ao Sul Global, ao Mercosul e à integração sul-americana, e rejeita 'alinhamentos automáticos'. O governo também concluiu acordos do Mercosul com União Europeia, EFTA e Singapura.",
+      "rationale": "A alternativa 2 corresponde ao programa: 'universalista' e 'diversificando nossas parcerias', mas 'aprofundaremos a aproximação geopolítica com o BRICS e com o Sul Global'. A alternativa 1 foi descartada porque o programa rejeita 'alinhamentos automáticos', prevê 'reaproximação com [...] a Europa', e o governo promulgou o acordo Mercosul-UE. Declarações sobre reduzir a dependência do dólar (2025) são um sinal parcial na direção da 1, sem alterar a ênfase do programa.",
+      "evidence": [
+        {
+          "title": "Diretrizes para o Desenvolvimento do Plano de Governo 2027-2030 (Programa de Governo Lula 2026)",
+          "publisher": "Coligação PT/PSB/PV/PCdoB/PDT/PSOL/Rede (cópia hospedada pelo Congresso em Foco)",
+          "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
+          "publishedAt": null,
+          "type": "plano-de-governo",
+          "excerpt": "'Manteremos uma política externa universalista [...] diversificando nossas parcerias estratégicas'; 'Aprofundaremos a aproximação geopolítica com o BRICS e com o Sul Global'; fortalecimento do NDB e 'dos mecanismos financeiros dos BRICS'; 'Faremos firme oposição a qualquer tentativa [...] de reduzir nosso país a uma posição de dependência geopolítica'; 'Persistiremos na reaproximação com a Ásia, o Oriente Médio e a Europa'."
+        },
+        {
+          "title": "Fim da 6x1, soberania e segurança: o plano de Lula para novo mandato",
+          "publisher": "Congresso em Foco",
+          "url": "https://www.congressoemfoco.com.br/noticia/121276/fim-da-6x1-soberania-e-seguranca-o-plano-de-lula-para-novo-mandato",
+          "publishedAt": "2026-08-14",
+          "type": "noticia",
+          "excerpt": "O plano cita 'pelo menos três ondas de tarifaços pelo Governo Trump', propõe política externa 'universalista', enfrentar 'agressões comerciais' com base no multilateralismo e aprofundar a aproximação com BRICS e Sul Global."
+        },
+        {
+          "title": "Lula defende moeda do Brics e critica dependência do dólar",
+          "publisher": "Congresso em Foco",
+          "url": "https://www.congressoemfoco.com.br/noticia/110966/lula-defende-moeda-do-brics-e-critica-dependencia-do-dolar",
+          "publishedAt": "2025-08-13",
+          "type": "declaracao",
+          "excerpt": "Lula: 'Nós não podemos ficar dependendo do dólar, que é uma moeda de um único país, que foi assumida como moeda do mundo' e 'podemos discutir nos Brics a necessidade de uma moeda de comércio entre nós'."
+        },
+        {
+          "title": "Lula assina decreto que promulga acordo UE-Mercosul",
+          "publisher": "O Povo",
+          "url": "https://mais.opovo.com.br/jornal/farol/2026/04/29/lula-assina-decreto-que-promulga-acordo-ue-mercosul.html",
+          "publishedAt": "2026-04-29",
+          "type": "ato-oficial",
+          "excerpt": "Lula assinou o decreto que oficializa o acordo comercial Mercosul-União Europeia, em vigor a partir de 1º de maio de 2026, e enviou ao Congresso os acordos Mercosul-Singapura e Mercosul-EFTA (evidência de nuance: aproximação comercial com a Europa)."
+        }
+      ]
+    }
+  ]
+}

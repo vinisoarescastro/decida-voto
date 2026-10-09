@@ -1,0 +1,534 @@
+{
+  "id": "d321524d-e5b1-4f58-9452-d6d5be76f093",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.admin_sessoes": {
+      "name": "admin_sessoes",
+      "schema": "",
+      "columns": {
+        "token_hash": {
+          "name": "token_hash",
+          "type": "char(64)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "criada_em": {
+          "name": "criada_em",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "expira_em": {
+          "name": "expira_em",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ultimo_acesso": {
+          "name": "ultimo_acesso",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "admin_sessoes_expira_idx": {
+          "name": "admin_sessoes_expira_idx",
+          "columns": [
+            {
+              "expression": "expira_em",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.limites_requisicao": {
+      "name": "limites_requisicao",
+      "schema": "",
+      "columns": {
+        "escopo": {
+          "name": "escopo",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chave_hash": {
+          "name": "chave_hash",
+          "type": "char(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "janela_inicio": {
+          "name": "janela_inicio",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contador": {
+          "name": "contador",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "limites_janela_idx": {
+          "name": "limites_janela_idx",
+          "columns": [
+            {
+              "expression": "janela_inicio",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "limites_requisicao_escopo_chave_hash_janela_inicio_pk": {
+          "name": "limites_requisicao_escopo_chave_hash_janela_inicio_pk",
+          "columns": [
+            "escopo",
+            "chave_hash",
+            "janela_inicio"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.municipios": {
+      "name": "municipios",
+      "schema": "",
+      "columns": {
+        "codigo_ibge": {
+          "name": "codigo_ibge",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(80)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "uf": {
+          "name": "uf",
+          "type": "char(2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "municipios_uf_idx": {
+          "name": "municipios_uf_idx",
+          "columns": [
+            {
+              "expression": "uf",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "municipios_codigo_uf_uq": {
+          "name": "municipios_codigo_uf_uq",
+          "nullsNotDistinct": false,
+          "columns": [
+            "codigo_ibge",
+            "uf"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.participacoes": {
+      "name": "participacoes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "data_envio": {
+          "name": "data_envio",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "current_date"
+        },
+        "uf": {
+          "name": "uf",
+          "type": "char(2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "municipio_codigo": {
+          "name": "municipio_codigo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "genero": {
+          "name": "genero",
+          "type": "genero",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "faixa_etaria": {
+          "name": "faixa_etaria",
+          "type": "faixa_etaria",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "temas_comparaveis": {
+          "name": "temas_comparaveis",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "versao_perguntas": {
+          "name": "versao_perguntas",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "versao_posicoes": {
+          "name": "versao_posicoes",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "participacoes_uf_idx": {
+          "name": "participacoes_uf_idx",
+          "columns": [
+            {
+              "expression": "uf",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "participacoes_municipio_idx": {
+          "name": "participacoes_municipio_idx",
+          "columns": [
+            {
+              "expression": "municipio_codigo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "participacoes_genero_idx": {
+          "name": "participacoes_genero_idx",
+          "columns": [
+            {
+              "expression": "genero",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "participacoes_faixa_idx": {
+          "name": "participacoes_faixa_idx",
+          "columns": [
+            {
+              "expression": "faixa_etaria",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "participacoes_municipio_uf_fk": {
+          "name": "participacoes_municipio_uf_fk",
+          "tableFrom": "participacoes",
+          "tableTo": "municipios",
+          "columnsFrom": [
+            "municipio_codigo",
+            "uf"
+          ],
+          "columnsTo": [
+            "codigo_ibge",
+            "uf"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "participacoes_temas_ck": {
+          "name": "participacoes_temas_ck",
+          "value": "\"participacoes\".\"temas_comparaveis\" between 0 and 50"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.respostas": {
+      "name": "respostas",
+      "schema": "",
+      "columns": {
+        "participacao_id": {
+          "name": "participacao_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pergunta_id": {
+          "name": "pergunta_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "valor": {
+          "name": "valor",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "respostas_participacao_id_participacoes_id_fk": {
+          "name": "respostas_participacao_id_participacoes_id_fk",
+          "tableFrom": "respostas",
+          "tableTo": "participacoes",
+          "columnsFrom": [
+            "participacao_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "respostas_participacao_id_pergunta_id_pk": {
+          "name": "respostas_participacao_id_pergunta_id_pk",
+          "columns": [
+            "participacao_id",
+            "pergunta_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "respostas_valor_ck": {
+          "name": "respostas_valor_ck",
+          "value": "\"respostas\".\"valor\" between 1 and 4"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.resultados": {
+      "name": "resultados",
+      "schema": "",
+      "columns": {
+        "participacao_id": {
+          "name": "participacao_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "candidato_id": {
+          "name": "candidato_id",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pontos": {
+          "name": "pontos",
+          "type": "numeric(7, 4)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "concordancia": {
+          "name": "concordancia",
+          "type": "numeric(7, 4)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "resultados_candidato_idx": {
+          "name": "resultados_candidato_idx",
+          "columns": [
+            {
+              "expression": "candidato_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "resultados_participacao_id_participacoes_id_fk": {
+          "name": "resultados_participacao_id_participacoes_id_fk",
+          "tableFrom": "resultados",
+          "tableTo": "participacoes",
+          "columnsFrom": [
+            "participacao_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "resultados_participacao_id_candidato_id_pk": {
+          "name": "resultados_participacao_id_candidato_id_pk",
+          "columns": [
+            "participacao_id",
+            "candidato_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "resultados_pontos_ck": {
+          "name": "resultados_pontos_ck",
+          "value": "\"resultados\".\"pontos\" between 0 and 100"
+        },
+        "resultados_concordancia_ck": {
+          "name": "resultados_concordancia_ck",
+          "value": "\"resultados\".\"concordancia\" between 0 and 100"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.tokens_usados": {
+      "name": "tokens_usados",
+      "schema": "",
+      "columns": {
+        "nonce_hash": {
+          "name": "nonce_hash",
+          "type": "char(64)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "expira_em": {
+          "name": "expira_em",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.faixa_etaria": {
+      "name": "faixa_etaria",
+      "schema": "public",
+      "values": [
+        "16-17",
+        "18-24",
+        "25-34",
+        "35-44",
+        "45-59",
+        "60+"
+      ]
+    },
+    "public.genero": {
+      "name": "genero",
+      "schema": "public",
+      "values": [
+        "homem",
+        "mulher"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

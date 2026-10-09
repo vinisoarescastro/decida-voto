@@ -1,0 +1,63 @@
+# Nginx como proxy reverso HTTPS para o Decida Voto (aplicação em 127.0.0.1:3000, via Docker Compose).
+# Substitua SEU_DOMINIO. Certificado: certbot certonly --nginx -d SEU_DOMINIO -d www.SEU_DOMINIO
+# Requer também deploy/nginx-limites.conf em /etc/nginx/conf.d/.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name SEU_DOMINIO www.SEU_DOMINIO;
+    return 301 https://SEU_DOMINIO$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name SEU_DOMINIO;
+
+    ssl_certificate     /etc/letsencrypt/live/SEU_DOMINIO/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/SEU_DOMINIO/privkey.pem;
+
+    server_tokens off;
+    client_max_body_size 32k;
+    # Os demais cabeçalhos de segurança (CSP etc.) são enviados pela própria aplicação.
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    access_log /var/log/nginx/decida-voto.access.log;
+    error_log  /var/log/nginx/decida-voto.error.log warn;
+
+    # Cabeçalhos repassados à aplicação. X-Real-IP é usado só para gerar hashes diários de controle de abuso.
+    proxy_set_header Host              $host;
+    proxy_set_header X-Real-IP         $remote_addr;
+    proxy_set_header X-Forwarded-For   $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    # Envio de participações: sem log de acesso, para não associar IP e horário a uma resposta.
+    location = /api/participacoes/ {
+        access_log off;
+        limit_req zone=dv_api burst=10 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    location /api/ {
+        limit_req zone=dv_api burst=40 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    location = /api/admin/login/ {
+        limit_req zone=dv_login burst=5 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    # Opcional (recomendado): libere o painel só para IPs conhecidos.
+    location /admin/ {
+        # allow 203.0.113.10;   # seu IP fixo
+        # deny all;
+        proxy_pass http://127.0.0.1:3000;
+    }
+}

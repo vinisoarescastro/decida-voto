@@ -1,0 +1,75 @@
+# Decida Voto — aplicação + PostgreSQL + backup diário.
+# Configure o arquivo .env (modelo em .env.example) antes de subir: docker compose up -d --build
+name: decida-voto
+
+x-database-url: &database-url postgres://${POSTGRES_USER:?defina no .env}:${POSTGRES_PASSWORD:?defina no .env}@db:5432/${POSTGRES_DB:?defina no .env}
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # Sem "ports": o banco só é acessível pela rede interna do Compose, nunca pela internet.
+
+  migrate:
+    build:
+      context: .
+      target: migrator
+    environment:
+      DATABASE_URL: *database-url
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      target: runner
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: *database-url
+      APP_ORIGIN: ${APP_ORIGIN:?defina no .env}
+      FORM_TOKEN_SECRET: ${FORM_TOKEN_SECRET:?defina no .env}
+      RATE_LIMIT_SECRET: ${RATE_LIMIT_SECRET:?defina no .env}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:?defina no .env}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:?defina no .env}
+      PRIVACY_MIN_GROUP: ${PRIVACY_MIN_GROUP:-10}
+      FORM_MIN_SECONDS: ${FORM_MIN_SECONDS:-15}
+    # Só a própria máquina acessa a aplicação; o Nginx da VPS faz o proxy público com HTTPS.
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      PGHOST: db
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-14}
+      PARTICIPACOES_EXCLUIR_APOS: ${PARTICIPACOES_EXCLUIR_APOS:-}
+    volumes:
+      - ./backups:/backups
+      - ./deploy/backup.sh:/usr/local/bin/backup.sh:ro
+    entrypoint: ["/bin/sh", "/usr/local/bin/backup.sh"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:

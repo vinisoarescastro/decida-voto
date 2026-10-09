@@ -1,0 +1,468 @@
+{
+  "updatedAt": "2026-10-09",
+  "reviewStatus": "pendente",
+  "items": [
+    {
+      "questionId": "estatais",
+      "title": "Petrobras, BB e Caixa Serão Privatizados? Veja o Que Diz Coordenador de Flávio Bolsonaro",
+      "summary": "O coordenador econômico da campanha de Flávio, Adolfo Sachsida, afirmou que Petrobras, Banco do Brasil e Caixa não serão privatizados. A reportagem registra que o plano prevê retomar privatizações caso a caso e que os Correios não foram mencionados.",
+      "publisher": "Forbes Brasil",
+      "publishedAt": "2026-10-08",
+      "url": "https://forbes.com.br/forbes-money/2026/10/petrobras-bb-e-caixa-serao-privatizados-veja-o-que-diz-coordenador-de-flavio-bolsonaro/",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "estatais",
+      "title": "Plano de governo de Lula em 2026 troca \"reconstrução\" por legado",
+      "summary": "A análise compara o programa de Lula de 2026 com o de 2022. Segundo o texto, a base ideológica foi mantida, inclusive a oposição à privatização de estatais estratégicas como Petrobras e Correios.",
+      "publisher": "Poder360",
+      "publishedAt": "2026-08-21",
+      "url": "https://www.poder360.com.br/poder-eleicoes-2026/plano-de-governo-de-lula-em-2026-troca-reconstrucao-por-legado/",
+      "type": "analise",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "estatais",
+      "title": "Flávio Bolsonaro afirma que Correios têm de ser privatizados",
+      "summary": "Em entrevista à Rádio Itatiaia, o então pré-candidato defendeu a privatização dos Correios, citando prejuízos da estatal, e a venda de outras empresas que considera ineficientes.",
+      "publisher": "O Liberal (Estadão Conteúdo)",
+      "publishedAt": "2026-06-02",
+      "url": "https://www.oliberal.com/politica/flavio-bolsonaro-afirma-que-correios-tem-de-ser-privatizados-1.1128935",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "estatais",
+      "title": "Correios: 'Enquanto eu for presidente, não haverá privatização', diz Lula",
+      "summary": "Em meio à crise financeira dos Correios, Lula descartou a privatização da estatal. Ele admitiu parcerias com empresas privadas e mencionou a hipótese de transformá-la em empresa de economia mista.",
+      "publisher": "Money Times (Estadão Conteúdo)",
+      "publishedAt": "2025-12-18",
+      "url": "https://www.moneytimes.com.br/correios-enquanto-eu-for-presidente-nao-havera-privatizacao-diz-lula-igdl/",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "impostos",
+      "title": "Promessa de Flávio de rever impostos esbarra no cronograma tributário",
+      "summary": "A reportagem explica que adiar a CBS e o IBS da reforma tributária, prevista pelo governo Lula, exigiria emenda constitucional. Já a tributação de lucros e dividendos, em vigor desde janeiro de 2026, poderia ser alterada por lei, como Flávio promete rever.",
+      "publisher": "Correio Braziliense",
+      "publishedAt": "2026-10-05",
+      "url": "https://www.correiobraziliense.com.br/economia/2026/10/7515287-promessa-de-flavio-de-rever-impostos-esbarra-no-cronograma-tributario.html",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "impostos",
+      "title": "O que Flávio Bolsonaro pode mudar na reforma tributária",
+      "summary": "A reportagem trata das críticas de Flávio à alíquota projetada do IVA e da promessa de rever a reforma tributária, além de sua posição sobre a isenção do IR até R$ 5 mil.",
+      "publisher": "Gazeta do Povo",
+      "publishedAt": "2026-10-08",
+      "url": "https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-reforma-tributaria/",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "impostos",
+      "title": "Lula 2026: conheça as propostas do candidato à Presidência",
+      "summary": "A reportagem resume o programa de Lula. Na área tributária, ele prevê consolidar a isenção do IR para salários de até R$ 5 mil, compensada por tributação de super-ricos, fundos exclusivos e offshores.",
+      "publisher": "Estado de Minas",
+      "publishedAt": "2026-08-31",
+      "url": "https://www.em.com.br/politica/2026/08/7490597-lula-2026-conheca-as-propostas-do-candidato-a-presidencia.html",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "title": "O que Flávio Bolsonaro e Lula propõem sobre o Bolsa Família",
+      "summary": "A reportagem compara as propostas: Lula fala em continuar ampliando o programa, sem fixar novo valor. Flávio promete manter o benefício, com foco em qualificação, emprego formal e retorno ao programa após o seguro-desemprego.",
+      "publisher": "BBC News Brasil (republicado por O POVO)",
+      "publishedAt": "2026-10-08",
+      "url": "https://www.opovo.com.br/agencia/bbc/2026/10/08/o-que-flavio-bolsonaro-e-lula-propoem-sobre-o-bolsa-familia.html",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "title": "Bolsa Família vira bandeira eleitoral, com promessas já existentes e obrigação de trabalhar",
+      "summary": "Levantamento sobre as propostas dos presidenciáveis para o Bolsa Família. A reportagem aponta que Lula promete manter e aperfeiçoar o programa sem detalhar como e que Flávio propõe trilhas de capacitação sem citar o programa pelo nome.",
+      "publisher": "Jornal de Brasília (Folhapress)",
+      "publishedAt": "2026-10-02",
+      "url": "https://jornaldebrasilia.com.br/noticias/politica-e-poder/bolsa-familia-vira-bandeira-eleitoral-com-promessas-ja-existentes-e-obrigacao-de-trabalhar/",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "title": "Governo reajusta Bolsa Família em 15% e eleva valor mínimo para R$ 691",
+      "summary": "Decreto de 17/09/2026 reajusta os benefícios pelo INPC acumulado desde março de 2023 (15,04%). O valor mínimo vai a R$ 691, com efeitos financeiros a partir de outubro.",
+      "publisher": "Mercado&Consumo (com informações da Agência Brasil)",
+      "publishedAt": "2026-09-17",
+      "url": "https://mercadoeconsumo.com.br/17/09/2026/economia/governo-reajusta-bolsa-familia-em-15-e-eleva-valor-minimo-para-r-691/",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "programas-sociais",
+      "title": "Flávio Bolsonaro diz que Lula aumentou Bolsa Família em \"ato de desespero\" e tenta comprar votos",
+      "summary": "Em comício em Joinville (SC), Flávio criticou o momento do reajuste do Bolsa Família, anunciado a poucas semanas da eleição, e afirmou que a medida deveria ter sido tomada em 2023.",
+      "publisher": "Diario de Pernambuco (Estadão Conteúdo)",
+      "publishedAt": "2026-09-19",
+      "url": "https://www.diariodepernambuco.com.br/politica/2026/09/11724383-flavio-bolsonaro-diz-que-lula-aumentou-bolsa-familia-em-ato-de-desespero-e-tenta-comprar-votos.html",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "saude",
+      "title": "O que os candidatos à Presidência propõem para a saúde",
+      "summary": "Comparativo dos planos de saúde dos candidatos. Lula promete ampliar o Agora Tem Especialistas e manter os acordos com hospitais privados. Flávio propõe o 'Brasil sem Fila', a contratação da rede privada ociosa e a correção da tabela SUS.",
+      "publisher": "Futuro da Saúde",
+      "publishedAt": "2026-08-19",
+      "url": "https://futurodasaude.com.br/planos-para-a-saude-candidatos-presidencia/",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "saude",
+      "title": "Lula aposta em mutirões e atendimento itinerante para reduzir filas no SUS",
+      "summary": "A reportagem descreve as ações do governo para reduzir filas no SUS, como o Agora Tem Especialistas, carretas de exames, mutirões de cirurgias e o prazo de 60 dias para iniciar o tratamento de câncer.",
+      "publisher": "Rádio Itatiaia",
+      "publishedAt": "2026-04-02",
+      "url": "https://www.itatiaia.com.br/politica/lula-aposta-em-mutiroes-e-atendimento-itinerante-para-reduzir-filas-no-sus",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "saude",
+      "title": "Plano de governo de Flávio Bolsonaro contradiz montagens espalhadas na web",
+      "summary": "A reportagem confronta conteúdos que circularam nas redes com o texto do plano. Ela aponta que o documento propõe contratar a rede privada ociosa sem privatizar o SUS e não prevê o fim da Farmácia Popular nem do Bolsa Família.",
+      "publisher": "Jovem Pan",
+      "publishedAt": "2026-10-07",
+      "url": "https://jovempan.com.br/politica/plano-de-governo-de-flavio-bolsonaro-contradiz-montagens-espalhadas-na-web/",
+      "type": "checagem",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "saude",
+      "title": "Flávio diz não pretender atacar pisos da saúde e educação, vinculação do mínimo e Previdência",
+      "summary": "Questionado sobre estudos de sua equipe para mudar a correção de gastos obrigatórios, noticiados em abril, Flávio afirmou que não pretende acabar com os pisos constitucionais da saúde e da educação.",
+      "publisher": "Correio do Estado (Estadão Conteúdo)",
+      "publishedAt": "2026-06-19",
+      "url": "https://correiodoestado.com.br/politica/flavio-diz-nao-pretender-atacar-pisos-da-saude-e-educacao-vinculacao/468377/",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "educacao",
+      "title": "Educação nas eleições de 2026 – Análise do Todos Pela Educação das propostas para a Educação Básica dos candidatos à presidência da República",
+      "summary": "Organização da sociedade civil compara os planos dos presidenciáveis para a educação básica. Destaca a prioridade ao tempo integral no plano de Lula e a ampliação de escolas cívico-militares e vouchers por falta de vaga no plano de Flávio, com pontos de atenção para ambos.",
+      "publisher": "Todos Pela Educação",
+      "publishedAt": null,
+      "url": "https://todospelaeducacao.org.br/wordpress/wp-content/uploads/2026/09/analise-educacao-nas-eleicoes-presidenciais-2026-todos-pela-educacao.pdf",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "educacao",
+      "title": "Educação: o que Flávio propõe em plano de governo",
+      "summary": "Reportagem detalha as propostas de educação do plano de Flávio Bolsonaro, como ampliação de escolas cívico-militares, método fônico, voucher-creche e voucher educacional onde faltar vaga pública e novo modelo de financiamento estudantil.",
+      "publisher": "SBT News",
+      "publishedAt": "2026-09-03",
+      "url": "https://sbtnews.sbt.com.br/noticia/eleicoes/educacao-o-que-flavio-propoe-em-plano-de-governo",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "educacao",
+      "title": "Lula diz que país não precisa de escola cívico-militar na educação",
+      "summary": "Ao sancionar o novo Plano Nacional de Educação, Lula afirmou que o país não precisa expandir escolas cívico-militares na rede pública e que quem quiser carreira militar deve se preparar para ela depois.",
+      "publisher": "Folha de Pernambuco",
+      "publishedAt": "2026-04-14",
+      "url": "https://www.folhape.com.br/politica/lula-diz-que-pais-nao-precisa-de-escola-civico-militar-na-educacao/480789/",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "armas",
+      "title": "Fim do Estatuto do Desarmamento: Flávio Bolsonaro planeja nova lei de armas",
+      "summary": "Reportagem relata que a equipe de Flávio estuda revogar o Estatuto do Desarmamento e substituir a análise de 'efetiva necessidade' por requisitos objetivos; o detalhamento foi apresentado pelo deputado Marcos Pollon.",
+      "publisher": "Gazeta do Povo",
+      "publishedAt": "2026-08-07",
+      "url": "https://www.gazetadopovo.com.br/republica/quem-planeja-o-fim-do-estatuto-do-desarmamento-no-brasil/",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "armas",
+      "title": "Flávio indica retomar agenda armamentista do pai e promete acesso a armas para legítima defesa",
+      "summary": "Em declaração à Folha, Flávio disse que 'a legítima defesa tem que voltar', sem detalhar medidas; a reportagem registra que o tema não está no plano de governo.",
+      "publisher": "ICL Notícias (conteúdo Folhapress)",
+      "publishedAt": "2026-10-07",
+      "url": "https://iclnoticias.com.br/?p=130906",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "armas",
+      "title": "Lula: \"Houve um tempo em que era mais bonito vender armas do que livros\"",
+      "summary": "Em evento em Salvador, Lula criticou a política de flexibilização de armas do governo anterior e associou a ampliação do acesso ao fortalecimento do crime organizado.",
+      "publisher": "Congresso em Foco",
+      "publishedAt": "2026-02-06",
+      "url": "https://www.congressoemfoco.com.br/noticia/116201/lula--houve-tempo-em-que-era-mais-bonito-vender-armas-do-que-livros",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "armas",
+      "title": "PT registra novo plano de governo de Lula no TSE; veja a íntegra",
+      "summary": "Reportagem sobre o registro do programa de Lula no TSE; na segurança, o texto prevê a continuidade da política de controle de armas e munições, com mais rastreabilidade e fiscalização.",
+      "publisher": "Congresso em Foco",
+      "publishedAt": "2026-08-08",
+      "url": "https://congressoemfoco.com.br/noticia/121121/pt-registra-novo-plano-de-governo-de-lula-no-tse-veja-a-integra",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "armas",
+      "title": "Lula vota em São Bernardo e critica armas, milícias e Banco Master",
+      "summary": "Ao votar no 1º turno, Lula criticou a facilitação da venda de armas e disse que o país avança 'facilitando a distribuição de livros didáticos nas escolas'.",
+      "publisher": "A Crítica",
+      "publishedAt": "2026-10-04",
+      "url": "https://acritica.net/eleicoes-2026/lula-vota-em-sao-bernardo-e-critica-armas-milicias-e-banco-master/",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "meio-ambiente",
+      "title": "Flávio Bolsonaro defende licenciamento ambiental 'sem ideologia' durante visita a Belém",
+      "summary": "Em agenda de campanha no Pará, Flávio criticou o modelo atual de licenciamento, que segundo ele inviabiliza o progresso, e defendeu combate a crimes ambientais com fiscalização e prisões.",
+      "publisher": "O Liberal",
+      "publishedAt": "2026-09-14",
+      "url": "https://www.oliberal.com/politica/flavio-bolsonaro-defende-licenciamento-ambiental-sem-ideologia-durante-visita-a-belem-1.1168706",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "meio-ambiente",
+      "title": "Congresso derruba vetos de Lula ao licenciamento ambiental",
+      "summary": "O Congresso derrubou os vetos do presidente à Lei Geral do Licenciamento Ambiental, exceto os relativos à Licença Ambiental Especial, restabelecendo pontos como a licença por adesão e compromisso para médio potencial poluidor.",
+      "publisher": "Agência Câmara de Notícias",
+      "publishedAt": "2025-11-27",
+      "url": "https://www.camara.leg.br/noticias/1227650-congresso-derruba-vetos-de-lula-ao-licenciamento-ambiental/",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "meio-ambiente",
+      "title": "Meio ambiente: o candidato menos pior",
+      "summary": "Coluna de opinião compara as propostas ambientais dos planos, citando a meta de zerar o desmatamento ilegal e a licença por decurso de prazo no plano de Flávio e o PSA e a agricultura de baixo carbono no de Lula, com críticas a ambos.",
+      "publisher": "O POVO+",
+      "publishedAt": "2026-09-23",
+      "url": "https://mais.opovo.com.br/colunistas/fabio-angeoletto/2026/09/23/meio-ambiente-o-candidato-menos-pior.html",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "corrupcao",
+      "title": "A nova decisão do STF sobre o alcance do foro privilegiado",
+      "summary": "O STF manteve, em julgamento virtual concluído em maio de 2026, o entendimento de que o foro continua após a saída do cargo e estendeu a orientação a todos os titulares de foro, inclusive cargos vitalícios. O voto divergente de Luiz Fux ficou vencido.",
+      "publisher": "CartaCapital",
+      "publishedAt": "2026-05-25",
+      "url": "https://www.cartacapital.com.br/justica/a-nova-decisao-do-stf-sobre-o-alcance-do-foro-privilegiado/",
+      "type": "noticia",
+      "candidates": []
+    },
+    {
+      "questionId": "corrupcao",
+      "title": "STF amplia foro privilegiado para manter investigações na Corte após fim do mandato",
+      "summary": "Por 7 votos a 4, o STF decidiu que crimes funcionais cometidos no exercício do cargo continuam sendo julgados pela Corte após renúncia, não reeleição ou cassação, seguindo o voto do relator Gilmar Mendes.",
+      "publisher": "Gazeta do Povo",
+      "publishedAt": "2025-03-11",
+      "url": "https://www.gazetadopovo.com.br/republica/stf-amplia-foro-privilegiado/",
+      "type": "noticia",
+      "candidates": []
+    },
+    {
+      "questionId": "corrupcao",
+      "title": "'Não é uma coisa séria', diz Lula sobre PEC da Blindagem",
+      "summary": "Lula criticou a PEC aprovada pela Câmara que ampliava a imunidade parlamentar e estendia o foro a presidentes de partidos. A proposta foi depois rejeitada pela CCJ do Senado.",
+      "publisher": "CNN Brasil",
+      "publishedAt": "2025-09-18",
+      "url": "https://www.cnnbrasil.com.br/politica/nao-e-uma-coisa-seria-diz-lula-sobre-pec-da-blindagem/",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "corrupcao",
+      "title": "EUA, 'tesouraço' e presídios: o que prevê o plano de governo de Flávio",
+      "summary": "Descreve as propostas do plano de Flávio para a Justiça, incluindo redução de competências do STF, limite a decisões individuais de ministros e quarentena para indicação de ministros de Estado à Corte.",
+      "publisher": "Congresso em Foco",
+      "publishedAt": "2026-08-14",
+      "url": "https://www.congressoemfoco.com.br/noticia/121271/eua--tesouraco-e-presidios-o-que-preve-o-plano-de-governo-de-flavio",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "title": "Lula pressiona Congresso pelo fim da escala 6 X 1",
+      "summary": "Lula cobra do Congresso a aprovação, antes das eleições, da PEC que fixa jornada máxima de 40 horas e dois dias de descanso remunerado, sem redução salarial.",
+      "publisher": "Poder360",
+      "publishedAt": "2026-08-24",
+      "url": "https://www.poder360.com.br/poder-governo/lula-pressiona-congresso-pelo-fim-da-escala-6-x-1/",
+      "type": "declaracao-oficial",
+      "candidates": [
+        "lula"
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "title": "Flávio Bolsonaro mostra favoritismo da escala 5x2, mas pondera",
+      "summary": "Flávio considera o debate sobre a 6x1 'válido, mas insuficiente', defende que o trabalhador escolha quanto tempo trabalha e propõe salário mínimo por hora trabalhada.",
+      "publisher": "Diário do Grande ABC",
+      "publishedAt": "2026-05-19",
+      "url": "https://www.dgabc.com.br/Noticia/4320008/flavio-bolsonaro-mostra-favoritismo-da-escala-5x2-mas-pondera",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "title": "Fim da 6x1: veja quais senadores votaram contra a PEC na CCJ",
+      "summary": "A CCJ do Senado aprovou a PEC do fim da 6x1 em votação simbólica; o relator rejeitou a emenda da oposição que previa regime flexível com remuneração por hora, e senadores como Rogério Marinho, coordenador da campanha de Flávio, se manifestaram contra.",
+      "publisher": "SBT News",
+      "publishedAt": "2026-09-02",
+      "url": "https://sbtnews.sbt.com.br/noticia/politica/fim-da-6x1-veja-quais-senadores-votaram-contra-a-pec-na-ccj",
+      "type": "noticia",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "trabalho",
+      "title": "Fim da escala 6x1: aliados de Flávio pressionam Alcolumbre para adiar votação",
+      "summary": "Senadores de oposição pedem que a votação da PEC no plenário fique para depois do 2º turno; Flávio volta a defender a proposta alternativa da oposição.",
+      "publisher": "Correio da Manhã",
+      "publishedAt": "2026-10-07",
+      "url": "https://www.correiodamanha.com.br/politica/2026/10/325368-fim-da-escala-6x1-aliados-de-flavio-pressionam-alcolumbre-para-adiar-votacao.html",
+      "type": "noticia",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "title": "Eleição presidencial de 2026 é a mais internacionalizada desde o fim da Guerra Fria",
+      "summary": "Analisa o peso da política externa na campanha: Lula atribui a crise tarifária com os EUA à atuação da família Bolsonaro, e Flávio a atribui à condução diplomática do PT.",
+      "publisher": "Gazeta do Povo",
+      "publishedAt": "2026-07-19",
+      "url": "https://www.gazetadopovo.com.br/eleicoes/2026/eleicao-presidencial-de-2026-e-a-mais-internacionalizada-desde-o-fim-da-guerra-fria/",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "title": "As eleições brasileiras e as perspectivas para o BRICS+",
+      "summary": "Artigo de opinião que projeta como o resultado da eleição afetaria a participação brasileira no BRICS+ e a agenda de reforma multilateral.",
+      "publisher": "CartaCapital",
+      "publishedAt": "2026-05-19",
+      "url": "https://www.cartacapital.com.br/artigo/as-eleicoes-brasileiras-e-as-perspectivas-para-o-brics/",
+      "type": "analise",
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "title": "Após negar reunião, Flávio Bolsonaro aparece com Trump em foto na Casa Branca",
+      "summary": "Flávio se reúne com Donald Trump na Casa Branca e afirma que, se eleito, o Brasil integrará o 'Escudo das Américas'.",
+      "publisher": "Investidor10",
+      "publishedAt": "2026-05-26",
+      "url": "https://investidor10.com.br/noticias/apos-negar-reuniao-flavio-bolsonaro-aparece-com-trump-em-foto-na-casa-branca-120597/",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "politica-externa",
+      "title": "Lula assina decreto que promulga acordo UE-Mercosul",
+      "summary": "Lula promulga o acordo comercial Mercosul-União Europeia, com vigência a partir de 1º de maio de 2026, e envia ao Congresso os acordos com Singapura e EFTA.",
+      "publisher": "O Povo",
+      "publishedAt": "2026-04-29",
+      "url": "https://mais.opovo.com.br/jornal/farol/2026/04/29/lula-assina-decreto-que-promulga-acordo-ue-mercosul.html",
+      "type": "noticia",
+      "candidates": [
+        "lula"
+      ]
+    }
+  ]
+}

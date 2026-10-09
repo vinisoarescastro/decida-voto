@@ -1,0 +1,285 @@
+{
+  "version": "2.5.0",
+  "questions": [
+    {
+      "id": "estatais",
+      "theme": "Empresas do governo",
+      "text": "O que fazer com as empresas do governo?",
+      "context": "São empresas que pertencem ao governo, como as de petróleo, de energia e os bancos públicos.",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Manter todas e fortalecer."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Manter as principais, com menos influência de políticos."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Vender algumas e manter as mais importantes."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Vender todas."
+        }
+      ]
+    },
+    {
+      "id": "impostos",
+      "theme": "Impostos",
+      "text": "Como deveriam ser os impostos?",
+      "context": "Impostos são o dinheiro que as pessoas e as empresas pagam ao governo.",
+      "options": [
+        {
+          "id": "a",
+          "value": 4,
+          "text": "Diminuir muito para todos, cortando gastos do governo."
+        },
+        {
+          "id": "b",
+          "value": 3,
+          "text": "Simplificar e diminuir aos poucos."
+        },
+        {
+          "id": "c",
+          "value": 2,
+          "text": "Diminuir para quem ganha pouco e cobrar mais de quem ganha muito."
+        },
+        {
+          "id": "d",
+          "value": 1,
+          "text": "Cobrar muito mais dos ricos."
+        }
+      ]
+    },
+    {
+      "id": "programas-sociais",
+      "theme": "Programas sociais",
+      "text": "O que fazer com os programas que pagam um valor todo mês às famílias pobres?",
+      "context": "Para receber, as famílias precisam seguir algumas regras, como manter os filhos na escola.",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Aumentar o valor e atender mais famílias."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Deixar como está, com mais fiscalização."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Manter, mas exigir que quem recebe trabalhe ou estude."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Acabar com todos os programas sociais."
+        }
+      ]
+    },
+    {
+      "id": "saude",
+      "theme": "Saúde",
+      "text": "Como melhorar o atendimento de saúde pública?",
+      "context": "O governo pode atender nos seus próprios postos e hospitais ou pagar hospitais particulares para atender a população.",
+      "options": [
+        {
+          "id": "a",
+          "value": 4,
+          "text": "Cada um deve pagar seu próprio plano de saúde."
+        },
+        {
+          "id": "b",
+          "value": 3,
+          "text": "Usar principalmente hospitais particulares pagos pelo governo."
+        },
+        {
+          "id": "c",
+          "value": 2,
+          "text": "Investir nos hospitais públicos e usar particulares só para diminuir filas."
+        },
+        {
+          "id": "d",
+          "value": 1,
+          "text": "Investir só nos postos e hospitais públicos."
+        }
+      ]
+    },
+    {
+      "id": "educacao",
+      "theme": "Educação",
+      "text": "O que deve ser prioridade nas escolas?",
+      "context": "Pense nas escolas das crianças e dos jovens, da creche ao ensino médio.",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Escola pública o dia todo (tempo integral)."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Manter as escolas como estão, com metas de aprendizado."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Mais disciplina e regras mais rígidas nas escolas."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Dar vale para escola particular e permitir ensino em casa."
+        }
+      ]
+    },
+    {
+      "id": "armas",
+      "theme": "Armas",
+      "text": "Quem deve poder ter arma de fogo?",
+      "context": "Ter a posse é guardar a arma em casa. Ter o porte é poder andar armado na rua.",
+      "options": [
+        {
+          "id": "a",
+          "value": 4,
+          "text": "Liberar armas para todos."
+        },
+        {
+          "id": "b",
+          "value": 3,
+          "text": "Facilitar ter arma em casa para quem cumprir as regras."
+        },
+        {
+          "id": "c",
+          "value": 2,
+          "text": "Permitir, com regras duras e muita fiscalização."
+        },
+        {
+          "id": "d",
+          "value": 1,
+          "text": "Só a polícia pode ter arma."
+        }
+      ]
+    },
+    {
+      "id": "meio-ambiente",
+      "theme": "Meio ambiente",
+      "text": "Como equilibrar a proteção da natureza e a produção no campo?",
+      "context": "Para desmatar ou fazer obras, é preciso pedir autorização ao governo, a chamada licença ambiental.",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Proteger a natureza."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Punir o desmatamento ilegal e replantar para compensar o permitido."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Facilitar autorizações e exigir menos do produtor."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Não proteger o meio ambiente."
+        }
+      ]
+    },
+    {
+      "id": "corrupcao",
+      "theme": "Corrupção e Justiça",
+      "text": "Políticos acusados de crimes devem ter foro privilegiado?",
+      "context": "Foro privilegiado é quando deputados, senadores e ministros acusados de crimes ligados ao cargo são julgados direto no tribunal mais alto do país, e não por um juiz comum. Hoje isso vale mesmo depois que eles saem do cargo.",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Sim, como é hoje, mesmo depois que saem do cargo."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Sim, só enquanto estiverem no cargo."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Sim, mas em outro tribunal, não no mais alto do país."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Não. Devem ser julgados como qualquer pessoa."
+        }
+      ]
+    },
+    {
+      "id": "trabalho",
+      "theme": "Trabalho",
+      "text": "O que mudar nas regras de horas de trabalho?",
+      "context": "Hoje é permitido trabalhar até 44 horas por semana e folgar só 1 dia a cada 6 trabalhados (escala 6x1).",
+      "options": [
+        {
+          "id": "a",
+          "value": 1,
+          "text": "Diminuir as horas e acabar com a escala 6x1."
+        },
+        {
+          "id": "b",
+          "value": 2,
+          "text": "Diminuir as horas, com exceções para pequenas empresas."
+        },
+        {
+          "id": "c",
+          "value": 3,
+          "text": "Deixar como está."
+        },
+        {
+          "id": "d",
+          "value": 4,
+          "text": "Deixar livre, permitir trabalhar mais de 50h semanais e ter menos direitos."
+        }
+      ]
+    },
+    {
+      "id": "politica-externa",
+      "theme": "Relações com outros países",
+      "text": "De quais países o Brasil deve se aproximar mais?",
+      "context": "São as parcerias e os acordos de comércio do Brasil com outros países.",
+      "options": [
+        {
+          "id": "a",
+          "value": 4,
+          "text": "Ficar do lado dos países ricos."
+        },
+        {
+          "id": "b",
+          "value": 3,
+          "text": "Negociar com todos, preferindo países ricos."
+        },
+        {
+          "id": "c",
+          "value": 2,
+          "text": "Negociar com todos, preferindo países em desenvolvimento."
+        },
+        {
+          "id": "d",
+          "value": 1,
+          "text": "Ficar do lado dos países em desenvolvimento."
+        }
+      ]
+    }
+  ]
+}
