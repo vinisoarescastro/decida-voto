@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { CONTACT_EMAIL, CONTROLADOR, RETENCAO_PARTICIPACOES } from "@/lib/site";
+import { Sumario } from "@/components/ui/Sumario";
 
 export const metadata: Metadata = {
   title: "Privacidade e termos de uso",
@@ -22,13 +23,24 @@ const lista = "list-disc space-y-2 pl-5";
 
 export default function PrivacidadePage() {
   return (
-    <div className="mx-auto max-w-2xl space-y-12 px-6 pt-14 sm:pt-20">
-      <header className="space-y-3">
+    <div className="animate-surgir mx-auto max-w-2xl space-y-12 px-6 pt-14 sm:pt-20">
+      <header className="space-y-5">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Privacidade e termos de uso</h1>
         <p className="text-muted">
           Opiniões políticas são dados pessoais sensíveis pela Lei Geral de Proteção de Dados (LGPD, art. 5º, II). Por isso
           coletamos o mínimo possível, sem nada que identifique você diretamente, e só com o seu consentimento.
         </p>
+        <Sumario
+          itens={[
+            { id: "coletados", rotulo: "O que coletamos" },
+            { id: "finalidade", rotulo: "Finalidade" },
+            { id: "base-legal", rotulo: "Base legal" },
+            { id: "retencao", rotulo: "Retenção" },
+            { id: "cookies", rotulo: "Cookies" },
+            { id: "seguranca", rotulo: "Segurança" },
+            { id: "termos", rotulo: "Termos de uso" },
+          ]}
+        />
       </header>
 
       <Secao id="coletados" titulo="O que coletamos">
@@ -118,7 +130,7 @@ export default function PrivacidadePage() {
         </ul>
       </Secao>
 
-      <Secao id="termos" titulo="Natureza da ferramenta">
+      <Secao id="termos" titulo="Termos de uso">
         <ul className={lista}>
           <li>
             O Decida Voto é uma ferramenta informativa e independente, sem vínculo com candidatos, partidos, coligações ou

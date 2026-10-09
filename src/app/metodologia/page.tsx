@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { PositionCard } from "@/components/PositionCard";
+import { Sumario } from "@/components/ui/Sumario";
 import { findPosition, MAX_DISTANCE, SIMILARITY_THRESHOLD } from "@/lib/affinity";
 import { candidates, formatDate, positions, positionsFile, questions, questionsFile } from "@/lib/data";
 import { CONTACT_EMAIL } from "@/lib/site";
@@ -28,7 +29,7 @@ export default function MetodologiaPage() {
   const documentedCount = positions.filter((p) => p.status === "documented").length;
 
   return (
-    <div className="mx-auto max-w-2xl space-y-16 px-6 pt-14 sm:pt-20">
+    <div className="animate-surgir mx-auto max-w-2xl space-y-16 px-6 pt-14 sm:pt-20">
       <header className="space-y-4">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Metodologia e fontes</h1>
         <p className="text-muted text-pretty">
@@ -61,6 +62,16 @@ export default function MetodologiaPage() {
             </dd>
           </div>
         </dl>
+        <Sumario
+          itens={[
+            { id: "principios", rotulo: "Princípios" },
+            { id: "calculo", rotulo: "Cálculo" },
+            { id: "fontes", rotulo: "Fontes" },
+            { id: "neutralidade", rotulo: "Imparcialidade" },
+            { id: "limitacoes", rotulo: "Limitações" },
+            { id: "posicoes", rotulo: "Posições por tema" },
+          ]}
+        />
       </header>
 
       <Section id="principios" title="Princípios">
@@ -131,7 +142,10 @@ export default function MetodologiaPage() {
       <Section id="neutralidade" title="Cuidados com a imparcialidade">
         <ul className="list-disc space-y-2 pl-5">
           <li>Os candidatos aparecem sempre em ordem alfabética.</li>
-          <li>Os dois usam a mesma cor nos gráficos, e o site não usa cores, símbolos ou slogans de campanha.</li>
+          <li>
+            Nos gráficos, cada candidato tem uma cor própria (violeta e magenta), de mesmo peso visual e sem relação com as
+            cores dos partidos. O site não usa cores, símbolos ou slogans de campanha.
+          </li>
           <li>As perguntas e alternativas foram redigidas para não induzir respostas e são submetidas a revisão humana.</li>
           <li>As notícias são selecionadas por tema, com o mesmo critério para os dois candidatos, e não pelo seu resultado.</li>
         </ul>

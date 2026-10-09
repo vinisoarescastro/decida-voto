@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-
-const campo = "mt-2 w-full rounded-xl border border-line bg-bg/70 px-4 py-3 focus:border-accent focus:outline-none";
+import { Button } from "@/components/ui/Button";
+import { classeRotulo, Input } from "@/components/ui/Field";
+import { IconeAlerta } from "@/components/ui/Icon";
 
 export function LoginForm() {
   const router = useRouter();
@@ -40,37 +41,35 @@ export function LoginForm() {
   return (
     <form onSubmit={entrar} className="mt-8 space-y-5">
       <div>
-        <label htmlFor="usuario" className="text-sm font-medium">
+        <label htmlFor="usuario" className={classeRotulo}>
           Usuário
         </label>
-        <input id="usuario" autoComplete="username" required value={usuario} onChange={(e) => setUsuario(e.target.value)} className={campo} />
+        <Input id="usuario" autoComplete="username" required value={usuario} onChange={(e) => setUsuario(e.target.value)} className="mt-2" />
       </div>
       <div>
-        <label htmlFor="senha" className="text-sm font-medium">
+        <label htmlFor="senha" className={classeRotulo}>
           Senha
         </label>
-        <input
+        <Input
           id="senha"
           type="password"
           autoComplete="current-password"
           required
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
-          className={campo}
+          className="mt-2"
         />
       </div>
       {erro && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="animate-surgir flex items-start gap-2 rounded-xl bg-danger-soft px-4 py-3 text-sm text-danger">
+          <IconeAlerta className="mt-0.5 shrink-0" />
           {erro}
         </p>
       )}
-      <button
-        type="submit"
-        disabled={enviando}
-        className="w-full rounded-full bg-ink px-6 py-3 text-sm font-medium text-bg transition-opacity hover:opacity-85 disabled:opacity-40"
-      >
-        {enviando ? "Entrando…" : "Entrar"}
-      </button>
+      <Button type="submit" disabled={enviando} tamanho="lg" className="w-full">
+        {enviando && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-current border-r-transparent" />}
+        {enviando ? "Entrando" : "Entrar"}
+      </Button>
     </form>
   );
 }

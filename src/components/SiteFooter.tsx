@@ -15,9 +15,9 @@ export function SiteFooter() {
   return (
     <footer className={`mx-auto w-full max-w-2xl px-6 pb-10 pt-24 text-xs leading-relaxed text-muted ${isHome ? "text-center" : ""}`}>
       {!isHome && (
-        <nav aria-label="Rodapé" className="mb-3 flex flex-wrap gap-x-5 gap-y-2">
+        <nav aria-label="Rodapé" className="mb-2 flex flex-wrap gap-x-5">
           {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} className="hover:text-ink">
+            <Link key={l.href} href={l.href} className="inline-flex min-h-9 items-center underline-offset-4 hover:text-ink hover:underline">
               {l.label}
             </Link>
           ))}

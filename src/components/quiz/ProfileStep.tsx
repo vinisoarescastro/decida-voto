@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useEffect, useId, useState, type FormEvent, type RefObject } from "react";
 import { GENEROS, IDADE_MAXIMA, IDADE_MINIMA, UFS, validarIdade, type Genero } from "@/lib/perfil";
+import { Button } from "@/components/ui/Button";
+import { classeRotulo, Input, MensagemErro, Select } from "@/components/ui/Field";
+import { IconeAlerta } from "@/components/ui/Icon";
 
 export type PerfilForm = {
   uf: string;
@@ -35,18 +38,6 @@ type Props = {
   erroGeral: string | null;
   headingRef: RefObject<HTMLHeadingElement | null>;
 };
-
-const campo = "mt-2 w-full rounded-xl border border-line bg-bg/70 px-4 py-3 backdrop-blur-sm focus:border-accent focus:outline-none";
-const rotulo = "text-sm font-medium";
-
-function Erro({ id, texto }: { id: string; texto?: string }) {
-  if (!texto) return null;
-  return (
-    <p id={id} className="mt-1.5 text-sm text-danger">
-      {texto}
-    </p>
-  );
-}
 
 export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, headingRef }: Props) {
   const id = useId();
@@ -88,28 +79,29 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
   });
 
   return (
-    <form onSubmit={enviar} noValidate>
-      <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+    <form onSubmit={enviar} noValidate className="animate-surgir">
+      <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">Etapa 1 de 2</p>
+      <h1 ref={headingRef} tabIndex={-1} className="mt-3 text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
         Antes de começar
       </h1>
-      <p className="mt-4 text-sm leading-relaxed text-muted">
+      <p className="mt-3 text-sm leading-relaxed text-muted">
         Estas informações são usadas apenas em estatísticas gerais. Não pedimos nome, e-mail, CPF ou qualquer dado que
         identifique você.
       </p>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <div className="mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2">
         <div>
-          <label htmlFor={`${id}-uf`} className={rotulo}>
+          <label htmlFor={`${id}-uf`} className={classeRotulo}>
             Estado
           </label>
-          <select
+          <Select
             id={`${id}-uf`}
             value={value.uf}
             onChange={(e) => {
               setMunicipios(null);
               set({ uf: e.target.value, municipio: "" });
             }}
-            className={campo}
+            className="mt-2"
             {...aria("uf")}
           >
             <option value="">Selecione</option>
@@ -118,20 +110,20 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
                 {u.nome}
               </option>
             ))}
-          </select>
-          <Erro id={`${id}-uf-erro`} texto={erros.uf} />
+          </Select>
+          <MensagemErro id={`${id}-uf-erro`} texto={erros.uf} />
         </div>
 
         <div>
-          <label htmlFor={`${id}-municipio`} className={rotulo}>
+          <label htmlFor={`${id}-municipio`} className={classeRotulo}>
             Cidade
           </label>
-          <select
+          <Select
             id={`${id}-municipio`}
             value={value.municipio}
             onChange={(e) => set({ municipio: e.target.value })}
             disabled={!value.uf || municipios === null}
-            className={`${campo} disabled:opacity-50`}
+            className="mt-2"
             {...aria("municipio")}
           >
             <option value="">{!value.uf ? "Escolha o estado primeiro" : municipios === null ? "Carregando…" : "Selecione"}</option>
@@ -140,40 +132,45 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
                 {nome}
               </option>
             ))}
-          </select>
-          <Erro id={`${id}-municipio-erro`} texto={erros.municipio} />
+          </Select>
+          <MensagemErro id={`${id}-municipio-erro`} texto={erros.municipio} />
         </div>
 
         <fieldset {...aria("genero")}>
-          <legend className={rotulo}>Gênero</legend>
-          <div className="mt-2 inline-flex rounded-full bg-surface-2 p-1">
-            {GENEROS.map((g) => (
-              <label
-                key={g.id}
-                className={`cursor-pointer rounded-full px-5 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent ${
-                  value.genero === g.id ? "bg-bg font-medium shadow-sm" : "text-muted hover:text-ink"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name={`${id}-genero`}
-                  value={g.id}
-                  checked={value.genero === g.id}
-                  onChange={() => set({ genero: g.id })}
-                  className="sr-only"
-                />
-                {g.label}
-              </label>
-            ))}
+          <legend className={classeRotulo}>Gênero</legend>
+          <div
+            className={`mt-2 grid h-12 grid-cols-2 gap-1 rounded-xl border bg-surface-2 p-1 transition-colors ${erros.genero ? "border-danger" : "border-line-strong"}`}
+          >
+            {GENEROS.map((g) => {
+              const marcado = value.genero === g.id;
+              return (
+                <label
+                  key={g.id}
+                  className={`grid cursor-pointer place-items-center rounded-lg text-sm transition-[background-color,color,box-shadow] duration-150 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ring ${
+                    marcado ? "bg-surface font-medium text-ink shadow-sm ring-1 ring-accent" : "text-muted hover:text-ink"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`${id}-genero`}
+                    value={g.id}
+                    checked={marcado}
+                    onChange={() => set({ genero: g.id })}
+                    className="sr-only"
+                  />
+                  {g.label}
+                </label>
+              );
+            })}
           </div>
-          <Erro id={`${id}-genero-erro`} texto={erros.genero} />
+          <MensagemErro id={`${id}-genero-erro`} texto={erros.genero} />
         </fieldset>
 
         <div>
-          <label htmlFor={`${id}-idade`} className={rotulo}>
+          <label htmlFor={`${id}-idade`} className={classeRotulo}>
             Idade
           </label>
-          <input
+          <Input
             id={`${id}-idade`}
             type="text"
             inputMode="numeric"
@@ -187,10 +184,10 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
               const r = validarIdade(value.idade);
               if (!r.ok) setErros((prev) => ({ ...prev, idade: r.erro }));
             }}
-            className={campo}
+            className="mt-2"
             {...aria("idade")}
           />
-          <Erro id={`${id}-idade-erro`} texto={erros.idade} />
+          <MensagemErro id={`${id}-idade-erro`} texto={erros.idade} />
         </div>
       </div>
 
@@ -201,13 +198,14 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
       </div>
 
       {erroGeral && (
-        <p role="alert" className="mt-6 text-sm text-danger">
+        <p role="alert" className="animate-surgir mt-8 flex items-start gap-2 rounded-xl bg-danger-soft px-4 py-3 text-sm text-danger">
+          <IconeAlerta className="mt-0.5 shrink-0" />
           {erroGeral}
         </p>
       )}
 
       {/* Ciência e concordância: o clique em "Continuar" registra o consentimento enviado ao servidor. */}
-      <div className="mt-10 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-10 flex flex-col-reverse gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p id={`${id}-aviso`} className="max-w-sm text-xs leading-relaxed text-muted">
           Ao clicar em “Continuar”, você declara estar ciente e de acordo com os{" "}
           <Link href="/privacidade/#termos" target="_blank" className="underline underline-offset-2 hover:text-ink">
@@ -219,14 +217,10 @@ export function ProfileStep({ value, onChange, onSubmit, enviando, erroGeral, he
           </Link>
           , incluindo o armazenamento das suas respostas, sem identificação pessoal, para estatísticas.
         </p>
-        <button
-          type="submit"
-          aria-describedby={`${id}-aviso`}
-          disabled={enviando}
-          className="shrink-0 self-end rounded-full bg-ink px-7 py-3 text-sm font-medium text-bg transition-opacity hover:opacity-85 disabled:opacity-40 sm:self-auto"
-        >
-          {enviando ? "Aguarde…" : "Continuar"}
-        </button>
+        <Button type="submit" aria-describedby={`${id}-aviso`} disabled={enviando} className="min-w-32 shrink-0 self-end sm:self-auto">
+          {enviando && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-current border-r-transparent" />}
+          {enviando ? "Aguarde" : "Continuar"}
+        </Button>
       </div>
     </form>
   );

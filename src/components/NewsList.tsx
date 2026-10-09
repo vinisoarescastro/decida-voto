@@ -1,5 +1,7 @@
 import type { NewsItem } from "@/lib/schema";
 import { NEWS_TYPE_LABELS, candidateName, formatDate, questions } from "@/lib/data";
+import { Disclosure, Etiqueta } from "@/components/ui/Disclosure";
+import { IconeExterno } from "@/components/ui/Icon";
 
 /**
  * Lista de notícias agrupadas por tema, na ordem do questionário.
@@ -17,35 +19,35 @@ export function NewsList({ items }: { items: NewsItem[] }) {
 
   return (
     <div>
-      <p className="mb-2 text-sm text-muted">
+      <p className="text-sm text-muted">
         Selecionadas por tema, com o mesmo critério para os dois candidatos, e não com base no seu resultado.
       </p>
-      <div className="divide-y divide-line border-y border-line">
+      <div className="mt-3 divide-y divide-line border-y border-line">
         {groups.map((group) => (
-          <details key={group.question.id} className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm">
-              <h3 className="font-medium">{group.question.theme}</h3>
-              <span className="flex items-center gap-3 text-muted">
-                {group.items.length}
-                <span aria-hidden="true" className="text-xs transition-transform group-open:rotate-180">
-                  ▾
-                </span>
+          <Disclosure
+            key={group.question.id}
+            titulo={<h3>{group.question.theme}</h3>}
+            lateral={
+              <span className="tabular-nums">
+                {group.items.length} {group.items.length === 1 ? "conteúdo" : "conteúdos"}
               </span>
-            </summary>
-            <ul className="space-y-6 pb-8 pt-2">
+            }
+          >
+            <ul className="space-y-6">
               {group.items.map((n) => (
                 <li key={n.url} className="text-sm">
-                  <p className="text-xs text-muted">
-                    {NEWS_TYPE_LABELS[n.type]} · {n.publisher} ·{" "}
-                    <time dateTime={n.publishedAt ?? undefined}>{formatDate(n.publishedAt)}</time>
+                  <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted">
+                    <Etiqueta>{NEWS_TYPE_LABELS[n.type]}</Etiqueta>
+                    {n.publisher} · <time dateTime={n.publishedAt ?? undefined}>{formatDate(n.publishedAt)}</time>
                   </p>
                   <a
                     href={n.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 block font-medium underline decoration-line underline-offset-4 hover:decoration-ink"
+                    className="mt-2 inline-flex items-start gap-1.5 font-medium underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                   >
                     {n.title}
+                    <IconeExterno tamanho={14} className="mt-1 shrink-0 text-muted" />
                     <span className="sr-only"> (abre em nova aba)</span>
                   </a>
                   <p className="mt-1.5 leading-relaxed text-muted">{n.summary}</p>
@@ -55,7 +57,7 @@ export function NewsList({ items }: { items: NewsItem[] }) {
                 </li>
               ))}
             </ul>
-          </details>
+          </Disclosure>
         ))}
       </div>
     </div>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/Button";
+import { IconeSair } from "@/components/ui/Icon";
 
 export function LogoutButton() {
   const router = useRouter();
@@ -10,8 +12,9 @@ export function LogoutButton() {
     router.refresh();
   }
   return (
-    <button type="button" onClick={sair} className="text-sm text-muted transition-colors hover:text-ink">
+    <Button variante="secondary" tamanho="sm" onClick={sair}>
+      <IconeSair tamanho={15} />
       Sair
-    </button>
+    </Button>
   );
 }

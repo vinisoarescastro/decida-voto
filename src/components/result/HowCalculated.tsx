@@ -3,6 +3,7 @@ import { formatPercent, type AffinityResult } from "@/lib/affinity";
 import { candidates } from "@/lib/data";
 
 const points = (share: number) => formatPercent(share * 100);
+const CORES = ["bg-cand-1", "bg-cand-2"] as const;
 
 export function HowCalculated({ result }: { result: AffinityResult }) {
   return (
@@ -22,16 +23,19 @@ export function HowCalculated({ result }: { result: AffinityResult }) {
         </li>
       </ol>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-surface/80 px-4">
         <table className="w-full min-w-[460px] text-left tabular-nums">
           <caption className="sr-only">Cálculo detalhado por tema</caption>
           <thead className="text-xs text-muted">
-            <tr className="border-b border-line">
+            <tr className="border-b border-line [&>th]:pt-3">
               <th scope="col" className="py-2 pr-3 font-normal">Tema</th>
               <th scope="col" className="px-3 py-2 text-right font-normal">Você</th>
-              {candidates.map((c) => (
+              {candidates.map((c, i) => (
                 <th key={c.id} scope="col" className="py-2 pl-3 text-right font-normal">
-                  {c.name}
+                  <span className="inline-flex items-center gap-1.5 font-medium text-ink">
+                    <span aria-hidden="true" className={`size-2 rounded-full ${CORES[i]}`} />
+                    {c.name}
+                  </span>
                   <span className="block text-[11px]">posição → pontos</span>
                 </th>
               ))}
@@ -60,7 +64,7 @@ export function HowCalculated({ result }: { result: AffinityResult }) {
             ))}
           </tbody>
           <tfoot>
-            <tr className="border-t border-ink/20 font-medium">
+            <tr className="border-t border-line-strong font-semibold [&>*]:pb-3">
               <th scope="row" className="py-2 pr-3" colSpan={2}>
                 Média ({result.comparableCount} temas)
               </th>

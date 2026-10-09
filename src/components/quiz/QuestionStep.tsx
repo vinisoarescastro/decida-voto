@@ -1,5 +1,6 @@
 import type { RefObject } from "react";
 import type { Option, Question } from "@/lib/schema";
+import { IconeCheck } from "@/components/ui/Icon";
 
 type Props = {
   question: Question;
@@ -13,21 +14,23 @@ type Props = {
 
 export function QuestionStep({ question, options, selected, headingRef, onSelect }: Props) {
   return (
-    <fieldset>
+    <fieldset className="animate-surgir">
       <legend className="contents">
         <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-semibold leading-snug tracking-tight text-balance sm:text-3xl">
           {question.text}
         </h1>
       </legend>
-      <p className="mt-4 text-sm leading-relaxed text-muted">{question.context}</p>
-      <div className="mt-8 space-y-2.5">
+      <p className="mt-3 text-sm leading-relaxed text-muted">{question.context}</p>
+      <div className="mt-8 space-y-3">
         {options.map((option) => {
           const checked = selected === option.id;
           return (
             <label
               key={option.id}
-              className={`flex cursor-pointer items-center justify-between gap-4 rounded-2xl border px-5 py-4 leading-snug transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
-                checked ? "border-accent bg-accent-soft" : "border-line bg-bg/70 backdrop-blur-sm hover:bg-surface-2"
+              className={`group flex min-h-14 cursor-pointer items-center justify-between gap-4 rounded-2xl border px-5 py-4 leading-snug shadow-sm transition-[border-color,background-color,box-shadow] duration-150 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ring ${
+                checked
+                  ? "border-accent bg-accent-soft ring-1 ring-accent"
+                  : "border-line-strong bg-surface/90 hover:border-ink/25 hover:bg-surface"
               }`}
             >
               <input
@@ -38,14 +41,14 @@ export function QuestionStep({ question, options, selected, headingRef, onSelect
                 onChange={() => onSelect(option.id)}
                 className="sr-only"
               />
-              <span>{option.text}</span>
+              <span className={checked ? "font-medium" : ""}>{option.text}</span>
               <span
                 aria-hidden="true"
-                className={`grid size-5 shrink-0 place-items-center rounded-full border transition-colors ${
-                  checked ? "border-accent bg-accent" : "border-line"
+                className={`grid size-6 shrink-0 place-items-center rounded-full border transition-colors duration-150 ${
+                  checked ? "border-accent bg-accent text-accent-ink" : "border-line-strong group-hover:border-ink/30"
                 }`}
               >
-                {checked && <span className="size-2 rounded-full bg-accent-ink" />}
+                {checked && <IconeCheck tamanho={14} strokeWidth={3} />}
               </span>
             </label>
           );

@@ -1,72 +1,108 @@
 @import "tailwindcss";
 
 /*
- * Paleta minimalista: branco e grafite na interface, violeta como destaque e um fundo com brilhos suaves
- * de lilás, magenta-rosado e pêssego.
- * Evita deliberadamente vermelho, verde-amarelo e azul, associados a campanhas.
- * Os dois candidatos usam SEMPRE a mesma cor nos gráficos.
+ * Sistema visual do Decida Voto
+ * - Interface em branco/grafite, violeta como cor de destaque e fundo com brilhos suaves de lilás,
+ *   magenta-rosado e pêssego.
+ * - Evita deliberadamente vermelho, verde, azul e amarelo (cores associadas a campanhas).
+ * - Cada candidato tem uma cor própria nos gráficos (violeta e magenta), de peso visual equivalente
+ *   e validadas para daltonismo; a identidade é sempre reforçada pelo nome escrito ao lado.
  */
 :root {
   --bg: #ffffff;
-  --surface-2: #f6f6f8;
+  --surface: #ffffff;
+  --surface-2: #f5f5f7;
   --ink: #111114;
-  --muted: #6b6b76;
-  --line: #ececf0;
+  --muted: #62626d;
+  --line: #e7e7ec;
+  --line-strong: #d4d4dc;
   --accent: #5a3fc0;
   --accent-hover: #4a32a3;
   --accent-ink: #ffffff;
-  --accent-soft: #f4f1fd;
-  --bar: #5a3fc0;
-  --bar-track: #efeff3;
+  --accent-soft: #f3f0fd;
+  --ring: rgb(90 63 192 / 0.28);
+  /* Cores dos candidatos (ordem alfabética: 1º e 2º). */
+  --cand-1: #5a3fc0;
+  --cand-2: #b02f86;
+  --bar-track: #ececf1;
   --danger: #a1195e;
+  --danger-soft: #fbeff5;
+  --success: #3f3a8c;
   --focus: #5a3fc0;
-  /* Fundo: brilhos de lilás, magenta-rosado e pêssego que se dissolvem em transparência. */
   --glow-1: rgb(190 172 250 / 0.38);
   --glow-2: rgb(240 160 214 / 0.3);
   --glow-3: rgb(253 194 160 / 0.32);
+  --shadow-card: 0 1px 2px rgb(17 17 20 / 0.04), 0 8px 24px -12px rgb(17 17 20 / 0.12);
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0e0e12;
-    --surface-2: #19191f;
+    --surface: #15151b;
+    --surface-2: #1b1b22;
     --ink: #f1f1f4;
-    --muted: #9b9ba7;
-    --line: #24242c;
+    --muted: #a1a1ad;
+    --line: #26262f;
+    --line-strong: #34343f;
     --accent: #a594f0;
     --accent-hover: #b9abf5;
     --accent-ink: #15121f;
-    --accent-soft: #1d1a2c;
-    --bar: #a594f0;
-    --bar-track: #22222a;
+    --accent-soft: #1f1b31;
+    --ring: rgb(165 148 240 / 0.35);
+    --cand-1: #8f7aee;
+    --cand-2: #d9549f;
+    --bar-track: #23232c;
     --danger: #f39ac4;
+    --danger-soft: #2a1622;
+    --success: #c9c1f7;
     --focus: #b9abf5;
     --glow-1: rgb(98 70 200 / 0.3);
     --glow-2: rgb(160 52 132 / 0.22);
     --glow-3: rgb(176 96 56 / 0.16);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
   }
 }
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
-  --color-bar: var(--bar);
+  --color-ring: var(--ring);
+  --color-cand-1: var(--cand-1);
+  --color-cand-2: var(--cand-2);
   --color-bar-track: var(--bar-track);
   --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --shadow-card: var(--shadow-card);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
   isolation: isolate;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
 /*
@@ -85,10 +121,37 @@ body::before {
     radial-gradient(40rem 30rem at -5% 70%, var(--glow-3), transparent 70%);
 }
 
+/* Foco visível e consistente para navegação por teclado. */
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+/* Âncoras não ficam coladas no topo ao navegar pelo sumário. */
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+/* Remove o marcador nativo dos <summary>; usamos um ícone próprio. */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- Microinterações */
+
+/* Entrada suave de conteúdo (troca de pergunta, painéis, páginas). */
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.animate-surgir {
+  animation: surgir 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Os dois lados da barra do resultado crescem a partir das extremidades ao aparecer. */
@@ -104,6 +167,16 @@ body::before {
 .animate-grow-right {
   transform-origin: right;
   animation: grow 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Esqueleto de carregamento. */
+@keyframes pulsar {
+  50% {
+    opacity: 0.45;
+  }
+}
+.animate-pulsar {
+  animation: pulsar 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

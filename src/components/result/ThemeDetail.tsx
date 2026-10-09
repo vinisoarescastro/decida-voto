@@ -1,36 +1,41 @@
 import { formatPercent, type ThemeResult } from "@/lib/affinity";
 import { candidates } from "@/lib/data";
 import { PositionCard } from "@/components/PositionCard";
+import { Disclosure } from "@/components/ui/Disclosure";
+
+const CORES = ["bg-cand-1", "bg-cand-2"] as const;
 
 export function ThemeDetail({ theme }: { theme: ThemeResult }) {
   const userOption = theme.question.options.find((o) => o.id === theme.userOptionId)!;
 
-  return (
-    <details className="group">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm">
-        <span className="font-medium">{theme.question.theme}</span>
-        <span className="flex items-center gap-3 text-muted tabular-nums">
-          {theme.comparable
-            ? theme.candidates
-                .map((c) => `${candidates.find((x) => x.id === c.candidateId)!.name} ${formatPercent(c.share! * 100)}%`)
-                .join(" · ")
-            : "sem dados suficientes"}
-          <span aria-hidden="true" className="text-xs transition-transform group-open:rotate-180">
-            ▾
-          </span>
+  const lateral = theme.comparable ? (
+    <span className="flex flex-wrap items-center gap-x-3 gap-y-1 tabular-nums">
+      {theme.candidates.map((c, i) => (
+        <span key={c.candidateId} className="inline-flex items-center gap-1.5">
+          <span aria-hidden="true" className={`size-2 rounded-full ${CORES[i]}`} />
+          <span className="sr-only">{candidates.find((x) => x.id === c.candidateId)!.name}:</span>
+          <span className="hidden sm:inline">{candidates.find((x) => x.id === c.candidateId)!.name}</span>
+          {formatPercent(c.share! * 100)}%
         </span>
-      </summary>
-      <div className="space-y-6 pb-8 pt-2">
-        <div className="text-sm">
+      ))}
+    </span>
+  ) : (
+    "sem dados suficientes"
+  );
+
+  return (
+    <Disclosure titulo={theme.question.theme} lateral={lateral}>
+      <div className="space-y-5">
+        <div className="rounded-xl bg-surface-2/70 px-4 py-3 text-sm">
           <p className="text-muted">{theme.question.text}</p>
-          <p className="mt-3">
-            <span className="text-muted">Sua resposta:</span> {userOption.text}
+          <p className="mt-2">
+            <span className="text-muted">Sua resposta:</span> <span className="font-medium">{userOption.text}</span>
           </p>
         </div>
         {theme.candidates.map((c) => (
           <PositionCard key={c.candidateId} question={theme.question} candidateId={c.candidateId} position={c.position} />
         ))}
       </div>
-    </details>
+    </Disclosure>
   );
 }

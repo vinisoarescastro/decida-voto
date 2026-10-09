@@ -7,6 +7,8 @@ import { shuffleOptions } from "@/lib/shuffle";
 import { QuestionStep } from "./QuestionStep";
 import { PERFIL_VAZIO, ProfileStep, type PerfilForm } from "./ProfileStep";
 import { ResultView } from "@/components/result/ResultView";
+import { Button } from "@/components/ui/Button";
+import { IconeSetaEsquerda } from "@/components/ui/Icon";
 
 // Fluxo: perfil (o clique em "Continuar" vale como ciência e concordância) → perguntas → resultado.
 // O resultado é calculado no navegador e exibido na hora; em paralelo, o perfil e as respostas
@@ -122,9 +124,9 @@ export function QuizApp() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 pt-14 sm:pt-20">
-      <div className="flex items-baseline justify-between text-xs text-muted">
-        <span>{question.theme}</span>
-        <span className="tabular-nums">
+      <div className="flex items-baseline justify-between gap-4 text-xs">
+        <span className="font-medium uppercase tracking-[0.14em] text-accent">{question.theme}</span>
+        <span className="tabular-nums text-muted">
           {index + 1} / {questions.length}
           <span className="sr-only">. Pergunta {index + 1} de {questions.length}</span>
         </span>
@@ -135,9 +137,9 @@ export function QuizApp() {
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(progress)}
-        className="mt-3 h-0.5 overflow-hidden rounded-full bg-bar-track"
+        className="mt-3 h-1 overflow-hidden rounded-full bg-bar-track"
       >
-        <div className="h-full bg-bar transition-[width] duration-500 ease-out" style={{ width: `${progress}%` }} />
+        <div className="h-full rounded-full bg-accent transition-[width] duration-500 ease-out" style={{ width: `${progress}%` }} />
       </div>
 
       <div className="mt-12">
@@ -151,24 +153,18 @@ export function QuizApp() {
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-between">
-        <button
-          type="button"
-          onClick={() => setIndex((i) => i - 1)}
-          disabled={index === 0}
-          className="text-sm text-muted transition-colors hover:text-ink disabled:invisible"
-        >
-          ← Anterior
-        </button>
-        <button
-          type="button"
-          onClick={() => (isLast ? concluir() : setIndex((i) => i + 1))}
-          disabled={!current}
-          className="rounded-full bg-ink px-7 py-3 text-sm font-medium text-bg transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-25"
-        >
+      <div className="mt-10 flex items-center justify-between gap-4">
+        <Button variante="ghost" onClick={() => setIndex((i) => i - 1)} className={index === 0 ? "invisible" : "-ml-4"}>
+          <IconeSetaEsquerda />
+          Anterior
+        </Button>
+        <Button onClick={() => (isLast ? concluir() : setIndex((i) => i + 1))} disabled={!current} className="min-w-32">
           {isLast ? "Ver resultado" : "Próxima"}
-        </button>
+        </Button>
       </div>
+      <p aria-live="polite" className="mt-3 h-5 text-right text-xs text-muted">
+        {!current && "Escolha uma alternativa para continuar."}
+      </p>
     </div>
   );
 }
