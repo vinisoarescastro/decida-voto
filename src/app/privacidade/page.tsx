@@ -64,8 +64,9 @@ export default async function PaginaPrivacidade() {
             faixa etária, de uso interno da equipe responsável por esta ferramenta.
           </li>
           <li>
-            Grupos com poucas participações não são exibidos nem mesmo internamente, para evitar que alguém seja
-            identificado indiretamente.
+            A equipe vê apenas números por grupo (estado, cidade, gênero e faixa etária), sem nome, contato ou idade
+            exata. Em grupos pequenos, como uma cidade com poucas participações, esses números podem corresponder a
+            poucas pessoas.
           </li>
           <li>
             Não vendemos, não compartilhamos e não publicamos esses dados. Os resultados agregados não são divulgados,
@@ -121,7 +122,7 @@ export default async function PaginaPrivacidade() {
       <Secao id="seguranca" titulo="Segurança">
         <ul className={lista}>
           <li>O banco de dados não é acessível pela internet, apenas pela própria aplicação.</li>
-          <li>A área administrativa exige autenticação e mostra somente números agregados, nunca respostas individuais.</li>
+          <li>A área administrativa exige autenticação e mostra somente números por grupo, nunca a lista de respostas de cada participação.</li>
           <li>Toda a comunicação com o site é criptografada (HTTPS).</li>
         </ul>
       </Secao>

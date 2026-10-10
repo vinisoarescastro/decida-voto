@@ -54,7 +54,7 @@ export function Grupos({
           ))}
         </ul>
       ) : (
-        <p className="mt-3 text-sm text-muted">Nenhum grupo com participações suficientes.</p>
+        <p className="mt-3 text-sm text-muted">{limiteMinimo > 1 ? "Nenhum grupo com participações suficientes." : "Nenhuma participação neste recorte."}</p>
       )}
       {dados.ocultos > 0 && (
         <p className="mt-2 border-t border-line pt-3 text-xs text-muted">

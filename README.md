@@ -10,7 +10,7 @@ Ferramenta informativa e independente que compara as respostas do eleitor a 10 p
 - **PostgreSQL 16** em Docker, sem porta exposta, com acesso via Drizzle ORM (consultas parametrizadas e migrações versionadas em `drizzle/`).
 - **Coleta mínima de dados**, com consentimento: UF, município (lista do IBGE), gênero, faixa etária e respostas. A afinidade é recalculada no servidor. Não guardamos idade exata, IP, horário nem identificadores.
 - **Responsável pelos dados (LGPD):** nome e e-mail de contato ficam no banco (tabela `configuracoes`) e são editados no painel. As páginas de Privacidade e Metodologia leem esses dados a cada acesso.
-- **Painel `/admin`** com autenticação (senha com hash scrypt, sessão em cookie `HttpOnly`/`SameSite=Strict`, bloqueio de tentativas). Mostra só estatísticas agregadas e oculta grupos com menos de `PRIVACY_MIN_GROUP` participações.
+- **Painel `/admin`** com autenticação (senha com hash scrypt, sessão em cookie `HttpOnly`/`SameSite=Strict`, bloqueio de tentativas). Mostra estatísticas por grupo e a contagem de participações do recorte filtrado; a afinidade de grupos com menos de `PRIVACY_MIN_GROUP` participações fica oculta (padrão 1: todos os grupos aparecem).
 - **Antiabuso:**
   - token assinado e de uso único;
   - tempo mínimo de preenchimento;

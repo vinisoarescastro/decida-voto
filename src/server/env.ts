@@ -19,8 +19,8 @@ const schema = z.object({
   ADMIN_PASSWORD_HASH: z.string().startsWith("scrypt:"),
   /** Tempo mínimo (s) entre iniciar o questionário e enviar; envios mais rápidos são tratados como robôs. */
   FORM_MIN_SECONDS: z.coerce.number().int().min(1).default(15),
-  /** Grupos com menos participações que isso não são exibidos no painel. */
-  PRIVACY_MIN_GROUP: z.coerce.number().int().min(5).default(10),
+  /** A afinidade de grupos com menos participações que isso não aparece no painel (1 = mostra todos). */
+  PRIVACY_MIN_GROUP: z.coerce.number().int().min(1).default(1),
   /**
    * Cabeçalho com o IP real do visitante, preenchido pelo proxy: "x-real-ip" (Nginx) ou
    * "cf-connecting-ip" (Cloudflare Tunnel). Usado só para gerar os hashes do controle de abuso.

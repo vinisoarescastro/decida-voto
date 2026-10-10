@@ -43,8 +43,8 @@ test("bloqueia tentativas repetidas de login (força bruta)", async () => {
   expect((await api.post("/api/admin/login/", { data: { usuario: E2E.adminUsuario, senha: E2E.adminSenha } })).status()).toBe(429);
 });
 
-test("painel mostra só estatísticas agregadas e oculta grupos pequenos", async ({ page, context }) => {
-  // Dados próprios do teste: 6 participações em SP (visível) e 1 em BA (grupo pequeno, oculto).
+test("painel mostra a contagem e as estatísticas por grupo, inclusive de grupos pequenos", async ({ page, context }) => {
+  // Dados próprios do teste: 6 participações em SP e 1 em BA (grupo pequeno, visível com o limite 1 de produção).
   const cliente = postgres(E2E.databaseUrl, { max: 1, onnotice: () => {} });
   const db = drizzle(cliente, { schema });
   for (let i = 0; i < 6; i++) await registrarParticipacao(db, entrada({ uf: "SP", municipio: 3550308, genero: "homem", idade: 33 }, 1), base);
@@ -59,13 +59,18 @@ test("painel mostra só estatísticas agregadas e oculta grupos pequenos", async
   await expect(page.getByText("Participações", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Por estado" })).toBeVisible();
   await expect(page.locator("li").filter({ hasText: "São Paulo" }).first()).toBeVisible();
-  await expect(page.getByText(/grupos? ocultos? por ter menos de 5 participações/).first()).toBeVisible();
+  await expect(page.locator("li").filter({ hasText: "Salvador" }).first()).toBeVisible();
+  await expect(page.getByText(/grupos? ocultos?/)).toHaveCount(0);
   await expect(page.getByText("Uso interno.", { exact: true })).toBeVisible();
-  await expect(page.getByText("Salvador")).toHaveCount(0);
 
-  // Filtro com poucos participantes: nada é exibido.
+  // Com filtro: contagem do recorte e total geral.
   await page.goto("/admin/?uf=BA");
-  await expect(page.getByText(/menos de 5 participações/)).toBeVisible();
+  await expect(page.getByText("Participações neste recorte", { exact: true })).toBeVisible();
+  await expect(page.getByText(/^de \d+ no total$/)).toBeVisible();
+  await expect(page.locator("li").filter({ hasText: "Salvador" }).first()).toBeVisible();
+  // Recorte sem participações.
+  await page.goto("/admin/?uf=AC");
+  await expect(page.getByText("Nenhuma participação neste recorte ainda.")).toBeVisible();
   // Parâmetros inválidos são ignorados, sem erro.
   await page.goto("/admin/?uf=XX&genero=%27%3B%20drop%20table&faixa=99");
   await expect(page.getByRole("heading", { name: "Por estado" })).toBeVisible();

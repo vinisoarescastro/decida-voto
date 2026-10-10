@@ -17,7 +17,7 @@ beforeAll(async () => {
     ...Array.from({ length: 12 }, () => entrada({ uf: "SP", municipio: 3550308, genero: "homem", idade: 30 }, 1)),
     // 10 no Rio de Janeiro/RJ, mulheres de 45–59, todas com valor 4
     ...Array.from({ length: 10 }, () => entrada({ uf: "RJ", municipio: 3304557, genero: "mulher", idade: 50 }, 4)),
-    // 3 em Salvador/BA (grupo pequeno: deve ficar oculto)
+    // 3 em Salvador/BA (grupo pequeno: oculto com limite 10, visível com limite 1)
     ...Array.from({ length: 3 }, () => entrada({ uf: "BA", municipio: 2927408, genero: "homem", idade: 20 }, 2)),
   ];
   for (const e of lote) await registrarParticipacao(db, e, base);
@@ -65,9 +65,23 @@ describe("calcularEstatisticas", () => {
     expect(spHomens.total).toBe(12);
   });
 
-  it("oculta tudo quando o recorte filtrado tem menos participações que o limite", async () => {
+  it("abaixo do limite, oculta a afinidade mas informa a contagem do recorte e o total geral", async () => {
     const ba = await calcularEstatisticas(db, CANDIDATOS, { uf: "BA" }, LIMITE);
-    expect(ba).toMatchObject({ total: null, geral: null });
+    expect(ba).toMatchObject({ total: 3, totalGeral: 25, geral: null });
     expect(ba.porUf.grupos).toHaveLength(0);
+  });
+
+  it("com limite 1 (configuração de produção), exibe todos os grupos, inclusive os pequenos", async () => {
+    const s = await calcularEstatisticas(db, CANDIDATOS, {}, 1);
+    expect(s.porUf.grupos.map((g) => g.chave)).toEqual(["SP", "RJ", "BA"]);
+    expect(s.porUf.ocultos).toBe(0);
+    const ba = await calcularEstatisticas(db, CANDIDATOS, { uf: "BA" }, 1);
+    expect(ba).toMatchObject({ total: 3, totalGeral: 25 });
+    expect(ba.geral![A] + ba.geral![B]).toBeCloseTo(100, 3);
+  });
+
+  it("recorte sem participações informa zero", async () => {
+    const vazio = await calcularEstatisticas(db, CANDIDATOS, { uf: "AC" }, 1);
+    expect(vazio).toMatchObject({ total: 0, totalGeral: 25, geral: null });
   });
 });

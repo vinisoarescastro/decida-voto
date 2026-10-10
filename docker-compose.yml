@@ -44,7 +44,7 @@ services:
       RATE_LIMIT_SECRET: ${RATE_LIMIT_SECRET:?defina no .env}
       ADMIN_USERNAME: ${ADMIN_USERNAME:?defina no .env}
       ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:?defina no .env}
-      PRIVACY_MIN_GROUP: ${PRIVACY_MIN_GROUP:-10}
+      PRIVACY_MIN_GROUP: ${PRIVACY_MIN_GROUP:-1}
       FORM_MIN_SECONDS: ${FORM_MIN_SECONDS:-15}
       TRUSTED_IP_HEADER: ${TRUSTED_IP_HEADER:-x-real-ip}
     # Só a própria máquina acessa a aplicação; o proxy público (Nginx ou Cloudflare Tunnel) faz o HTTPS.

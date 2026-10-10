@@ -22,6 +22,7 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
   const limite = env().PRIVACY_MIN_GROUP;
   const [est, responsavel] = await Promise.all([calcularEstatisticas(db(), ids, filtros, limite), lerResponsavel(db())]);
   const [a, b] = candidates;
+  const comFiltro = Object.values(filtros).some((v) => v !== undefined);
 
   return (
     <div className="animate-surgir space-y-6 sm:space-y-8">
@@ -29,7 +30,7 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
         <div>
           <Sobretitulo>Área administrativa</Sobretitulo>
           <h1 className="mt-2 text-[1.75rem] font-semibold tracking-tight sm:text-3xl">Painel</h1>
-          <p className="mt-1 text-sm text-muted">Estatísticas agregadas. Nenhuma resposta individual é exibida.</p>
+          <p className="mt-1 text-sm text-muted">Estatísticas por grupo, sem nome, contato ou idade exata de quem respondeu.</p>
         </div>
         <BotaoSair />
       </header>
@@ -47,16 +48,22 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
 
       <Filtros valores={filtros} municipiosDaUf={filtros.uf ? municipiosPorUf[filtros.uf] : []} />
 
-      {est.total === null ? (
+      {est.geral === null ? (
         <p className="rounded-3xl border border-dashed border-line-strong px-6 py-12 text-center text-sm text-muted">
-          Este recorte tem menos de {limite} participações. Para proteger a privacidade, os dados não são exibidos.
+          {est.total === 0
+            ? "Nenhuma participação neste recorte ainda."
+            : `Este recorte tem ${est.total.toLocaleString("pt-BR")} ${est.total === 1 ? "participação" : "participações"}, menos que o mínimo de ${limite} configurado para exibir a afinidade.`}
+          {comFiltro && <span className="mt-1 block">Total geral: {est.totalGeral.toLocaleString("pt-BR")}.</span>}
         </p>
       ) : (
         <>
           <section className="grid gap-5 rounded-3xl border border-line bg-surface/90 p-5 shadow-sm sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10 sm:p-6">
             <div>
-              <p className="text-xs font-medium text-muted">Participações</p>
+              <p className="text-xs font-medium text-muted">{comFiltro ? "Participações neste recorte" : "Participações"}</p>
               <p className="mt-1 text-5xl font-semibold tracking-tight tabular-nums">{est.total.toLocaleString("pt-BR")}</p>
+              {comFiltro && (
+                <p className="mt-1 text-xs text-muted">de {est.totalGeral.toLocaleString("pt-BR")} no total</p>
+              )}
             </div>
             <div>
               <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 text-sm">

@@ -7,7 +7,7 @@ export const E2E = {
   databaseUrl: process.env.TEST_DATABASE_URL ?? "postgres://postgres:teste@127.0.0.1:55432/decida_voto_teste",
   adminUsuario: "admin-teste",
   adminSenha: "senha-de-teste-e2e",
-  minimoGrupo: 5,
+  minimoGrupo: 1,
 };
 
 export default defineConfig({

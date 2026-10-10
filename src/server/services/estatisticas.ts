@@ -5,9 +5,10 @@ import { participacoes, resultados } from "../db/schema";
 import type { AnyDb } from "../db/types";
 import { nomesMunicipios } from "../municipios";
 
-// Estatísticas exclusivamente agregadas para o painel administrativo.
-// Regra de privacidade: qualquer grupo com menos de `limiteMinimo` participações é ocultado
-// (nem o número exato é exibido), para reduzir o risco de identificação indireta.
+// Estatísticas agrupadas para o painel administrativo (sem nome, contato ou idade exata).
+// `limiteMinimo` (PRIVACY_MIN_GROUP) define a partir de quantas participações a afinidade de um grupo
+// aparece. Decisão de 10/10/2026: 1, ou seja, todo grupo com participação é exibido. A contagem do
+// recorte aparece sempre, mesmo abaixo do limite.
 
 export type Filtros = { uf?: string; municipio?: number; genero?: Genero; faixa?: FaixaEtaria };
 export type Dimensao = "uf" | "municipio" | "genero" | "faixa";
@@ -26,8 +27,11 @@ export type Agrupamento = { grupos: Grupo[]; ocultos: number };
 
 export type Estatisticas = {
   limiteMinimo: number;
-  /** null quando o total filtrado é menor que o limite (tudo fica oculto). */
-  total: number | null;
+  /** Participações no recorte filtrado (sempre informado). */
+  total: number;
+  /** Participações sem nenhum filtro, para comparar com o recorte. */
+  totalGeral: number;
+  /** null quando o recorte tem menos participações que o limite (ou nenhuma). */
   geral: Record<string, number> | null;
   porUf: Agrupamento;
   porMunicipio: Agrupamento;
@@ -119,8 +123,10 @@ export async function calcularEstatisticas(
 ): Promise<Estatisticas> {
   const [geral] = await consultar(db, candidatos, filtros);
   const total = geral?.n ?? 0;
-  if (total < limiteMinimo) {
-    return { limiteMinimo, total: null, geral: null, porUf: vazio, porMunicipio: vazio, porGenero: vazio, porFaixa: vazio };
+  const comFiltro = Object.values(filtros).some((v) => v !== undefined);
+  const totalGeral = comFiltro ? ((await consultar(db, candidatos, {}))[0]?.n ?? 0) : total;
+  if (total === 0 || total < limiteMinimo) {
+    return { limiteMinimo, total, totalGeral, geral: null, porUf: vazio, porMunicipio: vazio, porGenero: vazio, porFaixa: vazio };
   }
 
   const [uf, municipio, genero, faixa] = await Promise.all(
@@ -130,6 +136,7 @@ export async function calcularEstatisticas(
   return {
     limiteMinimo,
     total,
+    totalGeral,
     geral: { [candidatos[0]]: geral.pa, [candidatos[1]]: geral.pb },
     porUf: montarAgrupamento(uf, "uf", candidatos, total, limiteMinimo, porTamanho),
     porMunicipio: montarAgrupamento(municipio, "municipio", candidatos, total, limiteMinimo, porTamanho, 20),
