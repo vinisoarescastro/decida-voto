@@ -57,7 +57,8 @@ describe("senha do administrador (scrypt)", () => {
     expect(hash).not.toContain("senha-forte-de-teste");
     expect(await verificarSenha("senha-forte-de-teste", hash)).toBe(true);
     expect(await verificarSenha("senha-errada", hash)).toBe(false);
-  });
+    // scrypt é lento de propósito (3 cálculos aqui); em servidor com CPU disputada, o limite padrão de 5 s não basta.
+  }, 20_000);
 
   it("recusa hash malformado", async () => {
     expect(await verificarSenha("x", "md5:abc")).toBe(false);
