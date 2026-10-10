@@ -1,5 +1,5 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "questions": [
     {
       "id": "estatais",
@@ -43,7 +43,7 @@
         {
           "id": "b",
           "value": 3,
-          "text": "Simplificar e diminuir aos poucos."
+          "text": "Manter os impostos parecidos, só simplificando e diminuindo devagar."
         },
         {
           "id": "c",
@@ -127,7 +127,7 @@
         {
           "id": "b",
           "value": 2,
-          "text": "Manter as escolas como estão, com metas de aprendizado."
+          "text": "Focar em alfabetização e metas de aprendizado, sem mudar o jeito das escolas."
         },
         {
           "id": "c",
@@ -137,7 +137,7 @@
         {
           "id": "d",
           "value": 4,
-          "text": "Dar vale para escola particular e permitir ensino em casa."
+          "text": "Dar mais liberdade às famílias: vale para escola particular ou ensino em casa."
         }
       ]
     },
@@ -198,30 +198,30 @@
       ]
     },
     {
-      "id": "corrupcao",
-      "theme": "Corrupção e Justiça",
-      "text": "Políticos acusados de crimes devem ter foro privilegiado?",
-      "context": "Foro privilegiado é quando deputados, senadores e ministros acusados de crimes ligados ao cargo são julgados direto no tribunal mais alto do país, e não por um juiz comum. Hoje isso vale mesmo depois que eles saem do cargo.",
+      "id": "stf-escolha",
+      "theme": "Justiça",
+      "text": "Como devem ser escolhidos os ministros do STF (Supremo Tribunal Federal)?",
+      "context": "O STF é o tribunal mais alto do país e dá a palavra final sobre a Constituição. Hoje, o presidente escolhe livremente quem vai ser ministro, e o Senado aprova ou não o nome.",
       "options": [
         {
           "id": "a",
           "value": 1,
-          "text": "Sim, como é hoje, mesmo depois que saem do cargo."
+          "text": "Deixar como é hoje: o presidente escolhe e o Senado aprova."
         },
         {
           "id": "b",
           "value": 2,
-          "text": "Sim, só enquanto estiverem no cargo."
+          "text": "O presidente escolhe, mas com regras mais rígidas sobre quem pode ser indicado."
         },
         {
           "id": "c",
           "value": 3,
-          "text": "Sim, mas em outro tribunal, não no mais alto do país."
+          "text": "O presidente escolhe a partir de uma lista de juízes de carreira feita pela própria Justiça."
         },
         {
           "id": "d",
           "value": 4,
-          "text": "Não. Devem ser julgados como qualquer pessoa."
+          "text": "Um conselho com juristas e pessoas da sociedade escolhe, não só o presidente."
         }
       ]
     },
@@ -262,7 +262,7 @@
         {
           "id": "a",
           "value": 4,
-          "text": "Ficar do lado dos países ricos."
+          "text": "Ficar do lado dos países ricos, mesmo que isso afaste os países em desenvolvimento."
         },
         {
           "id": "b",
@@ -277,7 +277,7 @@
         {
           "id": "d",
           "value": 1,
-          "text": "Ficar do lado dos países em desenvolvimento."
+          "text": "Ficar do lado dos países em desenvolvimento, mesmo que isso afaste os países ricos."
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "updatedAt": "2026-10-09",
   "reviewStatus": "pendente",
   "candidates": [
@@ -110,7 +110,7 @@
       "value": 4,
       "confidence": "alta",
       "summary": "O plano propõe um \"Tesouraço\", descrito como \"um corte profundo e por todos os lados\" nos gastos. Também prevê rever a reforma tributária e a \"majoração de impostos efetuada pelo atual governo\", reduzir o IVA e os impostos sobre energia e combustíveis. Flávio declarou que buscará reduzir a carga tributária e os impostos sobre a folha de pagamento. Ele também defende a isenção do IR até R$ 5 mil, \"sem precisar aumentar ou criar impostos\".",
-      "rationale": "A alternativa 4 corresponde ao texto do plano, que vincula o corte profundo de gastos à redução de impostos. A alternativa 3 também prevê simplificar e não aumentar tributos de nenhum grupo, mas fala em reduzir 'aos poucos', enquanto o plano propõe cortes amplos e revisão de aumentos recentes. Ponto de atenção: reportagem da Gazeta do Povo (08/10/2026) afirma, em paráfrase, que Flávio prometeu 'tributar a distribuição de dividendos', o que seria um elemento da alternativa 2. Não localizei a fala original.",
+      "rationale": "A alternativa 4 corresponde ao texto do plano, que vincula o corte profundo de gastos à redução de impostos. A alternativa 3 também prevê simplificar e não aumentar tributos de nenhum grupo, mas fala em diminuir 'devagar', enquanto o plano propõe cortes amplos e revisão de aumentos recentes. Uma reportagem de 08/10/2026 afirmou, em paráfrase e sem a fala original, que ele prometeu tributar dividendos. A fonte primária aponta o contrário: no Senado, em 05/11/2025, ele votou a favor da isenção do IR até R$ 5 mil, mas chamou de 'confisco' a cobrança de 10% sobre a distribuição de dividendos.",
       "evidence": [
         {
           "title": "Para o Brasil vencer o atraso (Diretrizes do Plano de Governo Flávio Bolsonaro 2027-2030, versão final)",
@@ -137,12 +137,12 @@
           "excerpt": "Flávio disse ser favorável à isenção até R$ 5 mil e que, no governo Bolsonaro, haveria compensação \"sem precisar aumentar ou criar impostos\". Ele criticou o atual governo por \"elevadíssima carga tributária\"."
         },
         {
-          "title": "O que Flávio Bolsonaro pode mudar na reforma tributária",
-          "publisher": "Gazeta do Povo",
-          "url": "https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-reforma-tributaria/",
-          "publishedAt": "2026-10-08",
-          "type": "noticia",
-          "excerpt": "Flávio afirmou que \"O principal ponto é definir o tamanho do IVA\". A reportagem diz, em paráfrase, que ele prometeu manter a faixa de isenção de R$ 5 mil e tributar a distribuição de dividendos."
+          "title": "Pronunciamento de Flávio Bolsonaro sobre o PL 1087/2025 (isenção do IR e tributação mínima de altas rendas)",
+          "publisher": "Senado Federal",
+          "url": "https://www25.senado.leg.br/web/atividade/pronunciamentos/-/p/pronunciamento/518071",
+          "publishedAt": "2025-11-05",
+          "type": "declaracao",
+          "excerpt": "Sobre profissionais liberais fora do Simples: 'mais 10% na distribuição de dividendos, quando passar da empresa para a pessoa física'. 'Isso é um confisco!' E: 'o nosso voto vai ser a favor desse projeto'."
         }
       ]
     },
@@ -178,6 +178,14 @@
           "publishedAt": "2026-08-31",
           "type": "noticia",
           "excerpt": "Segundo a reportagem, o programa propõe consolidar a isenção do IR para salários de até R$ 5.000, compensada pela taxação de super-ricos, fundos exclusivos e offshores."
+        },
+        {
+          "title": "Lula diz que pode tirar 'um pouquinho' dos ricos para os pobres",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-eleicoes-2026/lula-diz-que-pode-tirar-um-pouquinho-dos-ricos-para-os-pobres/",
+          "publishedAt": "2026-09-28",
+          "type": "declaracao",
+          "excerpt": "'Eu não quero tirar nada de nenhum rico. Se eu puder, eu tiro um pouquinho, fazendo ele pagar mais imposto' para melhorar a vida dos pobres."
         }
       ]
     },
@@ -328,7 +336,7 @@
       "value": 3,
       "confidence": "media",
       "summary": "O plano de governo registrado no TSE ('Para o Brasil vencer o atraso') afirma 'Vamos ampliar as Escolas Cívico-Militares', propõe o método fônico, repasses vinculados a metas de aprendizagem, apoio à escola em tempo integral e voucher para escola ou creche privada apenas onde faltar vaga na rede pública. Como senador, criticou em 2023 o fim do programa federal de escolas cívico-militares.",
-      "rationale": "A alternativa 3 (mais disciplina e regras mais rígidas nas escolas) é a mais próxima da proposta central do plano para a educação básica: ampliar as escolas cívico-militares, modelo baseado em disciplina e gestão compartilhada com militares. Como a pergunta não cita esse modelo pelo nome, a correspondência depende de interpretação, e por isso a confiança é média. A alternativa 4 foi descartada porque o vale previsto é restrito à falta de vagas na rede pública e o plano não menciona ensino em casa. O plano também tem elementos das alternativas 1 e 2 (apoio ao tempo integral; metas de aprendizagem), mas sem a mesma prioridade.",
+      "rationale": "A alternativa 3 (mais disciplina e regras mais rígidas nas escolas) é a mais próxima da proposta central do plano para a educação básica: ampliar as escolas cívico-militares, modelo baseado em disciplina e gestão compartilhada com militares. Como a pergunta não cita esse modelo pelo nome, a correspondência depende de interpretação, e por isso a confiança é média. A alternativa 4 foi descartada porque o vale previsto é restrito à falta de vagas na rede pública e o plano não menciona ensino em casa. Como senador, ele apoiou em 06/2026 o pedido de urgência para votar o projeto de ensino domiciliar, um sinal parcial na direção da 4. O plano também tem elementos das alternativas 1 e 2 (apoio ao tempo integral; metas de aprendizagem), mas sem a mesma prioridade.",
       "evidence": [
         {
           "title": "Para o Brasil vencer o atraso – Diretrizes do Plano de Governo 2027-2030",
@@ -361,6 +369,14 @@
           "publishedAt": "2023-07-12",
           "type": "declaracao",
           "excerpt": "Flávio criticou o encerramento do programa federal, referindo-se a 'Pais e mães, militares e carentes, que podiam matricular seus filhos nas exemplares escolas cívico-militares'."
+        },
+        {
+          "title": "Senadores bolsonaristas se articulam para votar com urgência projeto que libera ensino domiciliar",
+          "publisher": "APUFSC (reprodução da Folha de S.Paulo)",
+          "url": "https://www.apufsc.org.br/2026/07/01/senadores-bolsonaristas-se-articulam-para-votar-com-urgencia-projeto-que-libera-ensino-domiciliar/",
+          "publishedAt": "2026-07-01",
+          "type": "noticia",
+          "excerpt": "O requerimento de urgência é do senador Magno Malta (PL-ES); entre os senadores que o apoiam aparece Flávio Bolsonaro (PL-RJ)."
         }
       ]
     },
@@ -580,64 +596,88 @@
       ]
     },
     {
-      "questionId": "corrupcao",
+      "questionId": "stf-escolha",
       "candidateId": "flavio-bolsonaro",
       "status": "documented",
       "value": 3,
       "confidence": "media",
-      "summary": "O plano de governo de Flávio Bolsonaro propõe o fim das competências criminais originárias do STF, de modo que parlamentares passem a ser julgados por outros tribunais, como STJ ou TRFs. Em setembro de 2025, ele defendeu na CCJ do Senado a PEC da Blindagem, que ampliava proteções a parlamentares e estendia o foro a presidentes de partidos.",
-      "rationale": "A proposta do plano corresponde à alternativa 3: tirar os processos criminais do STF e passá-los a outros tribunais. Não corresponde à 4, porque o plano mantém julgamento em tribunais (STJ/TRFs) e não na primeira instância. Declarações de 2017-2019 contra o foro ('Eu sou contra o foro') apontariam para a 4, mas são anteriores e menos específicas que o plano de 2026. A defesa da PEC da Blindagem em 2025 aponta em sentido oposto (ampliação de prerrogativas), por isso a confiança é média.",
+      "summary": "Flávio Bolsonaro assina duas propostas de emenda à Constituição que limitam a escolha a juízes de carreira e criam listas prévias. A PEC 17/2026 exige magistrados de 60 a 70 anos, escolhidos em lista tríplice. Na PEC 45/2025, a lista é montada pelo CNJ, o presidente a reduz a três nomes e o Senado escolhe. O plano de governo propõe quarentena de um ano para ministros de Estado serem indicados ao STF.",
+      "rationale": "As duas PECs que ele assina correspondem à alternativa 3: o presidente deixa de escolher livremente e passa a escolher numa lista de juízes de carreira definida pela própria Justiça. A confiança é média porque a posição vem de assinaturas em propostas, não do plano de governo. O plano trata só da quarentena, que se aproxima da alternativa 2. Na campanha, ele fala em indicar ministros com perfil conservador, sem detalhar o modelo de escolha.",
       "evidence": [
+        {
+          "title": "Proposta de Emenda à Constituição nº 17, de 2026",
+          "publisher": "Senado Federal",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175716",
+          "publishedAt": "2026-09-02",
+          "type": "ato-oficial",
+          "excerpt": "Ementa: 'Altera os arts. 14 e 101 da Constituição Federal, para dispor sobre os requisitos de escolha dos Ministros do Supremo Tribunal Federal e sobre sua inelegibilidade para qualquer cargo eletivo, pelo prazo de cinco anos após deixarem a função.' Primeiro signatário: Zequinha Marinho (PODE/PA); Flávio Bolsonaro (PL/RJ) consta entre os autores."
+        },
+        {
+          "title": "Saiba o que Lula e Flávio propõem sobre novas regras para indicação de ministros ao STF",
+          "publisher": "Jornal de Brasília (Estadão Conteúdo)",
+          "url": "https://jornaldebrasilia.com.br/noticias/politica-e-poder/saiba-o-que-lula-e-flavio-propoem-sobre-novas-regras-para-indicacao-de-ministros-ao-stf/",
+          "publishedAt": "2026-10-07",
+          "type": "noticia",
+          "excerpt": "A PEC assinada por Flávio exige que o indicado seja magistrado, tenha entre 60 e 70 anos e não tenha condenação em processo disciplinar; a escolha seria por lista tríplice definida por colegiado com membros do STF, STJ, TST e STM."
+        },
+        {
+          "title": "Proposta de Emenda à Constituição nº 45, de 2025",
+          "publisher": "Senado Federal",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/171886",
+          "publishedAt": "2025-12-02",
+          "type": "ato-oficial",
+          "excerpt": "Ementa: 'Modifica o processo de escolha dos Ministros do Supremo Tribunal Federal.' Primeiro signatário: Carlos Portinho (PL/RJ); Flávio Bolsonaro (PL/RJ) consta entre os coautores. Segundo o Poder360 (03/12/2025), o CNJ elaboraria lista sêxtupla, o presidente a reduziria a três nomes e o Senado escolheria um."
+        },
         {
           "title": "Para o Brasil vencer o atraso - Diretrizes do Plano de Governo 2027-2030",
           "publisher": "Flávio Bolsonaro / PL (cópia hospedada pelo Poder360)",
           "url": "https://static.poder360.com.br/uploads/2026/08/plano-flavio.pdf",
           "publishedAt": null,
           "type": "plano-de-governo",
-          "excerpt": "p. 65, 'Reforma do Judiciário: o STF como Corte Constitucional': 'Fim das competências criminais originárias do STF, permitindo que parlamentares sejam julgados por instâncias inferiores, como o STJ ou os TRFs, para que exerçam seus mandatos com mais altivez, sem que isso represente qualquer contrapartida de impunidade.'"
-        },
-        {
-          "title": "CCJ do Senado rejeita PEC da Blindagem por unanimidade",
-          "publisher": "InfoMoney",
-          "url": "https://www.infomoney.com.br/politica/ccj-do-senado-rejeita-pec-da-blindagem-por-unanimidade/",
-          "publishedAt": "2025-09-24",
-          "type": "noticia",
-          "excerpt": "Na discussão da CCJ, Flávio defendeu a PEC como forma de proteger o Congresso de ministros do STF, a quem chamou de 'categoria que está acima da lei'; a comissão rejeitou a PEC por unanimidade (a reportagem não detalha o voto individual)."
-        },
-        {
-          "title": "Família Bolsonaro pediu o fim do foro privilegiado 9 vezes antes de decisão que beneficiou Flávio",
-          "publisher": "Aos Fatos",
-          "url": "https://www.aosfatos.org/noticias/familia-bolsonaro-pediu-o-fim-do-foro-privilegiado-9-vezes-antes-de-decisao-que-beneficiou-flavio/",
-          "publishedAt": "2020-06-26",
-          "type": "checagem",
-          "excerpt": "Registra declarações de Flávio contra o foro, como 'Eu sou contra o foro, mas não é uma escolha minha' (Record, 18/01/2019), e o pedido de foro especial feito por ele ao TJ-RJ em 2020 no caso das 'rachadinhas'."
+          "excerpt": "p. 65, 'Reforma do Judiciário: o STF como Corte Constitucional': 'Quarentena de 1 ano para que Ministros de Estado possam ser indicados ao STF.' O plano não trata de listas nem de outra forma de escolha."
         }
       ]
     },
     {
-      "questionId": "corrupcao",
+      "questionId": "stf-escolha",
       "candidateId": "lula",
-      "status": "insufficient",
-      "value": null,
-      "confidence": null,
-      "summary": "Não foi localizada posição pública de Lula sobre manter, restringir ou extinguir o foro privilegiado. O programa de governo 2027-2030 não trata do tema. Há apenas críticas de Lula, em setembro de 2025, à PEC da Blindagem, que ampliava a imunidade parlamentar e estendia o foro a presidentes de partidos.",
-      "rationale": "A crítica à PEC da Blindagem refere-se principalmente à imunidade ('da prerrogativa garantindo imunidade [...] até para presidente de partido') e, no máximo, indica oposição a ampliar o foro (afastaria a alternativa 1). Ela não permite distinguir entre as alternativas 2, 3 e 4. Não foram encontradas declarações de Lula sobre a PEC 333/2017 (fim do foro) nem sobre a decisão do STF de 2025. Posições do líder do PT na Câmara não foram atribuídas ao candidato.",
+      "status": "documented",
+      "value": 4,
+      "confidence": "media",
+      "summary": "Na campanha, Lula passou a defender que a escolha dos ministros do STF não fique só com o presidente. Em 30/09/2026 disse: 'Vou propor que a gente monte um conselho para escolher os ministros'. Em entrevista à Band, sugeriu um colegiado com entidades da sociedade civil. O programa de governo 2027-2030 não trata do tema, e o modelo ainda não foi detalhado.",
+      "rationale": "A proposta de um conselho para escolher os ministros, com participação da sociedade civil, corresponde à alternativa 4. A confiança é média porque são declarações recentes, sem proposta formal: não está definido se o conselho escolheria ou apenas avaliaria os nomes, nem quem o comporia.",
       "evidence": [
+        {
+          "title": "Lula defende criação de conselho para escolher ministros do STF",
+          "publisher": "Poder360",
+          "url": "https://www.poder360.com.br/poder-eleicoes-2026/lula-defende-criacao-de-conselho-para-escolher-ministros-do-stf/",
+          "publishedAt": "2026-09-30",
+          "type": "declaracao",
+          "excerpt": "Em entrevista a influenciadores: 'Vou propor que a gente monte um conselho para escolher os ministros [do STF].' Segundo a reportagem, o programa de governo não traz proposta específica sobre a forma de escolha."
+        },
+        {
+          "title": "Com crise no STF, Lula sugere conselho para indicação de nomes e defende mandato para ministros",
+          "publisher": "O Tempo (Folhapress)",
+          "url": "https://www.otempo.com.br/eleicoes/2026/presidentes/2026/9/27/com-crise-no-stf-lula-sugere-conselho-para-indicacao-de-nomes-e-defende-mandato-para-ministros",
+          "publishedAt": "2026-09-27",
+          "type": "declaracao",
+          "excerpt": "Em entrevista à Band: 'Temos que criar um critério para que seja alguém que passe por um crivo de um colegiado'. Segundo a reportagem, Lula sugeriu um conselho com juristas e membros da sociedade civil."
+        },
+        {
+          "title": "Saiba o que Lula e Flávio propõem sobre novas regras para indicação de ministros ao STF",
+          "publisher": "Jornal de Brasília (Estadão Conteúdo)",
+          "url": "https://jornaldebrasilia.com.br/noticias/politica-e-poder/saiba-o-que-lula-e-flavio-propoem-sobre-novas-regras-para-indicacao-de-ministros-ao-stf/",
+          "publishedAt": "2026-10-07",
+          "type": "noticia",
+          "excerpt": "Lula: 'Eu acho que tem que mudar o critério.' Ele propõe que um colegiado composto por entidades da sociedade civil faça a escolha do indicado, em formato ainda a definir."
+        },
         {
           "title": "Diretrizes para o Desenvolvimento do Plano de Governo 2027-2030 (Programa de Governo Lula 2026)",
           "publisher": "Coligação PT/PSB/PV/PCdoB/PDT/PSOL/Rede (cópia hospedada pelo Congresso em Foco)",
           "url": "https://static.congressoemfoco.com.br/2026/08/08/attachment/2026/08/08/32ce89_programa_governo_lula_2026.pdf",
           "publishedAt": null,
           "type": "plano-de-governo",
-          "excerpt": "O programa não menciona foro privilegiado ou foro por prerrogativa de função (busca no texto integral). Sobre a Justiça, cita a 'morosidade decisória decorrente da quantidade excessiva de processos e instâncias recursais' e propõe 'diálogo permanente com os atores do judiciário'."
-        },
-        {
-          "title": "'Não é uma coisa séria', diz Lula sobre PEC da Blindagem",
-          "publisher": "CNN Brasil",
-          "url": "https://www.cnnbrasil.com.br/politica/nao-e-uma-coisa-seria-diz-lula-sobre-pec-da-blindagem/",
-          "publishedAt": "2025-09-18",
-          "type": "declaracao",
-          "excerpt": "Lula: 'A votação no Congresso Nacional, sabe, da prerrogativa garantindo imunidade da forma que foi garantida até para presidente de partido, não é uma coisa séria'. A CNN informa que a PEC incluía a ampliação do foro a presidentes nacionais de partidos."
+          "excerpt": "O programa não menciona o STF nem a forma de escolha de seus ministros (busca no texto integral)."
         }
       ]
     },
@@ -724,9 +764,9 @@
       "candidateId": "flavio-bolsonaro",
       "status": "documented",
       "value": 3,
-      "confidence": "alta",
+      "confidence": "media",
       "summary": "O plano de Flávio Bolsonaro propõe diplomacia 'pragmática, não ideológica', com reaproximação com Estados Unidos, Argentina e Israel, retomada da adesão à OCDE e abertura comercial, mantendo negociações com China, União Europeia e mercados asiáticos. Em maio de 2026, após encontro com Donald Trump, declarou que o Brasil integraria o 'Escudo das Américas'.",
-      "rationale": "A alternativa 3 corresponde ao plano: reaproximação com EUA, Argentina e Israel e adesão à OCDE, mas 'Negociaremos com todos [...] da China à União Europeia' e sem 'escolher amigos por afinidade ideológica'. A alternativa 4 foi descartada porque o plano mantém a China como parceira e rejeita alinhamento ideológico. A adesão anunciada ao 'Escudo das Américas' é um sinal parcial na direção da 4, aplicando o mesmo critério usado para os sinais parciais de Lula.",
+      "rationale": "A alternativa 3 corresponde ao plano: reaproximação com EUA, Argentina e Israel e adesão à OCDE, mas 'Negociaremos com todos [...] da China à União Europeia' e sem 'escolher amigos por afinidade ideológica'. A alternativa 4 foi descartada porque o plano mantém a China como parceira e rejeita alinhamento ideológico. Fora do plano, há sinais na direção da 4: a adesão anunciada ao 'Escudo das Américas', a declaração de que vai 'reavaliar' a permanência no BRICS (06/2026) e a proposta de 'libertar' o Brasil das 'amarras do Mercosul'. Por isso a confiança é média. Em 21/09/2026, porém, ele afirmou: 'A gente não tem que escolher um lado'.",
       "evidence": [
         {
           "title": "Para o Brasil vencer o atraso - Diretrizes do Plano de Governo 2027-2030",
@@ -751,6 +791,22 @@
           "publishedAt": "2026-05-26",
           "type": "declaracao",
           "excerpt": "Flávio defendeu 'parcerias estratégicas que enriqueçam o nosso povo, gerem empregos, tragam investimento, tecnologia e segurança' e afirmou que, se eleito, o Brasil passará a integrar o 'Escudo das Américas', iniciativa lançada por Trump."
+        },
+        {
+          "title": "Veja o que os candidatos à Presidência pensam sobre EUA, China, Brics e outros temas de política externa",
+          "publisher": "Farol da Bahia (FolhaPress)",
+          "url": "https://www.faroldabahia.com.br/noticia/veja-o-que-os-candidatos-a-presidencia-pensam-sobre-eua-china-brics-e-outros-temas-de-politica-externa",
+          "publishedAt": "2026-09-13",
+          "type": "noticia",
+          "excerpt": "Em entrevista ao podcast da Prager University (3 de junho), Flávio disse: 'vou reavaliar se o Brasil deve ficar em um bloco que é muito ideológico' e 'Vamos considerar deixar o bloco'. Em manifestação ao escritório de comércio dos EUA, falou em 'libertar das amarras do Mercosul'."
+        },
+        {
+          "title": "O programa de Flávio Bolsonaro não menciona BRICS nem Mercosul: o que o candidato do PL propõe para o Brasil no mundo",
+          "publisher": "ND Mais",
+          "url": "https://ndmais.com.br/mundo/o-programa-de-flavio-bolsonaro-nao-menciona-brics-nem-mercosul-o-que-o-candidato-do-pl-propoe-para-o-brasil-no-mundo/",
+          "publishedAt": "2026-09-29",
+          "type": "declaracao",
+          "excerpt": "No comício de Natal (21/09): 'A gente não tem que escolher um lado, a gente tem que estar junto com todas as nações que sejam desenvolvimentistas, que queiram investir no nosso Brasil, que queiram trazer tecnologia.'"
         }
       ]
     },

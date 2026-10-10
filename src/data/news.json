@@ -321,39 +321,44 @@
       ]
     },
     {
-      "questionId": "corrupcao",
-      "title": "A nova decisão do STF sobre o alcance do foro privilegiado",
-      "summary": "O STF manteve, em julgamento virtual concluído em maio de 2026, o entendimento de que o foro continua após a saída do cargo e estendeu a orientação a todos os titulares de foro, inclusive cargos vitalícios. O voto divergente de Luiz Fux ficou vencido.",
-      "publisher": "CartaCapital",
-      "publishedAt": "2026-05-25",
-      "url": "https://www.cartacapital.com.br/justica/a-nova-decisao-do-stf-sobre-o-alcance-do-foro-privilegiado/",
+      "questionId": "stf-escolha",
+      "title": "Saiba o que Lula e Flávio propõem sobre novas regras para indicação de ministros ao STF",
+      "summary": "Compara as propostas dos dois candidatos: Lula defende que um colegiado da sociedade civil participe da escolha; Flávio assinou PEC que restringe a indicação a magistrados de 60 a 70 anos, escolhidos por lista tríplice.",
+      "publisher": "Jornal de Brasília (Estadão Conteúdo)",
+      "publishedAt": "2026-10-07",
+      "url": "https://jornaldebrasilia.com.br/noticias/politica-e-poder/saiba-o-que-lula-e-flavio-propoem-sobre-novas-regras-para-indicacao-de-ministros-ao-stf/",
       "type": "noticia",
-      "candidates": []
+      "candidates": [
+        "lula",
+        "flavio-bolsonaro"
+      ]
     },
     {
-      "questionId": "corrupcao",
-      "title": "STF amplia foro privilegiado para manter investigações na Corte após fim do mandato",
-      "summary": "Por 7 votos a 4, o STF decidiu que crimes funcionais cometidos no exercício do cargo continuam sendo julgados pela Corte após renúncia, não reeleição ou cassação, seguindo o voto do relator Gilmar Mendes.",
-      "publisher": "Gazeta do Povo",
-      "publishedAt": "2025-03-11",
-      "url": "https://www.gazetadopovo.com.br/republica/stf-amplia-foro-privilegiado/",
+      "questionId": "stf-escolha",
+      "title": "Lula defende criação de conselho para escolher ministros do STF",
+      "summary": "Em entrevista a influenciadores, Lula disse que vai propor um conselho para escolher os ministros do STF e defendeu mandato para eles. O programa de governo não traz proposta sobre o tema.",
+      "publisher": "Poder360",
+      "publishedAt": "2026-09-30",
+      "url": "https://www.poder360.com.br/poder-eleicoes-2026/lula-defende-criacao-de-conselho-para-escolher-ministros-do-stf/",
       "type": "noticia",
-      "candidates": []
-    },
-    {
-      "questionId": "corrupcao",
-      "title": "'Não é uma coisa séria', diz Lula sobre PEC da Blindagem",
-      "summary": "Lula criticou a PEC aprovada pela Câmara que ampliava a imunidade parlamentar e estendia o foro a presidentes de partidos. A proposta foi depois rejeitada pela CCJ do Senado.",
-      "publisher": "CNN Brasil",
-      "publishedAt": "2025-09-18",
-      "url": "https://www.cnnbrasil.com.br/politica/nao-e-uma-coisa-seria-diz-lula-sobre-pec-da-blindagem/",
-      "type": "declaracao-oficial",
       "candidates": [
         "lula"
       ]
     },
     {
-      "questionId": "corrupcao",
+      "questionId": "stf-escolha",
+      "title": "Portinho propõe PEC que muda regras de indicação ao STF",
+      "summary": "A PEC 45/2025 muda a escolha dos ministros do STF: o CNJ montaria uma lista de seis nomes, o presidente a reduziria a três e o Senado escolheria um. Também cria mandato de 10 anos. Segundo a página da proposta no Senado, Flávio Bolsonaro é um dos coautores.",
+      "publisher": "Poder360",
+      "publishedAt": "2025-12-03",
+      "url": "https://www.poder360.com.br/poder-congresso/portinho-propoe-pec-que-muda-regras-de-indicacao-ao-stf/",
+      "type": "noticia",
+      "candidates": [
+        "flavio-bolsonaro"
+      ]
+    },
+    {
+      "questionId": "stf-escolha",
       "title": "EUA, 'tesouraço' e presídios: o que prevê o plano de governo de Flávio",
       "summary": "Descreve as propostas do plano de Flávio para a Justiça, incluindo redução de competências do STF, limite a decisões individuais de ministros e quarentena para indicação de ministros de Estado à Corte.",
       "publisher": "Congresso em Foco",
