@@ -8,7 +8,7 @@ export default function Inicio() {
   return (
     <section className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center px-5 pt-14 text-center sm:px-6 sm:pt-20">
       <div className="animate-surgir">
-        <Logo className="h-9 sm:h-12" alt="Decida Voto" />
+        <Logo className="h-24 sm:h-32" alt="Em quem votar?" />
       </div>
       <Sobretitulo className="animate-surgir mt-12 [animation-delay:60ms]">
         2º turno presidencial · <span className="whitespace-nowrap">25 de outubro de 2026</span>

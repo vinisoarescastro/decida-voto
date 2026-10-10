@@ -14,8 +14,8 @@ export function SiteHeader() {
   const largo = pathname.startsWith("/admin");
   return (
     <header className={`mx-auto w-full px-5 pt-6 sm:px-6 sm:pt-8 ${largo ? "max-w-5xl" : "max-w-2xl"}`}>
-      <Link href="/" className="inline-flex min-h-11 items-center" aria-label="Decida Voto, página inicial">
-        <Logo className="h-6 sm:h-7" />
+      <Link href="/" className="inline-flex min-h-11 items-center" aria-label="Em quem votar? Página inicial">
+        <Logo className="h-10 sm:h-12" />
       </Link>
     </header>
   );

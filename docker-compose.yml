@@ -1,4 +1,4 @@
-# Decida Voto — aplicação + PostgreSQL + backup diário.
+# Em quem votar? — aplicação + PostgreSQL + backup diário.
 # Configure o arquivo .env (modelo em .env.example) antes de subir: docker compose up -d --build
 name: decida-voto
 

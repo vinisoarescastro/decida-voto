@@ -1,4 +1,4 @@
-# Nginx como proxy reverso HTTPS para o Decida Voto (aplicação em 127.0.0.1:3000, via Docker Compose).
+# Nginx como proxy reverso HTTPS para o Em quem votar? (aplicação em 127.0.0.1:3000, via Docker Compose).
 # Substitua SEU_DOMINIO. Certificado: certbot certonly --nginx -d SEU_DOMINIO -d www.SEU_DOMINIO
 # Requer também deploy/nginx-limites.conf em /etc/nginx/conf.d/.
 

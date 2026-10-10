@@ -8,7 +8,7 @@ const secret = z.string().min(32, "deve ter pelo menos 32 caracteres aleatórios
 
 const schema = z.object({
   DATABASE_URL: z.string().url(),
-  /** Origem pública do site (ex.: https://decidavoto.com.br). Requisições POST de outra origem são recusadas. */
+  /** Origem pública do site (ex.: https://www.seudominio.com.br). Requisições POST de outra origem são recusadas. */
   APP_ORIGIN: z.string().url(),
   /** Assina os tokens de início do questionário. */
   FORM_TOKEN_SECRET: secret,

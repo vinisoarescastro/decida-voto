@@ -6,7 +6,7 @@ import { responsavelPublico } from "@/server/responsavel-publico";
 
 export const metadata: Metadata = {
   title: "Privacidade e termos de uso",
-  description: "Quais dados o Decida Voto coleta, para quê, por quanto tempo e como são protegidos.",
+  description: "Quais dados o site Em quem votar? coleta, para quê, por quanto tempo e como são protegidos.",
 };
 
 const lista = "list-disc space-y-2 pl-5";
@@ -61,7 +61,7 @@ export default async function PaginaPrivacidade() {
         <ul className={lista}>
           <li>
             Para produzir estatísticas gerais e agregadas sobre a afinidade com os candidatos por estado, cidade, gênero e
-            faixa etária, de uso interno da equipe do Decida Voto.
+            faixa etária, de uso interno da equipe responsável por esta ferramenta.
           </li>
           <li>
             Grupos com poucas participações não são exibidos nem mesmo internamente, para evitar que alguém seja
@@ -69,7 +69,7 @@ export default async function PaginaPrivacidade() {
           </li>
           <li>
             Não vendemos, não compartilhamos e não publicamos esses dados. Os resultados agregados não são divulgados,
-            porque o Decida Voto não é pesquisa eleitoral.
+            porque esta ferramenta não é pesquisa eleitoral.
           </li>
         </ul>
       </Secao>
@@ -127,7 +127,7 @@ export default async function PaginaPrivacidade() {
       <Secao id="termos" titulo="Termos de uso">
         <ul className={lista}>
           <li>
-            O Decida Voto é uma ferramenta informativa e independente, sem vínculo com candidatos, partidos, coligações ou
+            O site Em quem votar? é uma ferramenta informativa e independente, sem vínculo com candidatos, partidos, coligações ou
             com a Justiça Eleitoral.
           </li>
           <li>

@@ -1,4 +1,6 @@
-# Decida Voto
+# Em quem votar?
+
+Antes chamado Decida Voto: identificadores técnicos (pacote, projeto do Docker Compose, bancos, volumes, backups e arquivos do Nginx) continuam com `decida-voto`/`decida_voto` para não quebrar ambientes já criados.
 
 Ferramenta informativa e independente que compara as respostas do eleitor a 10 perguntas com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026. Não é pesquisa eleitoral nem recomendação de voto.
 

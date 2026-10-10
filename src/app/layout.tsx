@@ -12,8 +12,8 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "Decida Voto — compare suas opiniões com as posições dos candidatos",
-    template: "%s | Decida Voto",
+    default: "Em quem votar? Compare suas opiniões com as posições dos candidatos",
+    template: "%s | Em quem votar?",
   },
   description:
     "Ferramenta informativa e independente: responda 10 perguntas e compare suas opiniões com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026.",

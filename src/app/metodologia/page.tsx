@@ -12,7 +12,7 @@ const TSE_RESULT_URL =
 
 export const metadata: Metadata = {
   title: "Metodologia e fontes",
-  description: "Como o Decida Voto calcula a afinidade e quais fontes sustentam cada posição atribuída aos candidatos.",
+  description: "Como o site Em quem votar? calcula a afinidade e quais fontes sustentam cada posição atribuída aos candidatos.",
 };
 
 const lista = "list-disc space-y-2 pl-5";

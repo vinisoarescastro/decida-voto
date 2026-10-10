@@ -94,8 +94,8 @@ export function TelaResultado({ resultado, envio, tituloRef, aoRefazer, aoRevisa
 
   return (
     <div className="mx-auto w-full max-w-2xl px-5 pt-6 sm:px-6 sm:pt-8">
-      <Link href="/" className="inline-flex min-h-11 items-center" aria-label="Decida Voto, página inicial">
-        <Logo className="h-6 sm:h-7" />
+      <Link href="/" className="inline-flex min-h-11 items-center" aria-label="Em quem votar? Página inicial">
+        <Logo className="h-10 sm:h-12" />
       </Link>
 
       <div className="animate-surgir mt-8 sm:mt-12">
