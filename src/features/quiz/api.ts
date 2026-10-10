@@ -1,4 +1,5 @@
 import type { Answers } from "@/lib/affinity";
+import { lerOrigem } from "@/features/convite/marcar-origem";
 import type { PerfilForm } from "./profile-form";
 
 // Comunicação do questionário com o servidor. As rotas usam a barra final (formato canônico do site),
@@ -34,6 +35,8 @@ export async function enviarParticipacao(perfil: PerfilForm, respostas: Answers,
         consentimento: true,
         token,
         site: perfil.site,
+        // Só "convite" (chegou por link compartilhado); ausente nos demais casos.
+        origem: lerOrigem(),
       }),
     });
     if (resposta.ok) return "ok";

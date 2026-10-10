@@ -16,7 +16,7 @@ beforeAll(async () => {
   const lote = [
     ...Array.from({ length: 4 }, () => entrada({ uf: "SP", municipio: 3550308, genero: "homem", idade: 30 }, 1)),
     ...Array.from({ length: 3 }, () => entrada({ uf: "RJ", municipio: 3304557, genero: "mulher", idade: 50 }, 4)),
-    entrada({ uf: "SP", municipio: 3509502, genero: "mulher", idade: 20 }, 2), // Campinas
+    { ...entrada({ uf: "SP", municipio: 3509502, genero: "mulher", idade: 20 }, 2), origem: "convite" as const }, // Campinas, por convite
   ];
   for (const e of lote) await registrarParticipacao(db, e, base);
 });
@@ -32,6 +32,11 @@ describe("calcularAnalises", () => {
     expect(a.ultimos7).toBe(8);
     expect(a.porDia).toHaveLength(1);
     expect(a.porDia[0].n).toBe(8);
+  });
+
+  it("conta as participações que vieram de convite", async () => {
+    expect((await calcularAnalises(db, CANDIDATOS, {}, 1, dados)).convites).toBe(1);
+    expect((await calcularAnalises(db, CANDIDATOS, { uf: "RJ" }, 1, dados)).convites).toBe(0);
   });
 
   it("distribui as participações por faixa de afinidade, somando o total", async () => {

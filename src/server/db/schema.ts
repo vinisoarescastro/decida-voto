@@ -50,6 +50,8 @@ export const participacoes = pgTable(
     temasComparaveis: smallint("temas_comparaveis").notNull(),
     versaoPerguntas: varchar("versao_perguntas", { length: 20 }).notNull(),
     versaoPosicoes: varchar("versao_posicoes", { length: 20 }).notNull(),
+    /** "convite" quando a pessoa chegou por um link compartilhado; null nos demais casos. Não identifica quem convidou. */
+    origem: varchar("origem", { length: 20 }),
   },
   (t) => [
     // Garante que o município pertence à UF informada.
@@ -59,6 +61,7 @@ export const participacoes = pgTable(
       name: "participacoes_municipio_uf_fk",
     }),
     check("participacoes_temas_ck", sql`${t.temasComparaveis} between 0 and 50`),
+    check("participacoes_origem_ck", sql`${t.origem} is null or ${t.origem} = 'convite'`),
     index("participacoes_uf_idx").on(t.uf),
     index("participacoes_municipio_idx").on(t.municipioCodigo),
     index("participacoes_genero_idx").on(t.genero),

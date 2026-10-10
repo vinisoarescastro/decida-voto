@@ -48,6 +48,7 @@ export async function registrarParticipacao(db: AnyDb, entrada: ParticipacaoInpu
         temasComparaveis: resultado.comparableCount,
         versaoPerguntas: base.versaoPerguntas,
         versaoPosicoes: base.versaoPosicoes,
+        origem: entrada.origem ?? null,
       })
       .returning({ id: participacoes.id });
 

@@ -1,0 +1,2 @@
+ALTER TABLE "participacoes" ADD COLUMN "origem" varchar(20);--> statement-breakpoint
+ALTER TABLE "participacoes" ADD CONSTRAINT "participacoes_origem_ck" CHECK ("participacoes"."origem" is null or "participacoes"."origem" = 'convite');

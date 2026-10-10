@@ -88,7 +88,7 @@ function Indicador({ rotulo, valor, detalhe }: { rotulo: string; valor: ReactNod
 
 export function Indicadores({ a, total, candidatos }: { a: Analises; total: number; candidatos: Candidate[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
       <Indicador rotulo="Hoje" valor={a.hoje.toLocaleString("pt-BR")} detalhe="participações no recorte" />
       <Indicador rotulo="Últimos 7 dias" valor={a.ultimos7.toLocaleString("pt-BR")} detalhe="participações no recorte" />
       <Indicador
@@ -96,7 +96,12 @@ export function Indicadores({ a, total, candidatos }: { a: Analises; total: numb
         valor={total ? `${formatPercent((a.equilibrados / total) * 100)}%` : "—"}
         detalhe={`${plural(a.equilibrados, "pessoa", "pessoas")} com diferença menor que 10 pontos`}
       />
-      <div className="rounded-3xl border border-line bg-surface/90 p-5 shadow-sm">
+      <Indicador
+        rotulo="Vieram de convite"
+        valor={a.convites.toLocaleString("pt-BR")}
+        detalhe={total ? `${formatPercent((a.convites / total) * 100)}% chegaram por link compartilhado no resultado` : "participações"}
+      />
+      <div className="col-span-2 rounded-3xl border border-line bg-surface/90 p-5 shadow-sm lg:col-span-1">
         <p className="text-xs font-medium text-muted">Concordância média</p>
         <ul className="mt-2 space-y-1.5 text-sm">
           {candidatos.map((c, i) => (

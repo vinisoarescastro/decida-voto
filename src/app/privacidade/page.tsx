@@ -50,6 +50,10 @@ export default async function PaginaPrivacidade() {
           <li>
             <strong>Data do envio</strong>, sem horário.
           </li>
+          <li>
+            <strong>Origem por convite:</strong> se você chegou por um link compartilhado no resultado de outra pessoa,
+            registramos apenas que a participação veio de um convite. Não sabemos quem convidou.
+          </li>
         </ul>
         <p>
           <strong>Não coletamos</strong> nome, e-mail, CPF, telefone, endereço, idade exata nem qualquer identificador do seu

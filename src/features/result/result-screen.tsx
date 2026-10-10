@@ -10,6 +10,7 @@ import { Botao } from "@/components/ui/button";
 import { IconeCalculo, IconeCheck, IconeChevronBaixo, IconeInfo, IconeJornal, IconeLista, IconeRefazer } from "@/components/ui/icon";
 import { Cartao } from "@/components/ui/text";
 import type { StatusEnvio } from "@/features/quiz/api";
+import { ConviteCompartilhar } from "@/features/convite/convite";
 import { GraficoAfinidade } from "./affinity-chart";
 import { ComoCalculamos } from "./how-calculated";
 import { PainelNoticias } from "./news-panel";
@@ -137,6 +138,8 @@ export function TelaResultado({ resultado, envio, tituloRef, aoRefazer, aoRevisa
           )}
         </p>
       </div>
+
+      <ConviteCompartilhar />
 
       <section aria-labelledby={`${base}-entenda`} className="mt-10">
         <h2 id={`${base}-entenda`} className="text-lg font-semibold tracking-tight">

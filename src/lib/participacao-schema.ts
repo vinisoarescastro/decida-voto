@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { IDADE_MAXIMA, IDADE_MINIMA, UF_SIGLAS } from "./perfil";
+import { ORIGEM_CONVITE } from "./site";
 
 // Validação definitiva no servidor (o navegador usa validarIdade, de perfil.ts, para respostas imediatas).
 
@@ -21,6 +22,8 @@ export const participacaoSchema = z
     token: z.string().min(10).max(300),
     /** Campo-isca: invisível para pessoas; robôs costumam preenchê-lo. */
     site: z.string().max(200),
+    /** Chegou por um link de convite (sem identificar quem convidou). */
+    origem: z.literal(ORIGEM_CONVITE).optional(),
   })
   .strict();
 export type ParticipacaoInput = z.infer<typeof participacaoSchema>;

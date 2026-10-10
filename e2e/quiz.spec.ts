@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { opcao, preencherPerfil, responderTudo } from "./helpers";
+import { contarConvites, opcao, preencherPerfil, responderTudo } from "./helpers";
 
 test("fluxo completo: perfil, questionário, resultado e registro da participação", async ({ page, baseURL, context }) => {
   const requests: { method: string; url: string }[] = [];
@@ -202,4 +202,45 @@ test("início, perfil e perguntas cabem na tela, sem rolagem", async ({ page }) 
     await opcao(page, 0).click();
     if (i < 9) await page.getByRole("button", { name: "Próxima" }).click();
   }
+});
+
+test("convite: cartão no resultado, mensagem neutra e origem registrada", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  const antes = await contarConvites();
+
+  // Chega por um link compartilhado.
+  await page.goto("/?origem=convite");
+  await page.getByRole("link", { name: "Descobrir minha afinidade" }).click();
+  await preencherPerfil(page);
+  await page.getByRole("button", { name: "Continuar" }).click();
+  await responderTudo(page);
+  await expect(page.getByRole("heading", { name: "Seu resultado", exact: true })).toBeVisible();
+  await expect(page.getByText("Sua participação foi registrada, sem identificação pessoal.")).toBeVisible();
+  expect(await contarConvites()).toBe(antes + 1);
+
+  // Cartão de convite: WhatsApp com mensagem pronta, sem o resultado de quem envia.
+  await expect(page.getByRole("heading", { name: "Conhece alguém em dúvida?" })).toBeVisible();
+  const whatsapp = page.getByRole("link", { name: /Enviar pelo WhatsApp/ });
+  const href = (await whatsapp.getAttribute("href"))!;
+  expect(href.startsWith("https://wa.me/?text=")).toBe(true);
+  const mensagem = decodeURIComponent(href.slice("https://wa.me/?text=".length));
+  expect(mensagem).toContain("https://emquemvotar.digital/?origem=convite");
+  expect(mensagem).not.toMatch(/\d+\s*%/);
+
+  await page.getByRole("button", { name: "Copiar link" }).click();
+  await expect(page.getByRole("button", { name: "Link copiado!" })).toBeVisible();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("https://emquemvotar.digital/?origem=convite");
+});
+
+test("prévia do link: imagem e textos para WhatsApp e redes sociais", async ({ page }) => {
+  await page.goto("/");
+  const meta = (seletor: string) => page.locator(seletor).getAttribute("content");
+  expect(await meta('meta[property="og:image"]')).toMatch(/^https:\/\/emquemvotar\.digital\/opengraph-image\.jpg/);
+  expect(await meta('meta[property="og:image:width"]')).toBe("1200");
+  expect(await meta('meta[property="og:image:height"]')).toBe("630");
+  expect(await meta('meta[property="og:title"]')).toContain("Em quem votar?");
+  expect(await meta('meta[name="twitter:card"]')).toBe("summary_large_image");
+  const imagem = await page.request.get("/opengraph-image.jpg");
+  expect(imagem.status()).toBe(200);
+  expect((await imagem.body()).length).toBeLessThan(300 * 1024);
 });

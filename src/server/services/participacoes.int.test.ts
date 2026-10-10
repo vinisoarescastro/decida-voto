@@ -22,7 +22,7 @@ describe("registrarParticipacao", () => {
     const [{ hoje }] = (await db.execute(sql`select (now() at time zone 'America/Sao_Paulo')::date::text as hoje`)) as unknown as { hoje: string }[];
     expect(p.dataEnvio).toBe(hoje);
     expect(Object.keys(p).sort()).toEqual(
-      ["dataEnvio", "faixaEtaria", "genero", "id", "municipioCodigo", "temasComparaveis", "uf", "versaoPerguntas", "versaoPosicoes"].sort(),
+      ["dataEnvio", "faixaEtaria", "genero", "id", "municipioCodigo", "origem", "temasComparaveis", "uf", "versaoPerguntas", "versaoPosicoes"].sort(),
     );
 
     const rs = await db.select().from(resultados);

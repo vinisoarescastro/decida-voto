@@ -5,3 +5,14 @@
 
 /** Data em que as participações são excluídas. Mantenha igual a PARTICIPACOES_EXCLUIR_APOS no .env. */
 export const RETENCAO_PARTICIPACOES = "31/03/2027";
+
+/** Endereço público do site (prévias de link e convites). */
+export const URL_SITE = "https://emquemvotar.digital";
+
+/** Marca de origem dos convites: o link compartilhado leva ?origem=convite. Só "convite" é aceito. */
+export const ORIGEM_CONVITE = "convite";
+export const LINK_CONVITE = `${URL_SITE}/?origem=${ORIGEM_CONVITE}`;
+
+/** Mensagem pronta do convite. Neutra e sem o resultado de quem envia (privacidade e período eleitoral). */
+export const MENSAGEM_CONVITE =
+  "Fiz um teste rápido que mostra qual candidato pensa mais parecido comigo. São 10 perguntas, leva 3 minutos e não precisa de cadastro. Faz o seu e depois a gente conversa!";

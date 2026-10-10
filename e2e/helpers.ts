@@ -32,3 +32,13 @@ export async function contarParticipacoes(): Promise<number> {
     await sql.end();
   }
 }
+
+export async function contarConvites(): Promise<number> {
+  const sql = postgres(E2E.databaseUrl, { max: 1, onnotice: () => {} });
+  try {
+    const [{ n }] = await sql`select count(*)::int as n from participacoes where origem = 'convite'`;
+    return n;
+  } finally {
+    await sql.end();
+  }
+}

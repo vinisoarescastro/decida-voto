@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { URL_SITE } from "@/lib/site";
+import { MarcarOrigem } from "@/features/convite/marcar-origem";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,6 +20,21 @@ export const metadata: Metadata = {
   description:
     "Ferramenta informativa e independente: responda 10 perguntas e compare suas opiniões com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026.",
   robots: { index: true, follow: true },
+  // Prévia do link (WhatsApp, redes sociais). A imagem vem de app/opengraph-image.jpg e twitter-image.jpg.
+  metadataBase: new URL(URL_SITE),
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Em quem votar?",
+    url: "/",
+    title: "Em quem votar? Descubra qual candidato pensa mais parecido com você",
+    description: "10 perguntas rápidas, 3 minutos, sem cadastro. Baseado em posições públicas documentadas.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Em quem votar? Descubra qual candidato pensa mais parecido com você",
+    description: "10 perguntas rápidas, 3 minutos, sem cadastro. Baseado em posições públicas documentadas.",
+  },
 };
 
 export const viewport: Viewport = {
@@ -40,6 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Pular para o conteúdo
         </a>
+        <MarcarOrigem />
         <SiteHeader />
         <main id="conteudo" className="flex flex-1 flex-col">
           {children}
