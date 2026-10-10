@@ -59,7 +59,7 @@ function rotular(dimensao: Dimensao, chave: string): string {
   }
 }
 
-function condicoes(f: Filtros): SQL | undefined {
+export function condicoes(f: Filtros): SQL | undefined {
   return and(
     f.uf ? eq(participacoes.uf, f.uf) : undefined,
     f.municipio ? eq(participacoes.municipioCodigo, f.municipio) : undefined,

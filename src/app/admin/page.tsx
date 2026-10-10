@@ -1,26 +1,35 @@
-import { candidates } from "@/lib/data";
+import { candidates, positions, questions } from "@/lib/data";
 import { formatPercent } from "@/lib/affinity";
 import { IconeInfo } from "@/components/ui/icon";
 import { MarcadorCandidato, Sobretitulo } from "@/components/ui/text";
 import { AbasPainel } from "@/features/admin/abas";
 import { Filtros } from "@/features/admin/filters";
 import { BarraDividida, Grupos } from "@/features/admin/groups";
-import { lerFiltros } from "@/features/admin/ler-filtros";
+import { GraficoAfinidadeDia, GraficoCruzamento, GraficoDistribuicao, GraficoParticipacoesDia, GraficoTemas, Indicadores } from "@/features/admin/graficos";
+import { lerFiltros, lerMetrica } from "@/features/admin/ler-filtros";
+import { MapaPainel } from "@/features/admin/mapa";
 import { BotaoSair } from "@/features/admin/logout-button";
 import { FormularioResponsavel } from "@/features/admin/responsavel-form";
 import { exigirAdmin } from "@/server/auth";
 import { db } from "@/server/db/client";
 import { env } from "@/server/env";
 import { municipiosPorUf } from "@/server/municipios";
+import { calcularAnalises } from "@/server/services/analises";
 import { calcularEstatisticas } from "@/server/services/estatisticas";
 import { lerResponsavel } from "@/server/services/responsavel";
 
 export default async function PaginaPainel({ searchParams }: PageProps<"/admin">) {
   await exigirAdmin();
-  const filtros = lerFiltros(await searchParams);
+  const busca = await searchParams;
+  const filtros = lerFiltros(busca);
+  const metrica = lerMetrica(busca);
   const ids = candidates.map((c) => c.id) as [string, string];
   const limite = env().PRIVACY_MIN_GROUP;
-  const [est, responsavel] = await Promise.all([calcularEstatisticas(db(), ids, filtros, limite), lerResponsavel(db())]);
+  const [est, analises, responsavel] = await Promise.all([
+    calcularEstatisticas(db(), ids, filtros, limite),
+    calcularAnalises(db(), ids, filtros, limite, { questions, positions }),
+    lerResponsavel(db()),
+  ]);
   const [a, b] = candidates;
   const comFiltro = Object.values(filtros).some((v) => v !== undefined);
 
@@ -83,6 +92,23 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
             </div>
           </section>
 
+          <Indicadores a={analises} total={est.total} candidatos={candidates} />
+        </>
+      )}
+
+      <MapaPainel filtros={filtros} metrica={metrica} porUf={analises.porUf} municipiosDaUf={analises.municipiosDaUf} candidatos={candidates} />
+
+      {est.geral !== null && (
+        <>
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <GraficoParticipacoesDia a={analises} candidatos={candidates} />
+            <GraficoAfinidadeDia a={analises} candidatos={candidates} />
+            <GraficoDistribuicao a={analises} candidatos={candidates} />
+            <GraficoCruzamento a={analises} candidatos={candidates} />
+          </div>
+          <GraficoTemas a={analises} candidatos={candidates} />
+
+          <h2 className="pt-2 text-lg font-semibold tracking-tight">Detalhe por grupo</h2>
           <div className="grid items-start gap-5 md:grid-cols-2">
             <Grupos titulo="Por estado" dados={est.porUf} candidatos={ids} limiteMinimo={limite} />
             <Grupos titulo="Por cidade" nota="As 20 cidades com mais participações no recorte." dados={est.porMunicipio} candidatos={ids} limiteMinimo={limite} />

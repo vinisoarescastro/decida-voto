@@ -56,12 +56,26 @@ test("painel mostra a contagem e as estatísticas por grupo, inclusive de grupos
   const sessao = (await context.cookies()).find((c) => c.name === "dv_admin");
   expect(sessao).toMatchObject({ httpOnly: true, sameSite: "Strict" });
 
-  await expect(page.getByText("Participações", { exact: true })).toBeVisible();
+  await expect(page.locator("p", { hasText: /^Participações$/ }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Por estado" })).toBeVisible();
   await expect(page.locator("li").filter({ hasText: "São Paulo" }).first()).toBeVisible();
   await expect(page.locator("li").filter({ hasText: "Salvador" }).first()).toBeVisible();
   await expect(page.getByText(/grupos? ocultos?/)).toHaveCount(0);
   await expect(page.getByText("Uso interno.", { exact: true })).toBeVisible();
+
+  // Mapa e gráficos.
+  await expect(page.getByRole("heading", { name: "Mapa do Brasil" })).toBeVisible();
+  await expect(page.locator('svg[aria-label="Estados do Brasil"] a')).toHaveCount(27);
+  for (const titulo of ["Participações por dia", "Afinidade média por dia", "Como as pessoas se distribuem", "Gênero × faixa etária", "Concordância por tema"]) {
+    await expect(page.getByRole("heading", { name: titulo })).toBeVisible();
+  }
+  // Clicar num estado filtra e abre o mapa de municípios.
+  await page.locator('svg[aria-label="Estados do Brasil"] a[aria-label^="São Paulo,"]').click();
+  await expect(page).toHaveURL(/uf=SP/);
+  await expect(page.getByRole("heading", { name: "São Paulo por município" })).toBeVisible();
+  await expect(page.locator('svg[aria-label="Municípios de São Paulo"] a')).toHaveCount(645);
+  await page.goto("/admin/?metrica=participacoes");
+  await expect(page.getByRole("link", { name: "Participações", exact: true })).toHaveAttribute("aria-current", "page");
 
   // Com filtro: contagem do recorte e total geral.
   await page.goto("/admin/?uf=BA");
