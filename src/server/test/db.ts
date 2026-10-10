@@ -13,5 +13,5 @@ export function criarDbDeTeste() {
 
 /** Apaga os dados de teste, preservando a tabela de municípios. */
 export async function limpar(db: AnyDb) {
-  await db.execute(sql`truncate participacoes, resultados, respostas, limites_requisicao, tokens_usados, admin_sessoes, configuracoes cascade`);
+  await db.execute(sql`truncate participacoes, resultados, respostas, limites_requisicao, tokens_usados, admin_sessoes, configuracoes, revisao_perguntas cascade`);
 }

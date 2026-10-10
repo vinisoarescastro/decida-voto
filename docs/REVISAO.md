@@ -2,6 +2,17 @@
 
 Pesquisa inicial feita em 09/10/2026. Todos os 63 links responderam no verificador automático (`npm run check:links`). Isso confirma que as páginas existem, mas **não** que o conteúdo foi lido corretamente: essa conferência é o papel da revisão humana.
 
+## Revisão pelo painel (recomendado)
+
+A aba **Revisão de conteúdo** do painel (`/admin/revisao/`) mostra cada pergunta com as alternativas na ordem da escala (1 a 4), o candidato marcado em cada uma, a confiança, o resumo, a justificativa e as fontes cadastradas.
+
+1. Para cada pergunta, abra as fontes e aplique os critérios da seção abaixo. Ajuste o texto da pergunta, das alternativas, o candidato marcado, a confiança, o resumo e a justificativa. O que mudar em relação ao publicado aparece destacado, junto com o texto anterior.
+2. Marque **Pergunta revisada**, registre na **Nota da revisão** o motivo das mudanças (uso interno, sem dados pessoais) e salve.
+3. As edições ficam como rascunho no banco e **não alteram o site**. Com tudo revisado, baixe `questions.json` e `positions.json` no fim da página. Os arquivos saem no mesmo formato do repositório, já validados. Quando o conteúdo muda, a versão sobe e `updatedAt` passa a ser a data do dia. `reviewStatus` só sai como `"revisado"` quando as 10 perguntas estiverem revisadas.
+4. A equipe técnica substitui os arquivos em `src/data`, confere o diff no git, roda `npm test`, faz o build e publica. Depois da publicação, use **Descartar rascunho** nas perguntas já incorporadas, se quiser limpar o painel.
+
+Fontes (evidências) e notícias não são editadas pelo painel: continue alterando direto em `positions.json` e `news.json`.
+
 ## Como revisar
 
 1. Rode `npm run dev` e abra `http://localhost:3000/metodologia/`. A página mostra cada posição com resumo, justificativa, confiança e fontes.

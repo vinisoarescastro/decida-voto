@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { expect, request as novoContexto, test } from "@playwright/test";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -113,4 +114,63 @@ test("API do responsável exige sessão e origem do próprio site", async () => 
   expect((await semSessao.post("/api/admin/responsavel/", { data: dados })).status()).toBe(401);
   const outraOrigem = await novoContexto.newContext({ baseURL: E2E.baseURL, extraHTTPHeaders: { Origin: "https://malicioso.example" } });
   expect((await outraOrigem.post("/api/admin/responsavel/", { data: dados })).status()).toBe(403);
+});
+
+test("aba de revisão salva rascunho, exporta os arquivos e não altera o site público", async ({ page }) => {
+  await entrar(page);
+  await page.getByRole("link", { name: "Revisão de conteúdo" }).click();
+  await expect(page.getByRole("heading", { name: "Revisão de conteúdo" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Revisão de conteúdo" })).toHaveAttribute("aria-current", "page");
+
+  const cartao = page.locator("#pergunta-estatais");
+  await cartao.locator(":scope > summary").click();
+
+  // Erro de validação aparece no campo.
+  const pergunta = cartao.getByLabel("Pergunta", { exact: true });
+  await pergunta.fill("");
+  await cartao.getByRole("button", { name: "Salvar" }).click();
+  await expect(cartao.getByText("Escreva a pergunta.")).toBeVisible();
+
+  await pergunta.fill("O que o governo deve fazer com as empresas públicas?");
+  await expect(cartao.getByText("Alterado.").first()).toBeVisible();
+  const alternativa2 = cartao.locator("div.rounded-2xl").filter({ has: page.getByLabel("Alternativa 2", { exact: true }) });
+  await alternativa2.getByRole("radio", { name: "Lula" }).check();
+  await expect(cartao.getByText("Publicado: alternativa 1.")).toBeVisible();
+  await cartao.getByRole("checkbox", { name: /Pergunta revisada/ }).check();
+  await cartao.getByLabel("Nota da revisão").fill("Teste automatizado.");
+  await cartao.getByRole("button", { name: "Salvar" }).click();
+  await expect(cartao.getByRole("status").filter({ hasText: "Rascunho salvo." })).toBeVisible();
+
+  // Persiste após recarregar.
+  await page.reload();
+  await expect(page.getByText("Revisadas").locator("..")).toContainText("1 de 10");
+  await expect(cartao.getByText("Revisada", { exact: true })).toBeVisible();
+
+  const download = page.waitForEvent("download");
+  await page.getByRole("link", { name: "Baixar positions.json" }).click();
+  const arquivo = JSON.parse(readFileSync(await (await download).path(), "utf8"));
+  expect(arquivo.reviewStatus).toBe("pendente");
+  expect(arquivo.positions.find((p: { questionId: string; candidateId: string }) => p.questionId === "estatais" && p.candidateId === "lula").value).toBe(2);
+
+  // O site público continua com o conteúdo publicado.
+  const publica = await page.request.get("/metodologia/");
+  expect(await publica.text()).toContain("O que fazer com as empresas do governo?");
+
+  page.once("dialog", (d) => d.accept());
+  await expect(cartao.locator(":scope > summary")).toContainText("O que o governo deve fazer com as empresas públicas?");
+  await cartao.locator(":scope > summary").click();
+  await cartao.getByRole("button", { name: "Descartar rascunho" }).click();
+  await expect(cartao.getByRole("status").filter({ hasText: "Rascunho descartado." })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText("Revisadas").locator("..")).toContainText("0 de 10");
+});
+
+test("API da revisão exige sessão e origem do próprio site", async () => {
+  const dados = { perguntaId: "estatais", rascunho: {} };
+  const semSessao = await novoContexto.newContext({ baseURL: E2E.baseURL, extraHTTPHeaders: { Origin: E2E.baseURL } });
+  expect((await semSessao.post("/api/admin/revisao/", { data: dados })).status()).toBe(401);
+  expect((await semSessao.delete("/api/admin/revisao/?pergunta=estatais")).status()).toBe(401);
+  expect((await semSessao.get("/api/admin/revisao/exportar/?arquivo=posicoes")).status()).toBe(401);
+  const outraOrigem = await novoContexto.newContext({ baseURL: E2E.baseURL, extraHTTPHeaders: { Origin: "https://malicioso.example" } });
+  expect((await outraOrigem.post("/api/admin/revisao/", { data: dados })).status()).toBe(403);
 });

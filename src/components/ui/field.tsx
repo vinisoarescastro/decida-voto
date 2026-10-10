@@ -1,20 +1,27 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from "react";
+import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { IconeAlerta, IconeChevronBaixo } from "./icon";
 
 // Campos de formulário padronizados. Altura de 52 px (toque confortável) e fonte de 16 px
 // (evita o zoom automático do iOS ao focar o campo).
 
-export const classeCampo =
-  "h-13 w-full rounded-2xl border border-line-strong bg-surface px-4 text-base text-ink shadow-sm " +
+const BASE_CAMPO =
+  "w-full rounded-2xl border border-line-strong bg-surface px-4 text-base text-ink shadow-sm " +
   "transition-[border-color,box-shadow] duration-150 placeholder:text-muted/70 " +
   "hover:border-ink/30 focus:border-ink focus:outline-none focus:ring-4 focus:ring-ring " +
   "disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted " +
   "aria-[invalid=true]:border-danger aria-[invalid=true]:focus:ring-danger/15";
 
+export const classeCampo = `h-13 ${BASE_CAMPO}`;
+
 export const classeRotulo = "block text-sm font-medium text-ink";
 
 export function Campo(props: InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={`${classeCampo} ${props.className ?? ""}`} />;
+}
+
+/** Texto de várias linhas; cresce com o conteúdo nos navegadores que suportam field-sizing. */
+export function AreaTexto(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return <textarea rows={3} {...props} className={`min-h-24 py-3 leading-relaxed [field-sizing:content] ${BASE_CAMPO} ${props.className ?? ""}`} />;
 }
 
 export function Selecao({ children, className = "", ...props }: SelectHTMLAttributes<HTMLSelectElement> & { children: ReactNode }) {

@@ -2,6 +2,7 @@ import { candidates } from "@/lib/data";
 import { formatPercent } from "@/lib/affinity";
 import { IconeInfo } from "@/components/ui/icon";
 import { MarcadorCandidato, Sobretitulo } from "@/components/ui/text";
+import { AbasPainel } from "@/features/admin/abas";
 import { Filtros } from "@/features/admin/filters";
 import { BarraDividida, Grupos } from "@/features/admin/groups";
 import { lerFiltros } from "@/features/admin/ler-filtros";
@@ -32,6 +33,8 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
         </div>
         <BotaoSair />
       </header>
+
+      <AbasPainel atual="estatisticas" />
 
       <p role="note" className="flex items-start gap-2.5 rounded-2xl bg-surface-2 px-4 py-3 text-xs leading-relaxed text-muted">
         <IconeInfo className="mt-0.5 shrink-0 text-ink" />

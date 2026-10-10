@@ -1,11 +1,13 @@
 import { sql } from "drizzle-orm";
 import {
+  boolean,
   char,
   check,
   date,
   foreignKey,
   index,
   integer,
+  jsonb,
   numeric,
   pgEnum,
   pgTable,
@@ -122,6 +124,23 @@ export const tokensUsados = pgTable("tokens_usados", {
 export const configuracoes = pgTable("configuracoes", {
   chave: varchar("chave", { length: 60 }).primaryKey(),
   valor: varchar("valor", { length: 500 }).notNull(),
+  atualizadoEm: timestamp("atualizado_em", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Rascunhos da revisão humana de perguntas e posições, feitos no painel. Não alteram o site:
+ * viram novos questions.json/positions.json na exportação, que passam pelos testes antes do build.
+ */
+export const revisaoPerguntas = pgTable("revisao_perguntas", {
+  perguntaId: varchar("pergunta_id", { length: 40 }).primaryKey(),
+  /** Texto da pergunta, alternativas e posição de cada candidato (formato de RascunhoConteudo). */
+  dados: jsonb("dados").notNull(),
+  revisada: boolean("revisada").notNull().default(false),
+  /** Nota interna da revisão (motivo da mudança). Não aparece no site. */
+  nota: varchar("nota", { length: 2000 }).notNull().default(""),
+  /** Versões publicadas sobre as quais o rascunho foi feito (alerta se o conteúdo mudou depois). */
+  versaoPerguntas: varchar("versao_perguntas", { length: 20 }).notNull(),
+  versaoPosicoes: varchar("versao_posicoes", { length: 20 }).notNull(),
   atualizadoEm: timestamp("atualizado_em", { withTimezone: true }).notNull().defaultNow(),
 });
 
