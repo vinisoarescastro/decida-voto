@@ -43,6 +43,8 @@ docker compose ps                # app e db devem aparecer como "healthy"
 
 As migrações rodam automaticamente (serviço `migrate`) antes da aplicação iniciar.
 
+Depois do primeiro acesso ao painel (`/admin`), preencha o cartão **Responsável pelos dados** (nome e e-mail de contato). Esses dados aparecem em Privacidade e Metodologia e são obrigatórios pela LGPD. Eles ficam no banco, não no código, e podem ser alterados pelo painel a qualquer momento.
+
 ## 3. Nginx e HTTPS
 
 ```bash

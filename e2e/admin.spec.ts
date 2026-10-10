@@ -74,3 +74,43 @@ test("painel mostra só estatísticas agregadas e oculta grupos pequenos", async
   await page.goto("/admin/");
   await expect(page).toHaveURL(/\/admin\/login\/$/);
 });
+
+test("painel altera o responsável pelos dados, e as páginas públicas mostram na hora", async ({ page }) => {
+  // Sem configuração, Privacidade não mostra o bloco de contato.
+  await page.goto("/privacidade/");
+  await expect(page.getByRole("heading", { name: "Responsável e contato" })).toHaveCount(0);
+
+  await entrar(page);
+  const nome = page.getByLabel("Nome do responsável");
+  const email = page.getByLabel("E-mail de contato");
+  await expect(nome).toHaveValue("");
+
+  await nome.fill("Pessoa Responsável de Teste");
+  await email.fill("sem-arroba");
+  await page.getByRole("button", { name: "Salvar" }).click();
+  await expect(page.getByText("Informe um e-mail válido.")).toBeVisible();
+  await expect(email).toHaveAttribute("aria-invalid", "true");
+
+  await email.fill("  Contato@Example.ORG ");
+  await page.getByRole("button", { name: "Salvar" }).click();
+  await expect(page.getByRole("status").filter({ hasText: "Salvo." })).toBeVisible();
+  await expect(email).toHaveValue("contato@example.org");
+
+  // Persiste após recarregar o painel.
+  await page.reload();
+  await expect(page.getByLabel("Nome do responsável")).toHaveValue("Pessoa Responsável de Teste");
+
+  await page.goto("/privacidade/");
+  await expect(page.getByText("Responsável pelo tratamento dos dados: Pessoa Responsável de Teste.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "contato@example.org" })).toHaveAttribute("href", "mailto:contato@example.org");
+  await page.goto("/metodologia/");
+  await expect(page.getByRole("link", { name: "contato@example.org" })).toBeVisible();
+});
+
+test("API do responsável exige sessão e origem do próprio site", async () => {
+  const dados = { nome: "Invasor", email: "invasor@example.org" };
+  const semSessao = await novoContexto.newContext({ baseURL: E2E.baseURL, extraHTTPHeaders: { Origin: E2E.baseURL } });
+  expect((await semSessao.post("/api/admin/responsavel/", { data: dados })).status()).toBe(401);
+  const outraOrigem = await novoContexto.newContext({ baseURL: E2E.baseURL, extraHTTPHeaders: { Origin: "https://malicioso.example" } });
+  expect((await outraOrigem.post("/api/admin/responsavel/", { data: dados })).status()).toBe(403);
+});

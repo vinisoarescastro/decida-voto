@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -15,14 +16,17 @@ export const metadata: Metadata = {
     template: "%s | Decida Voto",
   },
   description:
-    "Ferramenta informativa e independente: responda 10 perguntas e compare suas opiniões com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026. Sem cadastro e sem armazenar respostas.",
+    "Ferramenta informativa e independente: responda 10 perguntas e compare suas opiniões com as posições públicas documentadas dos candidatos ao 2º turno presidencial de 2026.",
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e12" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0d11" },
   ],
 };
 
@@ -32,12 +36,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#conteudo"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-bg focus:px-4 focus:py-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-surface focus:px-4 focus:py-2"
         >
           Pular para o conteúdo
         </a>
         <SiteHeader />
-        <main id="conteudo" className="flex-1">
+        <main id="conteudo" className="flex flex-1 flex-col">
           {children}
         </main>
         <SiteFooter />

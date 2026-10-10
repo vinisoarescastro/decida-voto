@@ -7,6 +7,7 @@ Ferramenta informativa e independente que compara as respostas do eleitor a 10 p
 - **Next.js 16 (App Router)** em modo servidor (`output: "standalone"`), executado em Docker atrás do Nginx. As páginas públicas continuam pré-renderizadas.
 - **PostgreSQL 16** em Docker, sem porta exposta, com acesso via Drizzle ORM (consultas parametrizadas e migrações versionadas em `drizzle/`).
 - **Coleta mínima de dados**, com consentimento: UF, município (lista do IBGE), gênero, faixa etária e respostas. A afinidade é recalculada no servidor. Não guardamos idade exata, IP, horário nem identificadores.
+- **Responsável pelos dados (LGPD):** nome e e-mail de contato ficam no banco (tabela `configuracoes`) e são editados no painel. As páginas de Privacidade e Metodologia leem esses dados a cada acesso.
 - **Painel `/admin`** com autenticação (senha com hash scrypt, sessão em cookie `HttpOnly`/`SameSite=Strict`, bloqueio de tentativas). Mostra só estatísticas agregadas e oculta grupos com menos de `PRIVACY_MIN_GROUP` participações.
 - **Antiabuso:**
   - token assinado e de uso único;
@@ -27,7 +28,11 @@ Ferramenta informativa e independente que compara as respostas do eleitor a 10 p
 | `src/server/services/` | Gravação de participações, estatísticas, sessões e tokens |
 | `src/server/security/` | Criptografia (hashes, tokens, senha) e limite de requisições |
 | `src/app/api/` | Rotas: municípios, token, participações, login e logout |
-| `src/app/admin/` | Painel administrativo |
+| `src/app/` | Páginas (início, questionário, metodologia, privacidade, admin, 404) |
+| `src/components/ui/`, `src/components/layout/` | Peças de interface reutilizáveis (botões, campos, ícones, cabeçalho, rodapé) |
+| `src/features/quiz/` | Fluxo do questionário: perfil, uma pergunta por tela, barra de ações e estado na URL (`?passo=`) |
+| `src/features/result/` | Tela de resultado: gráfico, detalhes por tema, cálculo e notícias |
+| `src/features/admin/` | Filtros, grupos, login e saída do painel |
 | `drizzle/` | Migrações SQL, incluindo a carga dos 5.571 municípios |
 | `deploy/` | Nginx, backup e roteiro de implantação ([deploy/README.md](deploy/README.md)) |
 
@@ -57,12 +62,17 @@ Para parar o banco de desenvolvimento, use `npm run db:dev:down`. Os dados ficam
 ```bash
 npm test                  # unitários: cálculo, validação de idade, criptografia, dados (roda antes de todo build)
 npm run test:integration  # integração com PostgreSQL real: gravação, restrições, estatísticas, limites, sessões
-npm run build && npm run test:e2e   # ponta a ponta: fluxo completo, proteções da API, painel e login
+npm run build && npm run test:e2e   # ponta a ponta (desktop e celular): fluxo, navegação, proteções da API, painel, acessibilidade (axe)
 npm run lint
 npm run check:links       # links de fontes e notícias
 ```
 
 Os testes de integração e de ponta a ponta exigem o banco de teste (`npm run db:test:up`). Para desligá-lo: `npm run db:test:down`.
+
+Limitações conhecidas dos testes automáticos:
+
+- O celular é emulado (Pixel 7 no Chromium). Safari/iOS e leitores de tela reais (TalkBack, VoiceOver) não são testados automaticamente; faça uma checagem manual antes do lançamento.
+- O axe cobre as regras automáticas da WCAG 2.1 A/AA. Ordem de leitura, clareza dos textos e uso só pelo teclado precisam de revisão humana.
 
 ## Banco de dados
 

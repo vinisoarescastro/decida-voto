@@ -14,7 +14,7 @@ export async function preencherPerfil(page: Page, { uf = "SP", cidade = "São Pa
 }
 
 export async function responderTudo(page: Page) {
-  await expect(page.getByText("1 / 10")).toBeVisible();
+  await expect(page.getByText("Pergunta 1 de 10")).toBeVisible();
   // O servidor recusa envios mais rápidos que FORM_MIN_SECONDS (1 s nos testes) como comportamento de robô.
   await page.waitForTimeout(1100);
   for (let i = 0; i < 10; i++) {

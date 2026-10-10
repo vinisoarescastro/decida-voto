@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { QuizLoader } from "@/components/quiz/QuizLoader";
+import { CarregadorQuestionario } from "@/features/quiz/quiz-loader";
 
 export const metadata: Metadata = {
   title: "Questionário",
-  description: "Responda 10 perguntas sobre temas políticos, econômicos e sociais. Sem cadastro e sem armazenar respostas.",
+  description: "Responda 10 perguntas sobre temas políticos, econômicos e sociais. Sem cadastro, em cerca de 3 minutos.",
 };
 
-export default function QuestionarioPage() {
-  return <QuizLoader />;
+export default function PaginaQuestionario() {
+  return <CarregadorQuestionario />;
 }

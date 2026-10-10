@@ -115,6 +115,16 @@ export const tokensUsados = pgTable("tokens_usados", {
   expiraEm: timestamp("expira_em", { withTimezone: true }).notNull(),
 });
 
+/**
+ * Configurações públicas do site editáveis pelo painel (ex.: nome e e-mail do responsável pelos dados).
+ * Não guarda dados de participantes nem segredos.
+ */
+export const configuracoes = pgTable("configuracoes", {
+  chave: varchar("chave", { length: 60 }).primaryKey(),
+  valor: varchar("valor", { length: 500 }).notNull(),
+  atualizadoEm: timestamp("atualizado_em", { withTimezone: true }).notNull().defaultNow(),
+});
+
 /** Sessões do painel administrativo. Guarda só o hash do token do cookie. */
 export const adminSessoes = pgTable(
   "admin_sessoes",

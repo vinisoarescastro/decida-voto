@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AdminLayout({ children }: LayoutProps<"/admin">) {
-  return <div className="mx-auto w-full max-w-5xl px-6 pt-10 sm:pt-14">{children}</div>;
+export default function LayoutAdmin({ children }: LayoutProps<"/admin">) {
+  return <div className="pb-seguro mx-auto w-full max-w-5xl px-5 pb-12 pt-6 sm:px-6 sm:pt-10">{children}</div>;
 }
