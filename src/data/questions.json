@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "questions": [
     {
       "id": "estatais",
@@ -272,7 +272,7 @@
         {
           "id": "c",
           "value": 2,
-          "text": "Negociar com todos, preferindo países em desenvolvimento."
+          "text": "Negociar com todos os países, sejam ricos ou em desenvolvimento."
         },
         {
           "id": "d",

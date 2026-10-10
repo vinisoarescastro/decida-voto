@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "updatedAt": "2026-10-09",
+  "version": "1.5.0",
+  "updatedAt": "2026-10-10",
   "reviewStatus": "pendente",
   "candidates": [
     {
@@ -817,7 +817,7 @@
       "value": 2,
       "confidence": "alta",
       "summary": "O programa de Lula define uma política externa 'universalista', que negocia 'com todas as regiões do mundo', com prioridade declarada ao BRICS, ao Sul Global, ao Mercosul e à integração sul-americana, e rejeita 'alinhamentos automáticos'. O governo também concluiu acordos do Mercosul com União Europeia, EFTA e Singapura.",
-      "rationale": "A alternativa 2 corresponde ao programa: 'universalista' e 'diversificando nossas parcerias', mas 'aprofundaremos a aproximação geopolítica com o BRICS e com o Sul Global'. A alternativa 1 foi descartada porque o programa rejeita 'alinhamentos automáticos', prevê 'reaproximação com [...] a Europa', e o governo promulgou o acordo Mercosul-UE. Declarações sobre reduzir a dependência do dólar (2025) são um sinal parcial na direção da 1, sem alterar a ênfase do programa.",
+      "rationale": "A alternativa 2 corresponde ao programa, que define a política externa como 'universalista', negociando 'com todas as regiões do mundo' e 'diversificando nossas parcerias', e rejeita 'alinhamentos automáticos'. O programa declara prioridade ao BRICS e ao Sul Global ('aprofundaremos a aproximação geopolítica com o BRICS e com o Sul Global'), mas sem se afastar dos países ricos: prevê 'reaproximação com [...] a Europa', e o governo promulgou o acordo Mercosul-UE. Por isso a alternativa 1 foi descartada. Declarações sobre reduzir a dependência do dólar (2025) são um sinal parcial na direção da 1, sem alterar a ênfase do programa.",
       "evidence": [
         {
           "title": "Diretrizes para o Desenvolvimento do Plano de Governo 2027-2030 (Programa de Governo Lula 2026)",

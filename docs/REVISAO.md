@@ -36,7 +36,7 @@ Fontes (evidências) e notícias não são editadas pelo painel: continue altera
 | Meio ambiente | 3 (alta) | 2 (alta) | |
 | Justiça (escolha dos ministros do STF) | 3 (média) | 4 (média) | Pergunta nova (v2.6.0), substitui a do foro privilegiado. Flávio: assina as PECs 17/2026 e 45/2025 (lista de juízes de carreira); o plano só prevê quarentena. Lula: "Vou propor que a gente monte um conselho para escolher os ministros" (30/09/2026), sem proposta formal |
 | Trabalho | 4 (média) | 1 (alta) | Flávio: alternativa 4 é a mais próxima (flexibilização, negociado sobre o legislado, pagamento por hora), mas "mais de 50h semanais" e "menos direitos" não aparecem nas fontes |
-| Política externa | 3 (média) | 2 (alta) | Revisado em 09/10/2026. Flávio: confiança reduzida por sinais fora do plano (BRICS, Mercosul, "Escudo das Américas"), embora diga "não tem que escolher um lado". Alternativas 1 e 4 reescritas para deixar claro que significam escolher um lado |
+| Política externa | 3 (média) | 2 (alta) | Revisado em 09/10/2026. Flávio: confiança reduzida por sinais fora do plano (BRICS, Mercosul, "Escudo das Américas"), embora diga "não tem que escolher um lado". Alternativas 1 e 4 reescritas para deixar claro que significam escolher um lado. Em 10/10/2026 (perguntas v2.7.0), a alternativa 2 passou de "Negociar com todos, preferindo países em desenvolvimento" para "Negociar com todos os países, sejam ricos ou em desenvolvimento", por decisão da equipe; Lula mantido na 2, com a justificativa ajustada. A equipe avaliou que a escala ficou assimétrica (a 2 passou a ser "sem preferência") e decidiu manter o texto e as posições dos dois candidatos, sem reavaliação |
 
 ## Pendências conhecidas
 
