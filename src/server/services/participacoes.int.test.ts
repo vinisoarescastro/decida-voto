@@ -18,6 +18,9 @@ describe("registrarParticipacao", () => {
     expect(p).toMatchObject({ uf: "SP", municipioCodigo: 3550308, genero: "mulher", faixaEtaria: "25-34" });
     // Somente a data, sem horário; nenhuma coluna de idade exata, IP ou identificador externo.
     expect(p.dataEnvio).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    // A data é a de Brasília, mesmo com o banco em UTC (envios após as 21h não "pulam" para o dia seguinte).
+    const [{ hoje }] = (await db.execute(sql`select (now() at time zone 'America/Sao_Paulo')::date::text as hoje`)) as unknown as { hoje: string }[];
+    expect(p.dataEnvio).toBe(hoje);
     expect(Object.keys(p).sort()).toEqual(
       ["dataEnvio", "faixaEtaria", "genero", "id", "municipioCodigo", "temasComparaveis", "uf", "versaoPerguntas", "versaoPosicoes"].sort(),
     );

@@ -41,7 +41,8 @@ export const participacoes = pgTable(
   "participacoes",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    dataEnvio: date("data_envio").notNull().default(sql`current_date`),
+    /** Data de envio no horário de Brasília (o servidor do banco roda em UTC). */
+    dataEnvio: date("data_envio").notNull().default(sql`(now() at time zone 'America/Sao_Paulo')::date`),
     uf: char("uf", { length: 2 }).notNull(),
     municipioCodigo: integer("municipio_codigo").notNull(),
     genero: generoEnum("genero").notNull(),

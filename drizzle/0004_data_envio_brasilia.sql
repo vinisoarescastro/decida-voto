@@ -1,0 +1,1 @@
+ALTER TABLE "participacoes" ALTER COLUMN "data_envio" SET DEFAULT (now() at time zone 'America/Sao_Paulo')::date;
