@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 type Dica = { texto: string; x: number; y: number };
 
@@ -8,6 +9,8 @@ type Dica = { texto: string; x: number; y: number };
  * Camada de dicas dos gráficos e do mapa: qualquer elemento com `data-dica` mostra o texto ao passar o
  * mouse ou ao receber foco pelo teclado (linhas separadas por "\n"). As dicas só complementam: os mesmos
  * valores estão nas tabelas de cada gráfico.
+ * A dica é desenhada direto no <body> (portal): dentro de um elemento animado (ex.: animate-surgir) o
+ * "position: fixed" passaria a valer em relação a ele, e a dica apareceria longe do mouse.
  */
 export function AreaDicas({ children, className = "" }: { children: ReactNode; className?: string }) {
   const [dica, setDica] = useState<Dica | null>(null);
@@ -32,7 +35,8 @@ export function AreaDicas({ children, className = "" }: { children: ReactNode; c
       onBlur={() => setDica(null)}
     >
       {children}
-      {dica && (
+      {dica &&
+        createPortal(
         <div
           role="tooltip"
           className="pointer-events-none fixed z-50 max-w-64 -translate-x-1/2 -translate-y-full rounded-xl border border-line bg-surface px-3 py-2 text-xs leading-relaxed text-ink shadow-lg"
@@ -43,8 +47,9 @@ export function AreaDicas({ children, className = "" }: { children: ReactNode; c
               {linha}
             </p>
           ))}
-        </div>
-      )}
+        </div>,
+          document.body,
+        )}
     </div>
   );
 }

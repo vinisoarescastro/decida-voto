@@ -39,6 +39,15 @@ export function corContagem(n: number, maximo: number): string {
   return `color-mix(in oklab, var(--ink) ${Math.round(18 + degrau * 62)}%, var(--surface))`;
 }
 
+/** Afinidade em duas linhas, para dicas: "Flávio Bolsonaro: 60%" e "Lula: 40%". */
+export function linhasAfinidade(pontosA: number | null, nomes: [string, string]): string {
+  if (pontosA === null) return "Afinidade oculta (poucas participações)";
+  return `${nomes[0]}: ${formatPercent(pontosA)}%\n${nomes[1]}: ${formatPercent(100 - pontosA)}%`;
+}
+
+/** Cor das divisas do mapa: cinza visível sobre qualquer preenchimento, nos dois temas. */
+export const COR_DIVISA = "color-mix(in oklab, var(--muted) 55%, var(--surface))";
+
 /** Texto curto da afinidade para dicas e tabelas: "Flávio Bolsonaro 60% · Lula 40%". */
 export function textoAfinidade(pontosA: number | null, nomes: [string, string]): string {
   if (pontosA === null) return "afinidade oculta (poucas participações)";

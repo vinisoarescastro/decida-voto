@@ -69,6 +69,19 @@ test("painel mostra a contagem e as estatísticas por grupo, inclusive de grupos
   for (const titulo of ["Participações por dia", "Afinidade média por dia", "Como as pessoas se distribuem", "Gênero × faixa etária", "Concordância por tema"]) {
     await expect(page.getByRole("heading", { name: titulo })).toBeVisible();
   }
+  // A dica aparece junto ao mouse, com o nome e o percentual de cada candidato.
+  const sp = page.locator('svg[aria-label="Estados do Brasil"] a[aria-label^="São Paulo,"] path');
+  await sp.scrollIntoViewIfNeeded();
+  const caixa = (await sp.boundingBox())!;
+  await page.mouse.move(caixa.x + caixa.width / 2, caixa.y + caixa.height / 2);
+  await page.mouse.move(caixa.x + caixa.width / 2 + 1, caixa.y + caixa.height / 2 + 1);
+  const dica = page.getByRole("tooltip");
+  await expect(dica).toContainText("São Paulo");
+  await expect(dica).toContainText(/Flávio Bolsonaro: [\d,]+%/);
+  await expect(dica).toContainText(/Lula: [\d,]+%/);
+  const caixaDica = (await dica.boundingBox())!;
+  expect(Math.abs(caixaDica.y + caixaDica.height - (caixa.y + caixa.height / 2))).toBeLessThan(80);
+
   // Clicar num estado filtra e abre o mapa de municípios.
   await page.locator('svg[aria-label="Estados do Brasil"] a[aria-label^="São Paulo,"]').click();
   await expect(page).toHaveURL(/uf=SP/);

@@ -8,7 +8,7 @@ import type { Regiao } from "@/server/services/analises";
 import { municipiosPorUf } from "@/server/municipios";
 import { AreaDicas } from "./dicas";
 import { LegendaAfinidade, LegendaContagem } from "./legendas";
-import { corAfinidade, corContagem, plural, textoAfinidade } from "./escalas";
+import { COR_DIVISA, corAfinidade, corContagem, linhasAfinidade, plural } from "./escalas";
 import { urlPainel, type Metrica } from "./ler-filtros";
 
 type MapaSvg = { viewBox: string; caminhos: Record<string, string> };
@@ -98,15 +98,15 @@ export async function MapaPainel({
             const nome = nomeDe(codigo);
             const cor = metrica === "participacoes" ? corContagem(n, maximo) : corAfinidade(n > 0 ? (r?.pontosA ?? null) : null);
             const texto =
-              n === 0 ? `${nome}\nNenhuma participação` : `${nome}\n${plural(n, "participação", "participações")}\n${textoAfinidade(r?.pontosA ?? null, nomes)}`;
+              n === 0 ? `${nome}\nNenhuma participação` : `${nome}\n${linhasAfinidade(r?.pontosA ?? null, nomes)}\n${plural(n, "participação", "participações")}`;
             const ativo = codigo === selecionado;
             return (
-              <a key={codigo} href={destino(codigo)} aria-label={texto.replaceAll("\n", ", ")} data-dica={texto} className="outline-none [&:focus-visible>path]:stroke-ink">
+              <a key={codigo} href={destino(codigo)} aria-label={texto.replaceAll("\n", ", ")} data-dica={texto} className="outline-none [&:focus-visible>path]:[stroke:var(--ink)]">
+                {/* Divisas em cinza visível (o branco sumia sobre os tons claros); contorno escuro ao passar o mouse. */}
                 <path
                   d={d}
-                  style={{ fill: cor }}
-                  className={`transition-[opacity] hover:opacity-80 ${ativo ? "stroke-ink" : "stroke-surface"}`}
-                  strokeWidth={ativo ? 3 : uf ? 0.6 : 1.2}
+                  style={{ fill: cor, stroke: ativo ? "var(--ink)" : COR_DIVISA, strokeWidth: ativo ? 3 : uf ? 0.75 : 1.25 }}
+                  className="transition-[opacity] hover:opacity-85 hover:[stroke:var(--ink)] hover:[stroke-width:2.5px]"
                   strokeLinejoin="round"
                   vectorEffect="non-scaling-stroke"
                 />
