@@ -99,8 +99,10 @@ export default async function PaginaPrivacidade() {
             48 horas.
           </li>
           <li>
-            <strong>Registros do servidor:</strong> como qualquer site, o servidor registra acessos às páginas (IP, data,
-            hora e página) para segurança. O envio das respostas não é registrado nesses logs.
+            <strong>Entrega e proteção do site:</strong> o acesso ao site passa pela Cloudflare, que fornece a conexão
+            segura (HTTPS) e a proteção contra ataques. Para isso, ela trata dados técnicos de acesso (como IP, data, hora e
+            página solicitada), conforme a política de privacidade dela, e pode usar cookies estritamente técnicos de
+            segurança. O nosso servidor não guarda registros de acesso às páginas nem do envio das respostas.
           </li>
         </ul>
       </Secao>

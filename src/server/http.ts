@@ -17,11 +17,13 @@ export function origemValida(req: Request): boolean {
 }
 
 /**
- * IP do cliente, informado pelo Nginx no cabeçalho X-Real-IP. O app só escuta em 127.0.0.1,
- * então esse cabeçalho não pode ser forjado por quem acessa de fora. Usado apenas para gerar hashes.
+ * IP do cliente, informado pelo proxy no cabeçalho TRUSTED_IP_HEADER: X-Real-IP (Nginx) ou
+ * CF-Connecting-IP (Cloudflare, que sobrescreve qualquer valor enviado pelo visitante). O app só
+ * recebe tráfego do proxy (escuta em 127.0.0.1 ou na rede interna do Docker), então o cabeçalho
+ * não pode ser forjado por quem acessa de fora. Usado apenas para gerar hashes.
  */
 export function ipDoCliente(req: Request): string {
-  return req.headers.get("x-real-ip")?.trim() || "sem-ip";
+  return req.headers.get(env().TRUSTED_IP_HEADER)?.trim() || "sem-ip";
 }
 
 const LIMITE_CORPO = 16 * 1024;

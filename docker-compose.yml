@@ -46,7 +46,8 @@ services:
       ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:?defina no .env}
       PRIVACY_MIN_GROUP: ${PRIVACY_MIN_GROUP:-10}
       FORM_MIN_SECONDS: ${FORM_MIN_SECONDS:-15}
-    # Só a própria máquina acessa a aplicação; o Nginx da VPS faz o proxy público com HTTPS.
+      TRUSTED_IP_HEADER: ${TRUSTED_IP_HEADER:-x-real-ip}
+    # Só a própria máquina acessa a aplicação; o proxy público (Nginx ou Cloudflare Tunnel) faz o HTTPS.
     ports:
       - "127.0.0.1:${APP_PORT:-3000}:3000"
     depends_on:
@@ -70,6 +71,21 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+
+  # Publicação pelo Cloudflare Tunnel, alternativa ao Nginx (para VPS em que as portas 80/443 já
+  # têm dono). Só sobe com COMPOSE_PROFILES=cloudflare no .env. O túnel é uma conexão de SAÍDA até
+  # a Cloudflare: nenhuma porta é aberta na VPS. No painel da Cloudflare, o hostname público aponta
+  # para http://app:3000. Use junto com TRUSTED_IP_HEADER=cf-connecting-ip.
+  cloudflared:
+    image: cloudflare/cloudflared:2026.9.3
+    profiles: ["cloudflare"]
+    restart: unless-stopped
+    command: ["tunnel", "--no-autoupdate", "run"]
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      app:
+        condition: service_healthy
 
 volumes:
   pgdata:

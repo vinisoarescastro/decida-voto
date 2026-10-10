@@ -21,6 +21,11 @@ const schema = z.object({
   FORM_MIN_SECONDS: z.coerce.number().int().min(1).default(15),
   /** Grupos com menos participações que isso não são exibidos no painel. */
   PRIVACY_MIN_GROUP: z.coerce.number().int().min(5).default(10),
+  /**
+   * Cabeçalho com o IP real do visitante, preenchido pelo proxy: "x-real-ip" (Nginx) ou
+   * "cf-connecting-ip" (Cloudflare Tunnel). Usado só para gerar os hashes do controle de abuso.
+   */
+  TRUSTED_IP_HEADER: z.enum(["x-real-ip", "cf-connecting-ip"]).default("x-real-ip"),
 });
 
 export type Env = z.infer<typeof schema>;

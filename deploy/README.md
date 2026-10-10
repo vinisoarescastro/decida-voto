@@ -57,6 +57,18 @@ sudo nginx -t && sudo systemctl reload nginx
 
 Recomendado: no bloco `location /admin/` do Nginx, libere o painel só para os seus IPs (`allow`/`deny`).
 
+## 3b. Alternativa: Cloudflare Tunnel (sem Nginx)
+
+Use quando as portas 80/443 da VPS já pertencem a outra aplicação. O contêiner `cloudflared` abre uma conexão de saída até a Cloudflare, que entrega o site com HTTPS. Nenhuma porta é aberta na VPS e nenhum outro serviço é alterado.
+
+1. O domínio usa os servidores de DNS da Cloudflare (plano gratuito).
+2. No painel da Cloudflare: Zero Trust › Networks › Tunnels › criar túnel do tipo Docker. Em "Public hostname", aponte o domínio para o serviço `HTTP` `app:3000`.
+3. No `.env` da VPS: `COMPOSE_PROFILES=cloudflare`, `TRUSTED_IP_HEADER=cf-connecting-ip` e `CLOUDFLARE_TUNNEL_TOKEN=` com o token do túnel (segredo: grave direto na VPS).
+4. `docker compose up -d --build`. O serviço `cloudflared` sobe depois que a aplicação fica saudável.
+5. Na Cloudflare, em SSL/TLS › Edge Certificates, ative "Always Use HTTPS".
+
+O limite de requisições por IP do Nginx fica a cargo da aplicação (que já limita token, envio e login). Se quiser uma camada extra, crie uma regra de rate limiting na Cloudflare.
+
 ## Operação do dia a dia
 
 | Ação | Comando |
