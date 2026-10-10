@@ -19,6 +19,7 @@ export function MarcadorCandidato({ indice, className = "" }: { indice: number; 
 
 export const COR_CANDIDATO = ["bg-cand-1", "bg-cand-2"] as const;
 export const BORDA_CANDIDATO = ["border-cand-1", "border-cand-2"] as const;
+export const ANEL_CANDIDATO = ["ring-cand-1", "ring-cand-2"] as const;
 
 /** Sumário de atalhos para as seções de uma página longa. */
 export function Sumario({ itens }: { itens: { id: string; rotulo: string }[] }) {

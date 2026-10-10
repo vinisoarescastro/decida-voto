@@ -18,7 +18,7 @@
   --surface-3: #ebebef;
   --ink: #121217;
   --ink-hover: #2c2c35;
-  --muted: #5f5f6b;
+  --muted: #4d4d58;
   --line: #e6e6eb;
   --line-strong: #d2d2da;
   --ring: rgb(18 18 23 / 0.14);
@@ -61,6 +61,13 @@
   }
 }
 
+/*
+ * Telas baixas: celulares comuns e notebooks (a barra do navegador ocupa ~110 px). As telas de passo
+ * único (início, perfil, perguntas) compactam espaçamentos e títulos para caberem sem rolagem.
+ */
+@custom-variant baixa (@media (max-height: 860px));
+@custom-variant muito-baixa (@media (max-height: 760px));
+
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -89,6 +96,8 @@ html {
 }
 
 body {
+  /* A troca de pergunta desliza na horizontal; "clip" evita a barra de rolagem lateral sem quebrar o sticky. */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--ink);
   isolation: isolate;
@@ -138,10 +147,11 @@ summary::-webkit-details-marker {
 
 /* ---------------------------------------------------------------- Microinterações */
 
+/* Só opacidade e escala: deslocar o conteúdo para baixo criaria rolagem momentânea (barra "piscando"). */
 @keyframes surgir {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: scale(0.985);
   }
 }
 .animate-surgir {

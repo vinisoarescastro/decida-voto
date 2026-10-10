@@ -25,12 +25,18 @@ const MENSAGENS_ENVIO: Record<StatusEnvio, string | null> = {
 
 type IdSecao = "temas" | "calculo" | "noticias";
 
+/** Candidato mais próximo das respostas, ou null quando não há comparação ou o resultado é equilibrado. */
+function idDoLider(resultado: AffinityResult): string | null {
+  if (resultado.comparableCount === 0 || resultado.similar) return null;
+  return resultado.scores.reduce((a, b) => (b.share > a.share ? b : a)).candidateId;
+}
+
 /** Frase-resumo em linguagem simples. Não recomenda voto: descreve a proximidade das respostas. */
 function resumo(resultado: AffinityResult): string {
   if (resultado.comparableCount === 0) return "Ainda não há dados suficientes para comparar.";
-  if (resultado.similar) return "Suas respostas ficaram equilibradas entre os dois candidatos.";
-  const lider = resultado.scores.reduce((a, b) => (b.share > a.share ? b : a));
-  return `Suas respostas ficaram mais próximas das posições de ${candidates.find((c) => c.id === lider.candidateId)!.name}.`;
+  const lider = idDoLider(resultado);
+  if (!lider) return "Suas respostas ficaram equilibradas entre os dois candidatos.";
+  return `Suas respostas ficaram mais próximas das posições de ${candidates.find((c) => c.id === lider)!.name}.`;
 }
 
 function Secao({
@@ -107,7 +113,7 @@ export function TelaResultado({ resultado, envio, tituloRef, aoRefazer, aoRevisa
         {!semComparacao && (
           <>
             <Cartao className="mt-7 p-5 sm:p-8">
-              <GraficoAfinidade placar={resultado.scores} />
+              <GraficoAfinidade placar={resultado.scores} liderId={idDoLider(resultado)} />
               {resultado.similar && (
                 <p className="mt-6 flex items-start gap-2 rounded-2xl bg-surface-2 px-4 py-3 text-sm">
                   <IconeInfo className="mt-0.5 shrink-0 text-muted" />A diferença é pequena e está dentro da imprecisão do método.

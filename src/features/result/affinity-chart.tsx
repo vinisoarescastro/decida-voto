@@ -1,14 +1,17 @@
+import Image from "next/image";
 import { formatPercent, type CandidateScore } from "@/lib/affinity";
 import { candidates } from "@/lib/data";
-import { COR_CANDIDATO, MarcadorCandidato } from "@/components/ui/text";
+import { ANEL_CANDIDATO, COR_CANDIDATO, MarcadorCandidato } from "@/components/ui/text";
 
 /**
  * Barra única dividida entre os dois candidatos (os percentuais somam 100%).
  * Cada lado tem a cor do candidato (violeta / magenta, peso visual equivalente, validadas para daltonismo);
  * a identidade é reforçada pelo nome e pelo marcador acima de cada lado e pelo espaço entre as partes.
  * Um traço discreto marca o ponto de equilíbrio (50%).
+ * Acima de cada lado, a foto do candidato: maior para quem ficou mais próximo das respostas. Com resultado
+ * equilibrado (liderId null), as duas têm o mesmo tamanho, para não sugerir uma diferença que o método não sustenta.
  */
-export function GraficoAfinidade({ placar }: { placar: CandidateScore[] }) {
+export function GraficoAfinidade({ placar, liderId }: { placar: CandidateScore[]; liderId: string | null }) {
   const lados = placar.map((s, i) => ({ ...s, indice: i, candidato: candidates.find((c) => c.id === s.candidateId)! }));
   const [esquerda, direita] = lados;
 
@@ -20,6 +23,15 @@ export function GraficoAfinidade({ placar }: { placar: CandidateScore[] }) {
       <div className="flex items-end justify-between gap-4">
         {lados.map((lado) => (
           <div key={lado.candidateId} className={lado.indice === 1 ? "text-right" : ""}>
+            <Image
+              src={`/candidatos/${lado.candidateId}.jpg`}
+              alt=""
+              width={192}
+              height={192}
+              className={`mb-3 rounded-full object-cover ring-2 ring-offset-2 ring-offset-surface ${ANEL_CANDIDATO[lado.indice]} ${
+                lado.indice === 1 ? "ml-auto" : ""
+              } ${liderId === null ? "size-16 sm:size-20" : lado.candidateId === liderId ? "size-20 sm:size-28" : "size-12 sm:size-14"}`}
+            />
             <p className={`flex items-center gap-2 text-sm font-medium ${lado.indice === 1 ? "justify-end" : ""}`}>
               <MarcadorCandidato indice={lado.indice} />
               {lado.candidato.name}

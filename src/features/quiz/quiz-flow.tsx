@@ -8,7 +8,7 @@ import { shuffleOptions } from "@/lib/shuffle";
 import { Botao } from "@/components/ui/button";
 import { IconeVoltar } from "@/components/ui/icon";
 import { TelaResultado } from "@/features/result/result-screen";
-import { BarraAcoes, ESPACO_BARRA } from "./action-bar";
+import { BarraAcoes } from "./action-bar";
 import { enviarParticipacao, ErroInicio, iniciarQuestionario, type StatusEnvio } from "./api";
 import { ordemDoPasso, passoParaUrl, resolverPasso, type Passo } from "./passos";
 import { FormularioPerfil, PERFIL_VAZIO, type PerfilForm } from "./profile-form";
@@ -142,9 +142,9 @@ export function FluxoQuestionario() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-5 pt-4 sm:px-6 sm:pt-14">
+    <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-5 pt-4 muito-baixa:pt-1 sm:px-6 sm:pt-14 sm:baixa:pt-8 sm:muito-baixa:pt-6">
       {passo.tipo === "perfil" ? (
-        <div className="pt-4 sm:pt-0">
+        <div className="flex flex-1 flex-col pt-4 muito-baixa:pt-2 sm:pt-0">
           <FormularioPerfil
             valor={perfil}
             aoMudar={setPerfil}
@@ -155,9 +155,9 @@ export function FluxoQuestionario() {
           />
         </div>
       ) : (
-        <div className={ESPACO_BARRA}>
+        <div className="flex flex-1 flex-col">
           <BarraProgresso atual={passo.indice} total={questions.length} respondidas={questions.map((q) => Boolean(respostas[q.id]))} />
-          <div className="mt-6 sm:mt-10">
+          <div className="mt-6 muito-baixa:mt-3 sm:mt-10 sm:baixa:mt-6">
             <TelaPergunta
               key={questions[passo.indice].id}
               pergunta={questions[passo.indice]}

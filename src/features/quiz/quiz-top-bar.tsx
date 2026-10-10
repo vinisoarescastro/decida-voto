@@ -7,7 +7,7 @@ import { IconeFechar } from "@/components/ui/icon";
  */
 export function BarraProgresso({ atual, total, respondidas }: { atual: number; total: number; respondidas: boolean[] }) {
   return (
-    <div className="sticky top-0 z-10 -mx-5 bg-bg/90 px-5 pb-3 pt-4 backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:backdrop-blur-none">
+    <div className="sticky top-0 z-10 -mx-5 px-5 pb-3 pt-4 backdrop-blur-md muito-baixa:pb-2 muito-baixa:pt-2 sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:backdrop-blur-none">
       <div className="flex items-center justify-between gap-4">
         <p className="text-sm font-medium tabular-nums">
           Pergunta {atual + 1} <span className="text-muted">de {total}</span>

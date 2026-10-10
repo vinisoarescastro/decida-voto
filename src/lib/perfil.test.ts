@@ -6,7 +6,7 @@ describe("validarIdade (frontend)", () => {
   it.each([
     ["16", 16],
     ["35", 35],
-    ["120", 120],
+    ["100", 100],
     [" 42 ", 42],
   ])("aceita %s", (texto, idade) => {
     expect(validarIdade(texto)).toEqual({ ok: true, idade });
@@ -21,7 +21,8 @@ describe("validarIdade (frontend)", () => {
     ["1e2", "Use apenas números inteiros"],
     ["15", "A idade mínima para participar é 16 anos."],
     ["0", "A idade mínima"],
-    ["121", "Informe uma idade de até 120 anos."],
+    ["101", "Informe uma idade de até 100 anos."],
+    ["120", "Informe uma idade de até 100 anos."],
   ])("rejeita %j com mensagem clara", (texto, mensagem) => {
     const r = validarIdade(texto);
     expect(r.ok).toBe(false);
@@ -36,7 +37,7 @@ describe("perfilSchema (backend)", () => {
     expect(perfilSchema.safeParse(base).success).toBe(true);
   });
 
-  it.each([15, 121, -1, 30.5, Number.NaN])("rejeita idade %s", (idade) => {
+  it.each([15, 101, -1, 30.5, Number.NaN, "30"])("rejeita idade %s", (idade) => {
     expect(perfilSchema.safeParse({ ...base, idade }).success).toBe(false);
   });
 
@@ -79,7 +80,7 @@ describe("faixaEtaria", () => {
     [44, "35-44"],
     [59, "45-59"],
     [60, "60+"],
-    [120, "60+"],
+    [100, "60+"],
   ])("idade %i → %s", (idade, faixa) => {
     expect(faixaEtaria(idade)).toBe(faixa);
   });

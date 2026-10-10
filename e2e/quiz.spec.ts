@@ -8,7 +8,7 @@ test("fluxo completo: perfil, questionário, resultado e registro da participaç
   page.on("request", (r) => requests.push({ method: r.method(), url: r.url() }));
 
   await page.goto("/");
-  await page.getByRole("link", { name: "Começar questionário" }).click();
+  await page.getByRole("link", { name: "Descobrir minha afinidade" }).click();
   await expect(page.getByRole("heading", { name: "Antes de começar" })).toBeVisible();
 
   // Validação no navegador: mensagens claras para cada campo.
@@ -20,12 +20,16 @@ test("fluxo completo: perfil, questionário, resultado e registro da participaç
   await expect(page.getByText(/Ao clicar em “Continuar”, você declara estar ciente e de acordo/)).toBeVisible();
   await expect(page.getByRole("link", { name: "Termos de uso" })).toHaveAttribute("href", "/privacidade/#termos");
   await expect(page.getByRole("link", { name: "Política de privacidade" })).toHaveAttribute("href", "/privacidade/");
+  // O campo de idade só aceita dígitos: letras, sinais e separadores são descartados.
+  const idade = page.getByLabel("Idade", { exact: true });
+  await expect(idade).toHaveAttribute("placeholder", "Ex.: 35");
+  await idade.fill("abc");
+  await expect(idade).toHaveValue("");
+  await idade.fill("3a5");
+  await expect(idade).toHaveValue("35");
   for (const [valor, mensagem] of [
-    ["abc", "Use apenas números inteiros"],
-    ["30.5", "Use apenas números inteiros"],
-    ["-5", "Use apenas números inteiros"],
     ["15", "A idade mínima para participar é 16 anos."],
-    ["121", "Informe uma idade de até 120 anos."],
+    ["101", "Informe uma idade de até 100 anos."],
   ]) {
     await page.getByLabel("Idade", { exact: true }).fill(valor);
     await page.getByLabel("Idade", { exact: true }).blur();
@@ -42,6 +46,8 @@ test("fluxo completo: perfil, questionário, resultado e registro da participaç
   await expect(page.getByText(/^Suas respostas ficaram/)).toBeVisible();
   await expect(page.getByText(/Baseado em \d+ de 10 temas/)).toBeVisible();
   await expect(page.getByText("Sua participação foi registrada, sem identificação pessoal.")).toBeVisible();
+  // Foto dos dois candidatos no resultado (a do mais próximo maior; iguais se o resultado for equilibrado).
+  await expect(page.locator('figure img[src*="/candidatos/"]')).toHaveCount(2);
 
   // Detalhes ficam fechados até a pessoa pedir.
   await expect(page.getByText("Concordância absoluta.")).toHaveCount(0);
@@ -109,13 +115,13 @@ test("botão Anterior e o 'voltar' do navegador retornam à pergunta anterior se
   await expect(page.getByText("Pergunta 3 de 10")).toBeVisible();
 });
 
-test("a barra de ações fixa não cobre o último campo nem a última alternativa", async ({ page }) => {
+test("a barra de ações não cobre o último campo nem a última alternativa", async ({ page }) => {
   // Distância entre o fim do elemento e o topo da barra, com a página rolada até o fim.
   const folga = (seletor: string) =>
     page.evaluate((sel) => {
       window.scrollTo(0, document.documentElement.scrollHeight);
       const botao = [...document.querySelectorAll("button")].find((b) => /^(Continuar|Próxima)/.test(b.textContent!.trim()))!;
-      const barra = botao.closest(".fixed")!;
+      const barra = botao.closest(".sticky")!;
       const alvos = document.querySelectorAll(sel);
       return barra.getBoundingClientRect().top - alvos[alvos.length - 1].getBoundingClientRect().bottom;
     }, seletor);
@@ -170,5 +176,30 @@ test("páginas institucionais e 404 carregam sem rolagem horizontal", async ({ p
     await page.goto(caminho);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
+  }
+});
+
+test("início, perfil e perguntas cabem na tela, sem rolagem", async ({ page }) => {
+  // Mede depois que as animações de entrada terminam (as infinitas, como o ponto pulsante, são ignoradas).
+  const excesso = () =>
+    page.evaluate(async () => {
+      const finitas = document.getAnimations().filter((a) => a.effect?.getTiming().iterations !== Infinity);
+      await Promise.all(finitas.map((a) => a.finished.catch(() => {})));
+      return document.documentElement.scrollHeight - window.innerHeight;
+    });
+  await page.goto("/");
+  expect(await excesso(), "início").toBeLessThanOrEqual(0);
+
+  await page.goto("/questionario/");
+  await expect(page.getByRole("heading", { name: "Antes de começar" })).toBeVisible();
+  expect(await excesso(), "perfil").toBeLessThanOrEqual(0);
+
+  await preencherPerfil(page);
+  await page.getByRole("button", { name: "Continuar" }).click();
+  for (let i = 0; i < 10; i++) {
+    await expect(page.getByText(`Pergunta ${i + 1} de 10`)).toBeVisible();
+    expect(await excesso(), `pergunta ${i + 1}`).toBeLessThanOrEqual(0);
+    await opcao(page, 0).click();
+    if (i < 9) await page.getByRole("button", { name: "Próxima" }).click();
   }
 });

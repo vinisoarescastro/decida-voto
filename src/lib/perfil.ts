@@ -40,7 +40,7 @@ export const GENEROS = [
 export type Genero = (typeof GENEROS)[number]["id"];
 
 export const IDADE_MINIMA = 16;
-export const IDADE_MAXIMA = 120;
+export const IDADE_MAXIMA = 100;
 
 /** Faixas etárias usadas no armazenamento e nas estatísticas. A idade exata não é gravada. */
 export const FAIXAS_ETARIAS = [

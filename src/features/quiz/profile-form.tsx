@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState, type FormEvent, type RefObject } from "react";
-import { GENEROS, IDADE_MAXIMA, IDADE_MINIMA, UFS, validarIdade, type Genero } from "@/lib/perfil";
+import { GENEROS, UFS, validarIdade, type Genero } from "@/lib/perfil";
 import { Botao } from "@/components/ui/button";
 import { Alerta, Campo, ErroCampo, Selecao, classeRotulo } from "@/components/ui/field";
 import { Girando } from "@/components/ui/icon";
 import { Sobretitulo } from "@/components/ui/text";
-import { BarraAcoes, ESPACO_BARRA_COM_NOTA } from "./action-bar";
+import { BarraAcoes } from "./action-bar";
 
 export type PerfilForm = {
   uf: string;
@@ -88,18 +88,19 @@ export function FormularioPerfil({ valor, aoMudar, aoContinuar, enviando, erroGe
   });
 
   return (
-    <form onSubmit={enviar} noValidate className={`animate-surgir ${ESPACO_BARRA_COM_NOTA}`}>
+    <form onSubmit={enviar} noValidate className="animate-surgir flex flex-1 flex-col">
       <Sobretitulo>Etapa 1 de 2</Sobretitulo>
-      <h1 ref={tituloRef} tabIndex={-1} className="mt-3 text-[1.75rem] font-semibold leading-tight tracking-tight sm:text-3xl">
+      <h1 ref={tituloRef} tabIndex={-1} className="mt-3 text-[1.75rem] font-semibold leading-tight tracking-tight muito-baixa:mt-2 muito-baixa:text-2xl sm:text-3xl">
         Antes de começar
       </h1>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted">
+      <p className="mt-3 text-[15px] leading-relaxed text-muted muito-baixa:mt-2 muito-baixa:text-sm">
         Estas informações são usadas apenas em estatísticas gerais. Não pedimos nome, e-mail, CPF ou qualquer dado que
         identifique você.
       </p>
 
-      <div className="mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2">
-        <div>
+      {/* No celular, Estado e Cidade ocupam a linha inteira (nomes longos); Gênero e Idade dividem uma linha. */}
+      <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-6 baixa:mt-6 baixa:gap-y-4 muito-baixa:mt-4 muito-baixa:gap-y-3 sm:gap-x-5">
+        <div className="col-span-2 sm:col-span-1">
           <label htmlFor={`${id}-uf`} className={classeRotulo}>
             Estado
           </label>
@@ -123,7 +124,7 @@ export function FormularioPerfil({ valor, aoMudar, aoContinuar, enviando, erroGe
           <ErroCampo id={`${id}-uf-erro`} texto={erros.uf} />
         </div>
 
-        <div>
+        <div className="col-span-2 sm:col-span-1">
           <label htmlFor={`${id}-municipio`} className={classeRotulo}>
             Cidade
           </label>
@@ -190,9 +191,10 @@ export function FormularioPerfil({ valor, aoMudar, aoContinuar, enviando, erroGe
             pattern="[0-9]*"
             autoComplete="off"
             maxLength={3}
-            placeholder={`${IDADE_MINIMA} a ${IDADE_MAXIMA}`}
+            placeholder="Ex.: 35"
             value={valor.idade}
-            onChange={(e) => alterar({ idade: e.target.value })}
+            // Só dígitos: letras, sinais e separadores são descartados enquanto a pessoa digita.
+            onChange={(e) => alterar({ idade: e.target.value.replace(/\D/g, "") })}
             onBlur={() => {
               if (!valor.idade) return;
               const r = validarIdade(valor.idade);
@@ -220,7 +222,7 @@ export function FormularioPerfil({ valor, aoMudar, aoContinuar, enviando, erroGe
       <BarraAcoes
         nota={
           // Ciência e concordância: o clique em "Continuar" registra o consentimento enviado ao servidor.
-          <p id={`${id}-aviso`} className="mb-3 text-xs leading-relaxed text-muted sm:mb-5 sm:max-w-md">
+          <p id={`${id}-aviso`} className="mb-3 text-xs leading-relaxed text-muted muito-baixa:mb-2 sm:mb-5 sm:max-w-md sm:baixa:mb-3">
             Ao clicar em “Continuar”, você declara estar ciente e de acordo com os{" "}
             <Link href="/privacidade/#termos" target="_blank" className="underline underline-offset-2 hover:text-ink">
               Termos de uso

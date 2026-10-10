@@ -48,20 +48,20 @@ export function TelaPergunta({ pergunta, alternativas, escolhida, tituloRef, aoE
         <h1
           ref={tituloRef}
           tabIndex={-1}
-          className="mt-3 text-[1.625rem] font-semibold leading-tight tracking-tight text-balance sm:text-[2rem]"
+          className="mt-3 text-[1.625rem] font-semibold leading-tight tracking-tight text-balance muito-baixa:mt-2 muito-baixa:text-[1.25rem] sm:text-[2rem] sm:baixa:text-[1.75rem] sm:muito-baixa:text-2xl"
         >
           {pergunta.text}
         </h1>
       </legend>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted">{pergunta.context}</p>
+      <p className="mt-3 text-[15px] leading-relaxed text-muted muito-baixa:mt-2 muito-baixa:text-sm muito-baixa:leading-snug">{pergunta.context}</p>
 
-      <div className="mt-7 space-y-3">
+      <div className="mt-7 space-y-3 baixa:mt-5 baixa:space-y-2.5 muito-baixa:mt-4 muito-baixa:space-y-2">
         {alternativas.map((alternativa, i) => {
           const marcada = escolhida === alternativa.id;
           return (
             <label
               key={alternativa.id}
-              className={`group flex min-h-16 cursor-pointer items-center gap-4 rounded-2xl border bg-surface px-4 py-3.5 shadow-sm transition-[border-color,background-color,box-shadow,transform] duration-150 active:scale-[0.99] has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ring ${
+              className={`group flex min-h-16 cursor-pointer items-center gap-4 rounded-2xl border bg-surface px-4 py-3.5 shadow-sm baixa:min-h-14 baixa:py-2.5 muito-baixa:min-h-11 muito-baixa:gap-3 muito-baixa:py-1.5 transition-[border-color,background-color,box-shadow,transform] duration-150 active:scale-[0.99] has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-ring ${
                 marcada ? "border-ink ring-1 ring-ink" : "border-line-strong hover:border-ink/35"
               }`}
             >
@@ -81,7 +81,7 @@ export function TelaPergunta({ pergunta, alternativas, escolhida, tituloRef, aoE
               >
                 {marcada ? <IconeCheck tamanho={16} strokeWidth={3} /> : LETRAS[i]}
               </span>
-              <span className={`text-[1.0625rem] leading-snug ${marcada ? "font-medium" : ""}`}>{alternativa.text}</span>
+              <span className={`text-[1.0625rem] leading-snug baixa:text-base muito-baixa:text-[15px] sm:baixa:text-[1.0625rem] ${marcada ? "font-medium" : ""}`}>{alternativa.text}</span>
             </label>
           );
         })}

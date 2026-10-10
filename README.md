@@ -25,7 +25,7 @@ Ferramenta informativa e independente que compara as respostas do eleitor a 10 p
 |---|---|
 | `src/data/` | Perguntas, posições, notícias e municípios do IBGE |
 | `src/lib/affinity.ts` | Cálculo de afinidade (função pura, usada no navegador e no servidor) |
-| `src/lib/perfil.ts`, `participacao-schema.ts` | Regras do perfil (idade de 16 a 120, faixas) e validação do envio |
+| `src/lib/perfil.ts`, `participacao-schema.ts` | Regras do perfil (idade de 16 a 100, faixas) e validação do envio |
 | `src/server/db/` | Esquema do banco e conexão |
 | `src/server/services/` | Gravação de participações, estatísticas, sessões e tokens |
 | `src/server/security/` | Criptografia (hashes, tokens, senha) e limite de requisições |
