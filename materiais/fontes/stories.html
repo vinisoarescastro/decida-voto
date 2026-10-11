@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Stories Em quem votar</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #121217; --muted: #4d4d58; --line: #d2d2da; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; }
+  body { font-family: "Geist", system-ui, sans-serif; color: var(--ink); }
+  /* Áreas seguras do Instagram: ~250 px no topo (barra e perfil) e ~300 px na base (campo de resposta). */
+  .tela {
+    position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    padding: 250px 80px 300px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    background:
+      radial-gradient(900px 620px at 50% 2%, rgb(190 172 250 / 0.55), transparent 70%),
+      radial-gradient(700px 600px at 105% 92%, rgb(240 160 214 / 0.42), transparent 70%),
+      radial-gradient(640px 560px at -8% 62%, rgb(253 194 160 / 0.42), transparent 70%),
+      #fff;
+  }
+  .logo { width: 520px; height: auto; }
+  .pilula {
+    margin-top: 30px; display: inline-flex; align-items: center; gap: 14px;
+    border: 2px solid var(--line); background: rgb(255 255 255 / 0.9); border-radius: 999px;
+    padding: 14px 30px; font-size: 27px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .pilula::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--ink); }
+  h1 { margin-top: 34px; font-size: 96px; line-height: 0.98; font-weight: 800; letter-spacing: -0.035em; }
+  h1 span { display: block; white-space: nowrap; }
+  .sub { margin-top: 28px; font-size: 37px; line-height: 1.42; color: var(--muted); max-width: 900px; text-wrap: balance; }
+  .sub strong, .cand { color: var(--ink); font-weight: 600; }
+  .cand { white-space: nowrap; }
+  .cand img { width: 1.25em; height: 1.25em; border-radius: 50%; object-fit: cover; vertical-align: -0.28em; margin-right: 8px; box-shadow: 0 0 0 2px var(--line); }
+  .chamada { margin-top: auto; padding-top: 48px; display: flex; flex-direction: column; align-items: center; }
+  .chamada .convite { font-size: 46px; font-weight: 800; letter-spacing: -0.02em; }
+  .seta { width: 100px; height: 112px; margin-top: 4px; }
+  /* Espaço para o adesivo de link do Instagram. */
+  .link {
+    margin-top: 10px; width: 860px; height: 196px;
+    border: 7px solid var(--ink); border-radius: 44px; background: #fff;
+    box-shadow: 0 0 0 14px rgb(255 255 255 / 0.75), 0 24px 60px -18px rgb(18 18 23 / 0.45);
+  }
+  .rodape { margin-top: 26px; font-size: 26px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <main class="tela">
+    <img class="logo" src="logo.png" alt="Em quem votar?">
+    <p class="pilula">2º turno · 25 de outubro de 2026</p>
+    <h1><span>Qual candidato</span><span>pensa mais</span><span>parecido</span><span>com você?</span></h1>
+    <p class="sub">Responda <strong>10 perguntas rápidas</strong> e descubra a sua afinidade com <span class="cand"><img src="flavio-bolsonaro.jpg" alt="">Flávio Bolsonaro</span> e <span class="cand"><img src="lula.jpg" alt="">Lula</span>.</p>
+
+    <div class="chamada">
+      <p class="convite">Toque no link e faça o teste</p>
+      <svg class="seta" viewBox="0 0 120 135" fill="none" stroke="#121217" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M60 10 V114" />
+        <path d="M18 76 L60 118 L102 76" />
+      </svg>
+      <div class="link" aria-label="Espaço para o adesivo de link"></div>
+      <p class="rodape">3 minutos · sem cadastro · a decisão é sempre sua</p>
+    </div>
+  </main>
+</body>
+</html>
