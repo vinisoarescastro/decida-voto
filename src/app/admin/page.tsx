@@ -7,9 +7,12 @@ import { Filtros } from "@/features/admin/filters";
 import { BarraDividida, Grupos } from "@/features/admin/groups";
 import {
   GraficoAfinidadeDia,
+  GraficoContagem,
   GraficoCruzamento,
   GraficoDistribuicao,
+  GraficoIntensidade,
   GraficoMaisProximos,
+  GraficoOrigens,
   GraficoParticipacoesDia,
   GraficoRespostas,
   GraficoTemas,
@@ -102,7 +105,10 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
           </section>
 
           <Indicadores a={analises} total={est.total} candidatos={candidates} />
-          <GraficoMaisProximos a={analises} total={est.total} candidatos={candidates} />
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <GraficoMaisProximos a={analises} candidatos={candidates} />
+            <GraficoIntensidade a={analises} candidatos={candidates} />
+          </div>
         </>
       )}
 
@@ -111,10 +117,20 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
       {est.geral !== null && (
         <>
           <div className="grid items-start gap-5 lg:grid-cols-2">
-            <GraficoParticipacoesDia a={analises} candidatos={candidates} />
-            <GraficoAfinidadeDia a={analises} candidatos={candidates} />
-            <GraficoDistribuicao a={analises} candidatos={candidates} />
+            <GraficoParticipacoesDia a={analises} />
+            <div className="space-y-5">
+              <GraficoAfinidadeDia a={analises} candidatos={candidates} />
+              <GraficoDistribuicao a={analises} candidatos={candidates} />
+            </div>
+          </div>
+          <GraficoOrigens a={analises} total={est.total} />
+
+          <h2 className="pt-2 text-lg font-semibold tracking-tight">Quem respondeu</h2>
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <GraficoContagem titulo="Idade de quem respondeu" dados={est.porFaixa} total={est.total} candidatos={candidates} />
             <GraficoCruzamento a={analises} candidatos={candidates} />
+            <GraficoContagem titulo="Estados com mais participações" nota="Os 10 primeiros no recorte." dados={est.porUf} total={est.total} candidatos={candidates} limite={10} />
+            <GraficoContagem titulo="Cidades com mais participações" nota="As 10 primeiras no recorte." dados={est.porMunicipio} total={est.total} candidatos={candidates} limite={10} />
           </div>
           <GraficoTemas a={analises} candidatos={candidates} />
           <GraficoRespostas a={analises} candidatos={candidates} />

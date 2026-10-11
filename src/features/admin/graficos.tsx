@@ -4,9 +4,13 @@ import { FAIXAS_ETARIAS, GENEROS } from "@/lib/perfil";
 import type { Candidate } from "@/lib/schema";
 import { MarcadorCandidato } from "@/components/ui/text";
 import type { Analises } from "@/server/services/analises";
+import type { Agrupamento } from "@/server/services/estatisticas";
 import { AreaDicas } from "./dicas";
-import { corAfinidade, plural, textoAfinidade } from "./escalas";
+import { corAfinidade, COR_OUTROS, plural, textoAfinidade } from "./escalas";
+import { BarrasHorizontais, Rosca, type Fatia } from "./formas";
 import { LegendaAfinidade } from "./legendas";
+import { GraficoLinhas } from "./linhas";
+import { acumulado, mediaMovel, preencherDias } from "./series";
 
 // Gráficos do painel, gerados no servidor (HTML/CSS). Regras seguidas: barras finas (≤ 24 px) com ponta
 // arredondada e base reta, 2 px de espaço entre partes, um eixo por gráfico, legenda sempre que há duas
@@ -88,7 +92,7 @@ function Indicador({ rotulo, valor, detalhe }: { rotulo: string; valor: ReactNod
 
 export function Indicadores({ a, total, candidatos }: { a: Analises; total: number; candidatos: Candidate[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       <Indicador rotulo="Hoje" valor={a.hoje.toLocaleString("pt-BR")} detalhe="participações no recorte" />
       <Indicador rotulo="Últimos 7 dias" valor={a.ultimos7.toLocaleString("pt-BR")} detalhe="participações no recorte" />
       <Indicador
@@ -97,27 +101,6 @@ export function Indicadores({ a, total, candidatos }: { a: Analises; total: numb
         detalhe={`${plural(a.equilibrados, "pessoa", "pessoas")} com diferença menor que 10 pontos`}
       />
       <div className="rounded-3xl border border-line bg-surface/90 p-5 shadow-sm">
-        <p className="text-xs font-medium text-muted">Como chegaram</p>
-        <ul className="mt-2 space-y-1 text-sm">
-          {(
-            [
-              ["Convite no resultado", a.porOrigem.convite],
-              ["Panfleto (QR code)", a.porOrigem.panfleto],
-              ["Stories", a.porOrigem.stories],
-              ["Direto ou outros", Math.max(0, total - a.porOrigem.convite - a.porOrigem.panfleto - a.porOrigem.stories)],
-            ] as const
-          ).map(([rotulo, n]) => (
-            <li key={rotulo} className="flex items-baseline justify-between gap-2">
-              <span className="truncate text-muted">{rotulo}</span>
-              <span className="whitespace-nowrap">
-                <strong className="font-semibold">{n.toLocaleString("pt-BR")}</strong>
-                <span className="ml-1 text-xs text-muted">{total ? `${formatPercent((n / total) * 100)}%` : ""}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="col-span-2 rounded-3xl border border-line bg-surface/90 p-5 shadow-sm lg:col-span-1">
         <p className="text-xs font-medium text-muted">Concordância média</p>
         <ul className="mt-2 space-y-1.5 text-sm">
           {candidatos.map((c, i) => (
@@ -137,82 +120,141 @@ export function Indicadores({ a, total, candidatos }: { a: Analises; total: numb
 }
 
 /** Participações por dia (uma série, tom neutro). */
-export function GraficoParticipacoesDia({ a, candidatos }: { a: Analises; candidatos: Candidate[] }) {
-  const nomes = nomesDe(candidatos);
-  const maximo = Math.max(1, ...a.porDia.map((d) => d.n));
+/** Topo "redondo" do eixo de contagens (1, 2, 5, 10, 20, 50…) e as marcas da grade. */
+function eixoContagem(maior: number): { maximo: number; marcas: number[] } {
+  const base = 10 ** Math.floor(Math.log10(Math.max(1, maior)));
+  const maximo = [1, 2, 5, 10].map((m) => m * base).find((m) => m >= maior) ?? 10 * base;
+  return { maximo, marcas: maximo % 2 === 0 ? [0, maximo / 2, maximo] : [0, maximo] };
+}
+
+/** Participações ao longo do tempo: total acumulado e por dia, em dois painéis (cada um com o seu eixo). */
+export function GraficoParticipacoesDia({ a }: { a: Analises }) {
+  const dias = preencherDias(a.porDia);
+  const rotulos = dias.map((d) => dataCurta(d.dia));
+  const totais = acumulado(dias.map((d) => d.n));
+  const eixoTotal = eixoContagem(totais.at(-1) ?? 0);
+  const eixoDia = eixoContagem(Math.max(0, ...dias.map((d) => d.n)));
   return (
-    <Cartao titulo="Participações por dia" nota="Data de envio no horário de Brasília (o horário não é guardado, por privacidade).">
-      {a.porDia.length === 0 ? (
+    <Cartao titulo="Participações ao longo do tempo" nota="Data de envio no horário de Brasília (o horário não é guardado, por privacidade).">
+      {dias.length === 0 ? (
         <p className="text-sm text-muted">Sem participações no recorte.</p>
       ) : (
-        <AreaDicas>
-          <div className="flex items-start justify-between text-[11px] tabular-nums text-muted">
-            <span>{maximo.toLocaleString("pt-BR")}</span>
+        <div className="space-y-6">
+          <div>
+            <p className="mb-3 text-xs font-medium text-muted">Total acumulado</p>
+            <GraficoLinhas
+              rotulo="Total acumulado de participações por dia"
+              rotulosX={rotulos}
+              series={[{ id: "total", nome: "Acumulado", cor: "var(--ink)", valores: totais }]}
+              detalhes={dias.map((d) => [`${plural(d.n, "participação", "participações")} no dia`])}
+              {...eixoTotal}
+            />
           </div>
-          <div className="relative flex h-40 items-end gap-0.5 border-b border-line">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-line" />
-            {a.porDia.map((d) => (
-              <div
-                key={d.dia}
-                tabIndex={0}
-                data-dica={`${dataCurta(d.dia)}\n${plural(d.n, "participação", "participações")}\n${textoAfinidade(d.pontosA, nomes)}`}
-                className="group flex h-full max-w-6 flex-1 cursor-default items-end justify-center outline-none"
-              >
-                <div className="w-full rounded-t-[4px] bg-ink/70 transition-colors group-hover:bg-ink group-focus-visible:bg-ink" style={{ height: `${Math.max(2, (d.n / maximo) * 100)}%` }} />
-              </div>
-            ))}
+          <div>
+            <p className="mb-3 text-xs font-medium text-muted">Por dia</p>
+            <GraficoLinhas
+              rotulo="Participações por dia"
+              rotulosX={rotulos}
+              series={[{ id: "dia", nome: "No dia", cor: "var(--ink)", valores: dias.map((d) => d.n) }]}
+              {...eixoDia}
+            />
           </div>
-          <div className="mt-1.5 flex justify-between text-[11px] tabular-nums text-muted">
-            <span>{dataCurta(a.porDia[0].dia)}</span>
-            {a.porDia.length > 1 && <span>{dataCurta(a.porDia[a.porDia.length - 1].dia)}</span>}
-          </div>
-        </AreaDicas>
+        </div>
       )}
-      <Tabela cabecalho={["Dia", "Participações"]} linhas={a.porDia.map((d) => [dataCurta(d.dia), d.n])} />
+      <Tabela cabecalho={["Dia", "Participações", "Acumulado"]} linhas={dias.map((d, i) => [dataCurta(d.dia), d.n, totais[i]])} />
     </Cartao>
   );
 }
 
-/** Afinidade média por dia: coluna dividida (100%), com marca dos 50%. */
+const ORIGENS_GRAFICO = [
+  { chave: "convite", rotulo: "Convite no resultado", cor: "var(--origem-convite)" },
+  { chave: "panfleto", rotulo: "Panfleto (QR code)", cor: "var(--origem-panfleto)" },
+  { chave: "stories", rotulo: "Stories", cor: "var(--origem-stories)" },
+  { chave: "direto", rotulo: "Direto ou outros", cor: COR_OUTROS },
+] as const;
+
+/** Como chegaram: rosca com a origem do link e, ao lado, a evolução diária de cada origem. */
+export function GraficoOrigens({ a, total }: { a: Analises; total: number }) {
+  const marcados = a.porOrigem.convite + a.porOrigem.panfleto + a.porOrigem.stories;
+  const contagem = { ...a.porOrigem, direto: Math.max(0, total - marcados) };
+  const fatias: Fatia[] = ORIGENS_GRAFICO.map((o) => ({ chave: o.chave, rotulo: o.rotulo, n: contagem[o.chave], cor: o.cor }));
+  const dias = preencherDias(a.porDia);
+  const doDia = (d: (typeof dias)[number]) => ({
+    ...d.porOrigem,
+    direto: Math.max(0, d.n - d.porOrigem.convite - d.porOrigem.panfleto - d.porOrigem.stories),
+  });
+  const eixo = eixoContagem(Math.max(0, ...dias.flatMap((d) => Object.values(doDia(d)))));
+  return (
+    <Cartao
+      titulo="Como chegaram"
+      nota="Pela marca no link (?origem=convite, panfleto ou stories). Quem abriu o endereço direto, por busca ou por outro link entra em “Direto ou outros”."
+    >
+      <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,26rem)_1fr]">
+        <Rosca fatias={fatias} unidade={["pessoa", "pessoas"]} />
+        {dias.length > 0 && (
+          <div>
+            <p className="mb-3 text-xs font-medium text-muted">Por dia, em cada origem</p>
+            <GraficoLinhas
+              rotulo="Participações por dia em cada origem"
+              rotulosX={dias.map((d) => dataCurta(d.dia))}
+              series={ORIGENS_GRAFICO.map((o) => ({ id: o.chave, nome: o.rotulo, cor: o.cor, valores: dias.map((d) => doDia(d)[o.chave]) }))}
+              {...eixo}
+            />
+          </div>
+        )}
+      </div>
+      <Tabela
+        cabecalho={["Dia", ...ORIGENS_GRAFICO.map((o) => o.rotulo)]}
+        linhas={dias.map((d) => [dataCurta(d.dia), ...ORIGENS_GRAFICO.map((o) => doDia(d)[o.chave])])}
+      />
+    </Cartao>
+  );
+}
+
+/** Afinidade média ao longo do tempo: média móvel de 7 dias de cada candidato, com a linha dos 50%. */
 export function GraficoAfinidadeDia({ a, candidatos }: { a: Analises; candidatos: Candidate[] }) {
   const nomes = nomesDe(candidatos);
+  const dias = preencherDias(a.porDia);
+  const movel = mediaMovel(dias);
   return (
-    <Cartao titulo="Afinidade média por dia" nota="Divisão média dos pontos entre os dois candidatos, por dia de envio.">
+    <Cartao
+      titulo="Afinidade média ao longo do tempo"
+      nota="Média móvel de 7 dias da divisão dos pontos entre os dois candidatos (cada dia pesa pelo número de participações). O valor de cada dia está na dica e na tabela."
+    >
       <Legenda2 candidatos={candidatos} />
-      {a.porDia.length === 0 ? (
+      {dias.length === 0 ? (
         <p className="mt-3 text-sm text-muted">Sem participações no recorte.</p>
       ) : (
-        <AreaDicas className="mt-3">
-          <div className="relative flex h-40 items-stretch gap-0.5">
-            <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 z-10 h-px bg-ink/30" />
-            {a.porDia.map((d) => (
-              <div
-                key={d.dia}
-                tabIndex={0}
-                data-dica={`${dataCurta(d.dia)}\n${plural(d.n, "participação", "participações")}\n${textoAfinidade(d.pontosA, nomes)}`}
-                className="flex max-w-6 flex-1 cursor-default flex-col-reverse gap-0.5 outline-none focus-visible:ring-2 focus-visible:ring-ink"
-              >
-                {d.pontosA === null ? (
-                  <div className="flex-1 rounded-[4px] bg-surface-3" />
-                ) : (
-                  <>
-                    <div className="rounded-b-[4px] bg-cand-1" style={{ height: `${d.pontosA}%` }} />
-                    <div className="flex-1 rounded-t-[4px] bg-cand-2" />
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="mt-1.5 flex justify-between text-[11px] tabular-nums text-muted">
-            <span>{dataCurta(a.porDia[0].dia)}</span>
-            <span>linha = 50%</span>
-            {a.porDia.length > 1 && <span>{dataCurta(a.porDia[a.porDia.length - 1].dia)}</span>}
-          </div>
-        </AreaDicas>
+        <div className="mt-4">
+          <GraficoLinhas
+            rotulo={`Afinidade média de ${nomes[0]} e ${nomes[1]} por dia, média móvel de 7 dias`}
+            rotulosX={dias.map((d) => dataCurta(d.dia))}
+            series={[
+              { id: candidatos[0].id, nome: nomes[0], cor: "var(--cand-1)", valores: movel },
+              { id: candidatos[1].id, nome: nomes[1], cor: "var(--cand-2)", valores: movel.map((v) => (v === null ? null : 100 - v)) },
+            ]}
+            maximo={100}
+            marcas={[0, 50, 100]}
+            referencia={50}
+            unidade="%"
+            detalhes={dias.map((d) => [
+              "Acima: média dos últimos 7 dias",
+              d.n ? `Só neste dia: ${textoAfinidade(d.pontosA, nomes)}` : "Sem participações neste dia",
+              plural(d.n, "participação", "participações"),
+            ])}
+          />
+        </div>
       )}
       <Tabela
-        cabecalho={["Dia", nomes[0], nomes[1]]}
-        linhas={a.porDia.map((d) => [dataCurta(d.dia), pct(d.pontosA), pct(d.pontosA === null ? null : 100 - d.pontosA)])}
+        cabecalho={["Dia", "Participações", `${nomes[0]} (dia)`, `${nomes[1]} (dia)`, `${nomes[0]} (7 dias)`, `${nomes[1]} (7 dias)`]}
+        linhas={dias.map((d, i) => [
+          dataCurta(d.dia),
+          d.n,
+          pct(d.pontosA),
+          pct(d.pontosA === null ? null : 100 - d.pontosA),
+          pct(movel[i]),
+          pct(movel[i] === null ? null : 100 - movel[i]!),
+        ])}
       />
     </Cartao>
   );
@@ -431,61 +473,74 @@ export function GraficoRespostas({ a, candidatos }: { a: Analises; candidatos: C
   );
 }
 
-/** Para quem cada pessoa ficou mais próxima: dois grupos (acima de 50% para cada candidato), em número e %. */
-export function GraficoMaisProximos({ a, total, candidatos }: { a: Analises; total: number; candidatos: Candidate[] }) {
-  const pctDe = (n: number) => (total ? (n / total) * 100 : 0);
-  const partes = [
-    { chave: candidatos[0].id, n: a.maisProximos[candidatos[0].id], cor: "bg-cand-1", rotulo: candidatos[0].name },
-    { chave: "empate", n: a.empates, cor: "bg-surface-3", rotulo: "Empate (50% × 50%)" },
-    { chave: candidatos[1].id, n: a.maisProximos[candidatos[1].id], cor: "bg-cand-2", rotulo: candidatos[1].name },
+/** Para quem cada pessoa ficou mais próxima (acima de 50%), em rosca. */
+export function GraficoMaisProximos({ a, candidatos }: { a: Analises; candidatos: Candidate[] }) {
+  const fatias: Fatia[] = [
+    { chave: candidatos[0].id, rotulo: candidatos[0].name, n: a.maisProximos[candidatos[0].id], cor: "var(--cand-1)" },
+    ...(a.empates > 0 ? [{ chave: "empate", rotulo: "Empate (50% × 50%)", n: a.empates, cor: COR_OUTROS }] : []),
+    { chave: candidatos[1].id, rotulo: candidatos[1].name, n: a.maisProximos[candidatos[1].id], cor: "var(--cand-2)" },
   ];
+  const total = fatias.reduce((s, f) => s + f.n, 0);
   return (
     <Cartao
       titulo="Para quem cada pessoa ficou mais próxima"
-      nota="Cada participação conta para o candidato que ficou com mais de 50% no resultado da pessoa. Inclui os resultados que apareceram como “equilibrados” na tela (diferença menor que 10 pontos)."
+      nota="Cada participação conta para o candidato que ficou com mais de 50% no resultado da pessoa, mesmo que por pouco."
     >
-      <div className="grid grid-cols-2 gap-4">
-        {candidatos.map((c, i) => {
-          const n = a.maisProximos[c.id];
-          return (
-            <div key={c.id} className={i === 1 ? "text-right" : ""}>
-              <p className={`flex items-center gap-2 text-sm font-medium ${i === 1 ? "justify-end" : ""}`}>
-                <MarcadorCandidato indice={i} />
-                {c.name}
-              </p>
-              <p className="mt-1 text-4xl font-semibold tracking-tight">{n.toLocaleString("pt-BR")}</p>
-              <p className="text-sm text-muted">
-                {n === 1 ? "pessoa" : "pessoas"} · <strong className="font-semibold text-ink">{formatPercent(pctDe(n))}%</strong>
-              </p>
-            </div>
-          );
-        })}
-      </div>
-      <AreaDicas className="mt-4">
-        <div className="flex h-3.5 gap-0.5 overflow-hidden rounded-full bg-track">
-          {partes.map((p) =>
-            p.n === 0 ? null : (
-              <div
-                key={p.chave}
-                tabIndex={0}
-                data-dica={`${p.rotulo}\n${plural(p.n, "pessoa", "pessoas")} (${formatPercent(pctDe(p.n))}%)`}
-                className={`h-full cursor-default outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-ink ${p.cor}`}
-                style={{ width: `${pctDe(p.n)}%` }}
-              />
-            ),
-          )}
-        </div>
-      </AreaDicas>
-      {a.empates > 0 && (
-        <p className="mt-2 text-xs text-muted">
-          {plural(a.empates, "resultado", "resultados")} exatamente 50% × 50% ({formatPercent(pctDe(a.empates))}%) não {a.empates === 1 ? "entra" : "entram"} em
-          nenhum dos lados.
-        </p>
+      <Rosca fatias={fatias} unidade={["pessoa", "pessoas"]} />
+      <Tabela cabecalho={["Mais próximo de", "Pessoas", "%"]} linhas={fatias.map((f) => [f.rotulo, f.n, pct(total ? (f.n / total) * 100 : null)])} />
+    </Cartao>
+  );
+}
+
+/** Intensidade do resultado: alinhados a cada candidato (10 pontos ou mais de diferença) ou equilibrados. */
+export function GraficoIntensidade({ a, candidatos }: { a: Analises; candidatos: Candidate[] }) {
+  const fatias: Fatia[] = [
+    { chave: candidatos[0].id, rotulo: `Mais alinhados a ${candidatos[0].name}`, n: a.alinhados[candidatos[0].id], cor: "var(--cand-1)" },
+    { chave: "equilibrado", rotulo: "Equilibrados", n: a.equilibrados, cor: COR_OUTROS },
+    { chave: candidatos[1].id, rotulo: `Mais alinhados a ${candidatos[1].name}`, n: a.alinhados[candidatos[1].id], cor: "var(--cand-2)" },
+  ];
+  const total = fatias.reduce((s, f) => s + f.n, 0);
+  return (
+    <Cartao
+      titulo="Intensidade do resultado"
+      nota="Alinhado: 10 pontos ou mais de diferença entre os candidatos. Equilibrado: menos de 10 pontos, o mesmo critério da tela de resultado."
+    >
+      <Rosca fatias={fatias} unidade={["pessoa", "pessoas"]} />
+      <Tabela cabecalho={["Resultado", "Pessoas", "%"]} linhas={fatias.map((f) => [f.rotulo, f.n, pct(total ? (f.n / total) * 100 : null)])} />
+    </Cartao>
+  );
+}
+
+/** Contagem por grupo (faixa etária, estados, cidades) em barras horizontais, com a afinidade na dica. */
+export function GraficoContagem({
+  titulo,
+  nota,
+  dados,
+  total,
+  candidatos,
+  limite,
+}: {
+  titulo: string;
+  nota?: string;
+  dados: Agrupamento;
+  total: number;
+  candidatos: Candidate[];
+  limite?: number;
+}) {
+  const grupos = limite ? dados.grupos.slice(0, limite) : dados.grupos;
+  const nomes = nomesDe(candidatos);
+  return (
+    <Cartao titulo={titulo} nota={nota}>
+      {grupos.length === 0 ? (
+        <p className="text-sm text-muted">Sem participações no recorte.</p>
+      ) : (
+        <BarrasHorizontais
+          total={total}
+          unidade={["participação", "participações"]}
+          itens={grupos.map((g) => ({ chave: g.chave, rotulo: g.rotulo, n: g.participacoes, dica: textoAfinidade(g.pontos[candidatos[0].id], nomes) }))}
+        />
       )}
-      <Tabela
-        cabecalho={["Mais próximo de", "Pessoas", "%"]}
-        linhas={partes.filter((p) => p.chave !== "empate" || p.n > 0).map((p) => [p.rotulo, p.n, `${formatPercent(pctDe(p.n))}%`])}
-      />
+      <Tabela cabecalho={["Grupo", "Participações", "%"]} linhas={grupos.map((g) => [g.rotulo, g.participacoes, pct(g.proporcao * 100)])} />
     </Cartao>
   );
 }

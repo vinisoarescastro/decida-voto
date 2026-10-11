@@ -66,7 +66,20 @@ test("painel mostra a contagem e as estatísticas por grupo, inclusive de grupos
   // Mapa e gráficos.
   await expect(page.getByRole("heading", { name: "Mapa do Brasil" })).toBeVisible();
   await expect(page.locator('svg[aria-label="Estados do Brasil"] a')).toHaveCount(27);
-  for (const titulo of ["Participações por dia", "Afinidade média por dia", "Como as pessoas se distribuem", "Gênero × faixa etária", "Concordância por tema", "Respostas por pergunta", "Para quem cada pessoa ficou mais próxima"]) {
+  for (const titulo of [
+    "Participações ao longo do tempo",
+    "Afinidade média ao longo do tempo",
+    "Como chegaram",
+    "Intensidade do resultado",
+    "Como as pessoas se distribuem",
+    "Gênero × faixa etária",
+    "Concordância por tema",
+    "Respostas por pergunta",
+    "Para quem cada pessoa ficou mais próxima",
+    "Idade de quem respondeu",
+    "Estados com mais participações",
+    "Cidades com mais participações",
+  ]) {
     await expect(page.getByRole("heading", { name: titulo })).toBeVisible();
   }
   // A dica aparece junto ao mouse, com o nome e o percentual de cada candidato.

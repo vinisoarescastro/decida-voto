@@ -4,7 +4,7 @@ import { candidates } from "@/lib/data";
 import type { Candidate } from "@/lib/schema";
 import { vereditoDoTema, type Veredito } from "@/lib/veredito";
 import { MaisDetalhes } from "@/components/ui/disclosure";
-import { BORDA_CANDIDATO, Sobretitulo } from "@/components/ui/text";
+import { Sobretitulo } from "@/components/ui/text";
 import { ListaFontes } from "./evidence-list";
 
 // "Pergunta a pergunta": para cada pergunta, só com quem a pessoa concorda mais (sem porcentagem), a resposta
@@ -72,14 +72,20 @@ function RespostaCandidatos({ tema, ids }: { tema: ThemeResult; ids: string[] })
   if (primeira.status !== "documented") return null;
   const alternativa = tema.question.options.find((o) => o.value === primeira.value)!;
   const nomes = ids.map((id) => candidatoDe(id).name);
-  const titulo = nomes.length === 2 ? `${nomes[0]} e ${nomes[1]} responderam o mesmo` : `Resposta de ${nomes[0]}`;
   return (
-    <div className={`rounded-2xl border-l-4 bg-surface-2/80 px-4 py-3 ${ids.length === 1 ? BORDA_CANDIDATO[indiceDe(ids[0])] : "border-line-strong"}`}>
-      <p className="text-xs font-medium text-muted">{titulo}</p>
-      <p className="mt-1 font-medium">{alternativa.text}</p>
+    <div className="bg-surface p-4">
+      <p className="flex items-center gap-2 text-xs font-medium text-muted">
+        <span className="flex shrink-0 -space-x-1.5">
+          {ids.map((id) => (
+            <Image key={id} src={`/candidatos/${id}.jpg`} alt="" width={48} height={48} className="size-5 rounded-full object-cover ring-2 ring-surface" />
+          ))}
+        </span>
+        {nomes.length === 2 ? `${nomes[0]} e ${nomes[1]}` : `Resposta de ${nomes[0]}`}
+      </p>
+      <p className="mt-1.5 font-medium leading-snug">{alternativa.text}</p>
       {posicoes.map((p, i) =>
         p.status === "documented" ? (
-          <div key={ids[i]} className="mt-1">
+          <div key={ids[i]} className="mt-2">
             <MaisDetalhes rotulo={`Por que essa é a posição de ${nomes[i]}?`}>
               <p className="text-sm leading-relaxed text-muted">{p.summary}</p>
               {p.evidence.length > 0 && (
@@ -122,17 +128,18 @@ function CartaoPergunta({ tema, numero }: { tema: ThemeResult; numero: number })
         </p>
       </div>
 
-      <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-        <div className="rounded-2xl border-l-4 border-ink bg-surface-2/80 px-4 py-3">
+      {/* Comparação lado a lado num só painel, com divisórias finas (identidade pela foto e pelo nome, não pela cor). */}
+      <div className={`mt-4 grid gap-px overflow-hidden rounded-2xl border border-line bg-line ${mostrados.length > 0 ? "sm:grid-cols-2" : ""}`}>
+        <div className={`bg-surface p-4 ${v.tipo === "entre" ? "sm:col-span-2" : ""}`}>
           <p className="text-xs font-medium text-muted">Sua resposta</p>
-          <p className="mt-1 font-medium">{resposta.text}</p>
+          <p className="mt-1.5 font-medium leading-snug">{resposta.text}</p>
         </div>
         {v.tipo === "entre" ? (
-          // Mesma distância: mostra os dois, cada um com a sua resposta.
-          <div className="grid gap-2.5 sm:col-span-2 sm:grid-cols-2">
+          // Mesma distância: os dois, cada um com a sua resposta.
+          <>
             <RespostaCandidatos tema={tema} ids={[a]} />
             <RespostaCandidatos tema={tema} ids={[b]} />
-          </div>
+          </>
         ) : mostrados.length > 0 ? (
           <RespostaCandidatos tema={tema} ids={mostrados} />
         ) : null}

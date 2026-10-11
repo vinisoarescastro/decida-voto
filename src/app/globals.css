@@ -25,6 +25,11 @@
   --cand-1: #5a3fc0;
   --cand-2: #b02f86;
   --track: #ececf1;
+  /* Origem do link, só nos gráficos do painel (uso interno): azul, laranja e verde-água da paleta
+     categórica validada (todos os pares, claro e escuro). Não têm relação com os candidatos. */
+  --origem-convite: #2a78d6;
+  --origem-panfleto: #eb6834;
+  --origem-stories: #1baf7a;
   --danger: #a1195e;
   --danger-soft: #fbeff5;
   --glow-1: rgb(190 172 250 / 0.36);
@@ -50,6 +55,9 @@
     --cand-1: #8f7aee;
     --cand-2: #d9549f;
     --track: #24242d;
+    --origem-convite: #3987e5;
+    --origem-panfleto: #d95926;
+    --origem-stories: #199e70;
     --danger: #f39ac4;
     --danger-soft: #2a1622;
     --glow-1: rgb(98 70 200 / 0.28);
@@ -80,6 +88,9 @@
   --color-line-strong: var(--line-strong);
   --color-ring: var(--ring);
   --color-cand-1: var(--cand-1);
+  --color-origem-convite: var(--origem-convite);
+  --color-origem-panfleto: var(--origem-panfleto);
+  --color-origem-stories: var(--origem-stories);
   --color-cand-2: var(--cand-2);
   --color-track: var(--track);
   --color-danger: var(--danger);

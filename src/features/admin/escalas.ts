@@ -45,6 +45,9 @@ export function linhasAfinidade(pontosA: number | null, nomes: [string, string])
   return `${nomes[0]}: ${formatPercent(pontosA)}%\n${nomes[1]}: ${formatPercent(100 - pontosA)}%`;
 }
 
+/** Categoria sem identidade própria ("Direto ou outros", empate, equilibrado): cinza médio, sem matiz. */
+export const COR_OUTROS = "color-mix(in oklab, var(--muted) 55%, var(--surface))";
+
 /** Cor das divisas do mapa: cinza visível sobre qualquer preenchimento, nos dois temas. */
 export const COR_DIVISA = "color-mix(in oklab, var(--muted) 55%, var(--surface))";
 

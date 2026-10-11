@@ -50,6 +50,23 @@ describe("calcularAnalises", () => {
   it("conta as participações por origem (convite, panfleto, stories)", async () => {
     expect((await calcularAnalises(db, CANDIDATOS, {}, 1, dados)).porOrigem).toEqual({ convite: 1, panfleto: 1, stories: 0 });
     expect((await calcularAnalises(db, CANDIDATOS, { uf: "RJ" }, 1, dados)).porOrigem).toEqual({ convite: 0, panfleto: 1, stories: 0 });
+    expect((await calcularAnalises(db, CANDIDATOS, {}, 1, dados)).porDia[0].porOrigem).toEqual({ convite: 1, panfleto: 1, stories: 0 });
+  });
+
+  it("separa os resultados alinhados (10 pontos ou mais de diferença) dos equilibrados", async () => {
+    const a = await calcularAnalises(db, CANDIDATOS, {}, 1, dados);
+    const diferenca = (valor: number) => 2 * pontosA(valor) - 100; // pontos de A − pontos de B
+    const esperado: Record<string, number> = { [A]: 0, [B]: 0 };
+    let equilibrados = 0;
+    for (const [valor, n] of [[1, 4], [4, 3], [2, 1]]) {
+      const d = diferenca(valor);
+      if (d >= 10) esperado[A] += n;
+      else if (d <= -10) esperado[B] += n;
+      else equilibrados += n;
+    }
+    expect(a.alinhados).toEqual(esperado);
+    expect(a.equilibrados).toBe(equilibrados);
+    expect(a.alinhados[A] + a.alinhados[B] + a.equilibrados).toBe(8);
   });
 
   it("distribui as participações por faixa de afinidade, somando o total", async () => {

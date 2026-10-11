@@ -16,7 +16,8 @@ const HOJE_BRASILIA = sql`(now() at time zone 'America/Sao_Paulo')::date`;
 // (PRIVACY_MIN_GROUP, hoje 1). "pontosA" é a média de pontos do 1º candidato (0..100); o 2º é 100 − pontosA.
 
 export type Celula = { n: number; pontosA: number | null };
-export type Dia = Celula & { dia: string };
+/** "porOrigem" conta só os links marcados; o restante do dia (n − soma) chegou direto. */
+export type Dia = Celula & { dia: string; porOrigem: Record<Origem, number> };
 export type Regiao = Celula & { codigo: string; nome: string };
 export type CruzamentoCelula = Celula & { genero: string; faixa: string };
 export type Tema = { perguntaId: string; tema: string; n: number; concordancia: Record<string, number | null> };
@@ -42,6 +43,8 @@ export type Analises = {
   maisProximos: Record<string, number>;
   /** Resultados exatamente 50% × 50%: não entram em nenhum dos dois grupos. */
   empates: number;
+  /** Pessoas com diferença de pelo menos 10 pontos a favor de cada candidato (as demais são "equilibrados"). */
+  alinhados: Record<string, number>;
   /** Concordância absoluta média (0..100) com cada candidato. */
   concordancia: Record<string, number | null>;
   porDia: Dia[];
@@ -87,10 +90,19 @@ export async function calcularAnalises(
       ladoA: sql<number>`count(*) filter (where ${ra.pontos} > ${rb.pontos})::int`,
       ladoB: sql<number>`count(*) filter (where ${rb.pontos} > ${ra.pontos})::int`,
       empates: sql<number>`count(*) filter (where ${ra.pontos} = ${rb.pontos})::int`,
+      alinhadosA: sql<number>`count(*) filter (where ${ra.pontos} - ${rb.pontos} >= ${SIMILARITY_THRESHOLD})::int`,
+      alinhadosB: sql<number>`count(*) filter (where ${rb.pontos} - ${ra.pontos} >= ${SIMILARITY_THRESHOLD})::int`,
       ca: sql<number>`avg(${ra.concordancia})::float8`,
       cb: sql<number>`avg(${rb.concordancia})::float8`,
     }).from(participacoes).$dynamic()),
-    juncao(db.select({ dia: sql<string>`${participacoes.dataEnvio}::text`, n: sql<number>`count(*)::int`, pa: sql<number>`avg(${ra.pontos})::float8` }).from(participacoes).$dynamic())
+    juncao(db.select({
+      dia: sql<string>`${participacoes.dataEnvio}::text`,
+      n: sql<number>`count(*)::int`,
+      pa: sql<number>`avg(${ra.pontos})::float8`,
+      convite: sql<number>`count(*) filter (where ${participacoes.origem} = 'convite')::int`,
+      panfleto: sql<number>`count(*) filter (where ${participacoes.origem} = 'panfleto')::int`,
+      stories: sql<number>`count(*) filter (where ${participacoes.origem} = 'stories')::int`,
+    }).from(participacoes).$dynamic())
       .groupBy(participacoes.dataEnvio)
       .orderBy(participacoes.dataEnvio),
     juncao(db.select({ faixa: sql<number>`least(floor(${ra.pontos} / 10), 9)::int`, n: sql<number>`count(*)::int` }).from(participacoes).$dynamic()).groupBy(sql`1`),
@@ -167,8 +179,13 @@ export async function calcularAnalises(
     porOrigem: Object.fromEntries(ORIGENS.map((o) => [o, num(r?.[o])])) as Record<Origem, number>,
     maisProximos: { [candidatos[0]]: num(r?.ladoA), [candidatos[1]]: num(r?.ladoB) },
     empates: num(r?.empates),
+    alinhados: { [candidatos[0]]: num(r?.alinhadosA), [candidatos[1]]: num(r?.alinhadosB) },
     concordancia: { [candidatos[0]]: media(r?.ca), [candidatos[1]]: media(r?.cb) },
-    porDia: dias.map((d) => ({ dia: d.dia, ...celula(d.n, d.pa) })),
+    porDia: dias.map((d) => ({
+      dia: d.dia,
+      ...celula(d.n, d.pa),
+      porOrigem: Object.fromEntries(ORIGENS.map((o) => [o, num(d[o])])) as Record<Origem, number>,
+    })),
     distribuicao,
     cruzamento: cruz.map((c) => ({ genero: c.genero, faixa: c.faixa, ...celula(c.n, c.pa) })),
     porTema,
