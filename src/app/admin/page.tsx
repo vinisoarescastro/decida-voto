@@ -9,6 +9,7 @@ import {
   GraficoAfinidadeDia,
   GraficoCruzamento,
   GraficoDistribuicao,
+  GraficoMaisProximos,
   GraficoParticipacoesDia,
   GraficoRespostas,
   GraficoTemas,
@@ -101,6 +102,7 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
           </section>
 
           <Indicadores a={analises} total={est.total} candidatos={candidates} />
+          <GraficoMaisProximos a={analises} total={est.total} candidatos={candidates} />
         </>
       )}
 

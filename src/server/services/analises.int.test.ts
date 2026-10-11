@@ -34,6 +34,18 @@ describe("calcularAnalises", () => {
     expect(a.porDia[0].n).toBe(8);
   });
 
+  it("conta para quem cada pessoa ficou mais próxima (dois grupos, acima de 50%)", async () => {
+    const a = await calcularAnalises(db, CANDIDATOS, {}, 1, dados);
+    const lado = (valor: number) => (pontosA(valor) > 50 ? A : pontosA(valor) < 50 ? B : null);
+    const esperado: Record<string, number> = { [A]: 0, [B]: 0 };
+    for (const [valor, n] of [[1, 4], [4, 3], [2, 1]]) {
+      const l = lado(valor);
+      if (l) esperado[l] += n;
+    }
+    expect(a.maisProximos).toEqual(esperado);
+    expect(a.maisProximos[A] + a.maisProximos[B] + a.empates).toBe(8);
+  });
+
   it("conta as participações que vieram de convite", async () => {
     expect((await calcularAnalises(db, CANDIDATOS, {}, 1, dados)).convites).toBe(1);
     expect((await calcularAnalises(db, CANDIDATOS, { uf: "RJ" }, 1, dados)).convites).toBe(0);

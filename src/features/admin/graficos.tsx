@@ -414,3 +414,62 @@ export function GraficoRespostas({ a, candidatos }: { a: Analises; candidatos: C
     </Cartao>
   );
 }
+
+/** Para quem cada pessoa ficou mais próxima: dois grupos (acima de 50% para cada candidato), em número e %. */
+export function GraficoMaisProximos({ a, total, candidatos }: { a: Analises; total: number; candidatos: Candidate[] }) {
+  const pctDe = (n: number) => (total ? (n / total) * 100 : 0);
+  const partes = [
+    { chave: candidatos[0].id, n: a.maisProximos[candidatos[0].id], cor: "bg-cand-1", rotulo: candidatos[0].name },
+    { chave: "empate", n: a.empates, cor: "bg-surface-3", rotulo: "Empate (50% × 50%)" },
+    { chave: candidatos[1].id, n: a.maisProximos[candidatos[1].id], cor: "bg-cand-2", rotulo: candidatos[1].name },
+  ];
+  return (
+    <Cartao
+      titulo="Para quem cada pessoa ficou mais próxima"
+      nota="Cada participação conta para o candidato que ficou com mais de 50% no resultado da pessoa. Inclui os resultados que apareceram como “equilibrados” na tela (diferença menor que 10 pontos)."
+    >
+      <div className="grid grid-cols-2 gap-4">
+        {candidatos.map((c, i) => {
+          const n = a.maisProximos[c.id];
+          return (
+            <div key={c.id} className={i === 1 ? "text-right" : ""}>
+              <p className={`flex items-center gap-2 text-sm font-medium ${i === 1 ? "justify-end" : ""}`}>
+                <MarcadorCandidato indice={i} />
+                {c.name}
+              </p>
+              <p className="mt-1 text-4xl font-semibold tracking-tight">{n.toLocaleString("pt-BR")}</p>
+              <p className="text-sm text-muted">
+                {n === 1 ? "pessoa" : "pessoas"} · <strong className="font-semibold text-ink">{formatPercent(pctDe(n))}%</strong>
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <AreaDicas className="mt-4">
+        <div className="flex h-3.5 gap-0.5 overflow-hidden rounded-full bg-track">
+          {partes.map((p) =>
+            p.n === 0 ? null : (
+              <div
+                key={p.chave}
+                tabIndex={0}
+                data-dica={`${p.rotulo}\n${plural(p.n, "pessoa", "pessoas")} (${formatPercent(pctDe(p.n))}%)`}
+                className={`h-full cursor-default outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-ink ${p.cor}`}
+                style={{ width: `${pctDe(p.n)}%` }}
+              />
+            ),
+          )}
+        </div>
+      </AreaDicas>
+      {a.empates > 0 && (
+        <p className="mt-2 text-xs text-muted">
+          {plural(a.empates, "resultado", "resultados")} exatamente 50% × 50% ({formatPercent(pctDe(a.empates))}%) não {a.empates === 1 ? "entra" : "entram"} em
+          nenhum dos lados.
+        </p>
+      )}
+      <Tabela
+        cabecalho={["Mais próximo de", "Pessoas", "%"]}
+        linhas={partes.filter((p) => p.chave !== "empate" || p.n > 0).map((p) => [p.rotulo, p.n, `${formatPercent(pctDe(p.n))}%`])}
+      />
+    </Cartao>
+  );
+}

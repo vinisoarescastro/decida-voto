@@ -37,6 +37,10 @@ export type Analises = {
   equilibrados: number;
   /** Participações de quem chegou por um link de convite (?origem=convite). */
   convites: number;
+  /** Pessoas cujo resultado ficou acima de 50% para cada candidato (dois grupos). */
+  maisProximos: Record<string, number>;
+  /** Resultados exatamente 50% × 50%: não entram em nenhum dos dois grupos. */
+  empates: number;
   /** Concordância absoluta média (0..100) com cada candidato. */
   concordancia: Record<string, number | null>;
   porDia: Dia[];
@@ -77,6 +81,9 @@ export async function calcularAnalises(
       semana: sql<number>`count(*) filter (where ${participacoes.dataEnvio} >= ${HOJE_BRASILIA} - 6)::int`,
       equilibrados: sql<number>`count(*) filter (where abs(${ra.pontos} - ${rb.pontos}) < ${SIMILARITY_THRESHOLD})::int`,
       convites: sql<number>`count(*) filter (where ${participacoes.origem} = 'convite')::int`,
+      ladoA: sql<number>`count(*) filter (where ${ra.pontos} > ${rb.pontos})::int`,
+      ladoB: sql<number>`count(*) filter (where ${rb.pontos} > ${ra.pontos})::int`,
+      empates: sql<number>`count(*) filter (where ${ra.pontos} = ${rb.pontos})::int`,
       ca: sql<number>`avg(${ra.concordancia})::float8`,
       cb: sql<number>`avg(${rb.concordancia})::float8`,
     }).from(participacoes).$dynamic()),
@@ -155,6 +162,8 @@ export async function calcularAnalises(
     ultimos7: num(r?.semana),
     equilibrados: num(r?.equilibrados),
     convites: num(r?.convites),
+    maisProximos: { [candidatos[0]]: num(r?.ladoA), [candidatos[1]]: num(r?.ladoB) },
+    empates: num(r?.empates),
     concordancia: { [candidatos[0]]: media(r?.ca), [candidatos[1]]: media(r?.cb) },
     porDia: dias.map((d) => ({ dia: d.dia, ...celula(d.n, d.pa) })),
     distribuicao,
