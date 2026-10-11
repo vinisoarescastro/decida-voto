@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PaginaConteudo, Secao } from "@/components/layout/page";
 import { Sumario } from "@/components/ui/text";
-import { RETENCAO_PARTICIPACOES } from "@/lib/site";
+import { RETENCAO_ALTERACAO, RETENCAO_PARTICIPACOES } from "@/lib/site";
 import { responsavelPublico } from "@/server/responsavel-publico";
 
 export const metadata: Metadata = {
@@ -88,7 +88,7 @@ export default async function PaginaPrivacidade() {
         <p>
           Como não guardamos nenhum dado que identifique você, não é possível localizar depois uma participação específica
           para consultá-la, corrigi-la ou excluí-la individualmente. Todas as participações são excluídas no prazo indicado
-          abaixo.
+          abaixo ou, se houver prorrogação, na nova data publicada nesta página.
         </p>
       </Secao>
 
@@ -96,7 +96,14 @@ export default async function PaginaPrivacidade() {
         <ul className={lista}>
           <li>
             <strong>Participações:</strong> até {RETENCAO_PARTICIPACOES}, quando são excluídas automaticamente. As cópias de
-            segurança são mantidas por até 14 dias.
+            segurança são mantidas por até 14 dias. Este prazo foi alterado em {RETENCAO_ALTERACAO.em} (antes, era até{" "}
+            {RETENCAO_ALTERACAO.prazoAnterior}) e vale também para as participações enviadas antes da alteração.
+          </li>
+          <li>
+            <strong>Prorrogação do prazo:</strong> se for necessário para as finalidades descritas nesta política, o prazo de
+            guarda das participações pode ser prorrogado, quantas vezes for preciso. Cada prorrogação terá uma nova data
+            definida, será publicada nesta página antes do fim do prazo em vigor e valerá também para as participações já
+            registradas.
           </li>
           <li>
             <strong>Controle de abuso:</strong> para limitar envios automatizados, usamos um código gerado a partir do
@@ -146,6 +153,10 @@ export default async function PaginaPrivacidade() {
             conter imprecisões ou ficar desatualizadas.
           </li>
           <li>Os links para notícias e fontes levam a sites de terceiros, que têm suas próprias políticas de privacidade.</li>
+          <li>
+            Os dados das participações são guardados pelo prazo informado em “Por quanto tempo guardamos”, que pode ser
+            prorrogado quando necessário, sempre com uma nova data publicada nesta página.
+          </li>
         </ul>
       </Secao>
 

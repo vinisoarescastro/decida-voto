@@ -4,7 +4,9 @@
 // Obrigatório antes da publicação.
 
 /** Data em que as participações são excluídas. Mantenha igual a PARTICIPACOES_EXCLUIR_APOS no .env. */
-export const RETENCAO_PARTICIPACOES = "31/03/2027";
+export const RETENCAO_PARTICIPACOES = "11/10/2034";
+/** Registro da última alteração do prazo, exibido na página de Privacidade (transparência com quem já participou). */
+export const RETENCAO_ALTERACAO = { em: "11/10/2026", prazoAnterior: "31/03/2027" };
 
 /** Endereço público do site (prévias de link e convites). */
 export const URL_SITE = "https://emquemvotar.digital";
