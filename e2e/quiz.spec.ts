@@ -265,3 +265,15 @@ test("buscadores: mapa do site, robots.txt, endereço oficial e dados estruturad
   const dados = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!);
   expect(dados).toMatchObject({ "@type": "WebSite", name: "Em quem votar?", url: "https://emquemvotar.digital/" });
 });
+
+test("origem do acesso: panfleto e stories são marcados na aba; valores desconhecidos são ignorados", async ({ page }) => {
+  const origemMarcada = () => page.evaluate(() => sessionStorage.getItem("dv_origem"));
+  for (const origem of ["panfleto", "stories"]) {
+    await page.goto(`/?origem=${origem}`);
+    await expect.poll(origemMarcada).toBe(origem);
+  }
+  await page.evaluate(() => sessionStorage.clear());
+  await page.goto("/?origem=hacker");
+  await page.waitForTimeout(300);
+  expect(await origemMarcada()).toBeNull();
+});

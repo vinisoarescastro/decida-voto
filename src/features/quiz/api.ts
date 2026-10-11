@@ -35,7 +35,7 @@ export async function enviarParticipacao(perfil: PerfilForm, respostas: Answers,
         consentimento: true,
         token,
         site: perfil.site,
-        // Só "convite" (chegou por link compartilhado); ausente nos demais casos.
+        // convite, panfleto ou stories (link com ?origem=…); ausente nos demais casos.
         origem: lerOrigem(),
       }),
     });

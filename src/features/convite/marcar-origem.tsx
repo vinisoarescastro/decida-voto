@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect } from "react";
-import { ORIGEM_CONVITE } from "@/lib/site";
+import { ORIGENS, type Origem } from "@/lib/site";
 
-// Medição dos convites: quem chega por um link compartilhado (?origem=convite) fica marcado só nesta aba
-// (sessionStorage, apagado ao fechar). No envio, o servidor grava apenas "veio de convite" — sem saber
-// quem convidou nem guardar identificador. Nada de cookie novo nem ferramenta de análise de terceiros.
+// Medição da divulgação: quem chega por um link com ?origem=convite|panfleto|stories fica marcado só nesta
+// aba (sessionStorage, apagado ao fechar). No envio, o servidor grava apenas a origem — sem saber quem
+// convidou nem guardar identificador. Nada de cookie novo nem ferramenta de análise de terceiros.
+
+const eOrigem = (v: string | null): v is Origem => (ORIGENS as readonly string[]).includes(v ?? "");
 
 const CHAVE = "dv_origem";
 
 export function MarcarOrigem() {
   useEffect(() => {
     try {
-      if (new URLSearchParams(window.location.search).get("origem") === ORIGEM_CONVITE) {
-        window.sessionStorage.setItem(CHAVE, ORIGEM_CONVITE);
-      }
+      const origem = new URLSearchParams(window.location.search).get("origem");
+      if (eOrigem(origem)) window.sessionStorage.setItem(CHAVE, origem);
     } catch {
       // Navegação privada ou armazenamento bloqueado: a participação conta, só sem a marca de origem.
     }
@@ -23,9 +24,10 @@ export function MarcarOrigem() {
 }
 
 /** Origem marcada nesta aba, para acompanhar o envio da participação. */
-export function lerOrigem(): typeof ORIGEM_CONVITE | undefined {
+export function lerOrigem(): Origem | undefined {
   try {
-    return window.sessionStorage.getItem(CHAVE) === ORIGEM_CONVITE ? ORIGEM_CONVITE : undefined;
+    const origem = window.sessionStorage.getItem(CHAVE);
+    return eOrigem(origem) ? origem : undefined;
   } catch {
     return undefined;
   }

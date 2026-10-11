@@ -1,6 +1,7 @@
 import { and, eq, sql } from "drizzle-orm";
 import { alias, type PgSelect } from "drizzle-orm/pg-core";
 import { SIMILARITY_THRESHOLD, themeAffinity } from "@/lib/affinity";
+import { ORIGENS, type Origem } from "@/lib/site";
 import type { Position, Question } from "@/lib/schema";
 import { participacoes, respostas, resultados } from "../db/schema";
 import type { AnyDb } from "../db/types";
@@ -35,8 +36,8 @@ export type Analises = {
   ultimos7: number;
   /** Participações com diferença entre os candidatos menor que o limiar de "equilibrado" do resultado. */
   equilibrados: number;
-  /** Participações de quem chegou por um link de convite (?origem=convite). */
-  convites: number;
+  /** Participações por origem do link (?origem=convite|panfleto|stories). As demais chegaram direto. */
+  porOrigem: Record<Origem, number>;
   /** Pessoas cujo resultado ficou acima de 50% para cada candidato (dois grupos). */
   maisProximos: Record<string, number>;
   /** Resultados exatamente 50% × 50%: não entram em nenhum dos dois grupos. */
@@ -80,7 +81,9 @@ export async function calcularAnalises(
       hoje: sql<number>`count(*) filter (where ${participacoes.dataEnvio} = ${HOJE_BRASILIA})::int`,
       semana: sql<number>`count(*) filter (where ${participacoes.dataEnvio} >= ${HOJE_BRASILIA} - 6)::int`,
       equilibrados: sql<number>`count(*) filter (where abs(${ra.pontos} - ${rb.pontos}) < ${SIMILARITY_THRESHOLD})::int`,
-      convites: sql<number>`count(*) filter (where ${participacoes.origem} = 'convite')::int`,
+      convite: sql<number>`count(*) filter (where ${participacoes.origem} = 'convite')::int`,
+      panfleto: sql<number>`count(*) filter (where ${participacoes.origem} = 'panfleto')::int`,
+      stories: sql<number>`count(*) filter (where ${participacoes.origem} = 'stories')::int`,
       ladoA: sql<number>`count(*) filter (where ${ra.pontos} > ${rb.pontos})::int`,
       ladoB: sql<number>`count(*) filter (where ${rb.pontos} > ${ra.pontos})::int`,
       empates: sql<number>`count(*) filter (where ${ra.pontos} = ${rb.pontos})::int`,
@@ -161,7 +164,7 @@ export async function calcularAnalises(
     hoje: num(r?.hoje),
     ultimos7: num(r?.semana),
     equilibrados: num(r?.equilibrados),
-    convites: num(r?.convites),
+    porOrigem: Object.fromEntries(ORIGENS.map((o) => [o, num(r?.[o])])) as Record<Origem, number>,
     maisProximos: { [candidatos[0]]: num(r?.ladoA), [candidatos[1]]: num(r?.ladoB) },
     empates: num(r?.empates),
     concordancia: { [candidatos[0]]: media(r?.ca), [candidatos[1]]: media(r?.cb) },

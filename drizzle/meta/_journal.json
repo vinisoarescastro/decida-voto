@@ -43,6 +43,13 @@
       "when": 1791675273915,
       "tag": "0005_origem_convite",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791730140074,
+      "tag": "0006_origens_panfleto_stories",
+      "breakpoints": true
     }
   ]
 }

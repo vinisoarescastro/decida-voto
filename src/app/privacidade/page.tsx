@@ -52,8 +52,9 @@ export default async function PaginaPrivacidade() {
             <strong>Data do envio</strong>, sem horário.
           </li>
           <li>
-            <strong>Origem por convite:</strong> se você chegou por um link compartilhado no resultado de outra pessoa,
-            registramos apenas que a participação veio de um convite. Não sabemos quem convidou.
+            <strong>Origem do acesso:</strong> se você chegou por um link compartilhado no resultado de outra pessoa, pelo
+            QR code de um panfleto ou por um link nas redes sociais, registramos apenas essa origem (convite, panfleto ou
+            stories). Não sabemos quem convidou nem quem você é.
           </li>
         </ul>
         <p>

@@ -1,0 +1,2 @@
+ALTER TABLE "participacoes" DROP CONSTRAINT "participacoes_origem_ck";--> statement-breakpoint
+ALTER TABLE "participacoes" ADD CONSTRAINT "participacoes_origem_ck" CHECK ("participacoes"."origem" is null or "participacoes"."origem" in ('convite', 'panfleto', 'stories'));

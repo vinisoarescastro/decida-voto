@@ -96,11 +96,27 @@ export function Indicadores({ a, total, candidatos }: { a: Analises; total: numb
         valor={total ? `${formatPercent((a.equilibrados / total) * 100)}%` : "—"}
         detalhe={`${plural(a.equilibrados, "pessoa", "pessoas")} com diferença menor que 10 pontos`}
       />
-      <Indicador
-        rotulo="Vieram de convite"
-        valor={a.convites.toLocaleString("pt-BR")}
-        detalhe={total ? `${formatPercent((a.convites / total) * 100)}% chegaram por link compartilhado no resultado` : "participações"}
-      />
+      <div className="rounded-3xl border border-line bg-surface/90 p-5 shadow-sm">
+        <p className="text-xs font-medium text-muted">Como chegaram</p>
+        <ul className="mt-2 space-y-1 text-sm">
+          {(
+            [
+              ["Convite no resultado", a.porOrigem.convite],
+              ["Panfleto (QR code)", a.porOrigem.panfleto],
+              ["Stories", a.porOrigem.stories],
+              ["Direto ou outros", Math.max(0, total - a.porOrigem.convite - a.porOrigem.panfleto - a.porOrigem.stories)],
+            ] as const
+          ).map(([rotulo, n]) => (
+            <li key={rotulo} className="flex items-baseline justify-between gap-2">
+              <span className="truncate text-muted">{rotulo}</span>
+              <span className="whitespace-nowrap">
+                <strong className="font-semibold">{n.toLocaleString("pt-BR")}</strong>
+                <span className="ml-1 text-xs text-muted">{total ? `${formatPercent((n / total) * 100)}%` : ""}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="col-span-2 rounded-3xl border border-line bg-surface/90 p-5 shadow-sm lg:col-span-1">
         <p className="text-xs font-medium text-muted">Concordância média</p>
         <ul className="mt-2 space-y-1.5 text-sm">

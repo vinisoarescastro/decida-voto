@@ -70,8 +70,8 @@ describe("participacaoSchema", () => {
     expect(participacaoSchema.safeParse({ ...valido, resultado: { lula: 100 } }).success).toBe(false);
   });
 
-  it("aceita só a origem 'convite' (ou nenhuma)", () => {
-    expect(participacaoSchema.safeParse({ ...valido, origem: "convite" }).success).toBe(true);
+  it("aceita só as origens conhecidas (ou nenhuma)", () => {
+    for (const origem of ["convite", "panfleto", "stories"]) expect(participacaoSchema.safeParse({ ...valido, origem }).success).toBe(true);
     expect(participacaoSchema.safeParse({ ...valido, origem: "anuncio" }).success).toBe(false);
     expect(participacaoSchema.safeParse({ ...valido, origem: "convite-de-fulano" }).success).toBe(false);
   });

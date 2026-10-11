@@ -11,9 +11,16 @@ export const RETENCAO_ALTERACAO = { em: "11/10/2026", prazoAnterior: "31/03/2027
 /** Endereço público do site (prévias de link e convites). */
 export const URL_SITE = "https://emquemvotar.digital";
 
-/** Marca de origem dos convites: o link compartilhado leva ?origem=convite. Só "convite" é aceito. */
-export const ORIGEM_CONVITE = "convite";
-export const LINK_CONVITE = `${URL_SITE}/?origem=${ORIGEM_CONVITE}`;
+/**
+ * Origens medidas (?origem=… no link): convite no resultado, QR code do panfleto e link dos stories.
+ * Só esses valores são aceitos; a origem não identifica quem convidou nem quem respondeu.
+ */
+export const ORIGENS = ["convite", "panfleto", "stories"] as const;
+export type Origem = (typeof ORIGENS)[number];
+export const ORIGEM_CONVITE: Origem = "convite";
+export const LINK_CONVITE = `${URL_SITE}/?origem=convite`;
+export const LINK_PANFLETO = `${URL_SITE}/?origem=panfleto`;
+export const LINK_STORIES = `${URL_SITE}/?origem=stories`;
 
 /** Mensagem pronta do convite. Neutra e sem o resultado de quem envia (privacidade e período eleitoral). */
 export const MENSAGEM_CONVITE =
