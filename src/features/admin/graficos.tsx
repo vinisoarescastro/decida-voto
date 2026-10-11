@@ -335,3 +335,82 @@ export function GraficoCruzamento({ a, candidatos }: { a: Analises; candidatos: 
     </Cartao>
   );
 }
+
+// Escala ORDINAL de um tom neutro (alternativa 1 → 4), validada com o validador da skill (--ordinal, claro e
+// escuro). As cores dos candidatos não entram na barra: o lado de cada um muda de pergunta para pergunta.
+const TONS_ESCALA = [34, 52, 70, 88].map((t) => `color-mix(in oklab, var(--ink) ${t}%, var(--surface))`);
+
+/** Respostas por pergunta: quantas pessoas marcaram cada alternativa, com a posição de cada candidato. */
+export function GraficoRespostas({ a, candidatos }: { a: Analises; candidatos: Candidate[] }) {
+  const ondeEsta = (posicoes: Record<string, number | null>, valor: number) =>
+    candidatos.map((c, i) => ({ c, i })).filter(({ c }) => posicoes[c.id] === valor);
+  return (
+    <Cartao
+      titulo="Respostas por pergunta"
+      nota="Quantas pessoas marcaram cada alternativa, na ordem da escala (1 a 4; no questionário a ordem é sorteada). As etiquetas indicam a alternativa em que cada candidato está."
+    >
+      <AreaDicas>
+        <div className="grid gap-x-10 gap-y-9 lg:grid-cols-2">
+          {a.respostasPorPergunta.map((q) => (
+            <div key={q.perguntaId}>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">{q.tema}</p>
+              <p className="mt-1 text-sm font-medium leading-snug">{q.texto}</p>
+              {q.total === 0 ? (
+                <p className="mt-3 text-xs text-muted">Sem respostas no recorte.</p>
+              ) : (
+                <div className="mt-3 flex h-3 gap-0.5 overflow-hidden rounded-full">
+                  {q.alternativas.map((alt, i) =>
+                    alt.n === 0 ? null : (
+                      <div
+                        key={alt.valor}
+                        tabIndex={0}
+                        data-dica={`Alternativa ${alt.valor}: ${alt.texto}\n${plural(alt.n, "resposta", "respostas")} (${formatPercent((alt.n / q.total) * 100)}%)${ondeEsta(q.posicoes, alt.valor)
+                          .map(({ c }) => `\nPosição de ${c.name}`)
+                          .join("")}`}
+                        className="h-full cursor-default outline-none transition-opacity hover:opacity-85 focus-visible:ring-2 focus-visible:ring-ink"
+                        style={{ width: `${(alt.n / q.total) * 100}%`, background: TONS_ESCALA[i] }}
+                      />
+                    ),
+                  )}
+                </div>
+              )}
+              <ol className="mt-3 space-y-1.5 text-xs">
+                {q.alternativas.map((alt, i) => (
+                  <li key={alt.valor} className="flex items-start gap-2">
+                    <span aria-hidden="true" className="mt-[3px] size-2.5 shrink-0 rounded-sm" style={{ background: TONS_ESCALA[i] }} />
+                    <span className="flex-1 leading-snug">
+                      <span className="text-muted">{alt.valor}.</span> {alt.texto}
+                      {ondeEsta(q.posicoes, alt.valor).map(({ c, i: indice }) => (
+                        <span key={c.id} className="ml-1.5 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-surface-2 px-1.5 py-px align-middle text-[11px] text-muted">
+                          <MarcadorCandidato indice={indice} className="size-2" />
+                          {c.name}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="shrink-0 tabular-nums text-muted">
+                      {alt.n.toLocaleString("pt-BR")} · {q.total ? `${formatPercent((alt.n / q.total) * 100)}%` : "—"}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      </AreaDicas>
+      <Tabela
+        cabecalho={["Pergunta", "Alternativa", "Respostas", "%", "Candidato nesta alternativa"]}
+        linhas={a.respostasPorPergunta.flatMap((q) =>
+          q.alternativas.map((alt) => [
+            q.tema,
+            `${alt.valor}. ${alt.texto}`,
+            alt.n,
+            q.total ? `${formatPercent((alt.n / q.total) * 100)}%` : "—",
+            ondeEsta(q.posicoes, alt.valor)
+              .map(({ c }) => c.name)
+              .join(", ") || "—",
+          ]),
+        )}
+      />
+    </Cartao>
+  );
+}

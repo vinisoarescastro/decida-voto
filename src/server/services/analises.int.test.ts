@@ -63,6 +63,20 @@ describe("calcularAnalises", () => {
     expect(a.concordancia[B]).not.toBeNull();
   });
 
+  it("conta quantas pessoas marcaram cada alternativa, na ordem da escala", async () => {
+    const a = await calcularAnalises(db, CANDIDATOS, {}, 1, dados);
+    const [q] = base.questions;
+    const r = a.respostasPorPergunta.find((x) => x.perguntaId === q.id)!;
+    expect(r.total).toBe(8);
+    expect(r.alternativas.map((x) => x.valor)).toEqual([1, 2, 3, 4]);
+    expect(r.alternativas.map((x) => x.n)).toEqual([4, 1, 0, 3]);
+    expect(r.alternativas[0].texto).toBe(q.options.find((o) => o.value === 1)!.text);
+    const posA = base.positions.find((p) => p.questionId === q.id && p.candidateId === A)!;
+    expect(r.posicoes[A]).toBe(posA.value);
+    const rj = await calcularAnalises(db, CANDIDATOS, { uf: "RJ" }, 1, dados);
+    expect(rj.respostasPorPergunta[0].alternativas.map((x) => x.n)).toEqual([0, 0, 0, 3]);
+  });
+
   it("dá os dados do mapa: todos os estados e, com UF filtrada, os municípios", async () => {
     const brasil = await calcularAnalises(db, CANDIDATOS, {}, 1, dados);
     expect(Object.fromEntries(brasil.porUf.map((u) => [u.codigo, u.n]))).toEqual({ SP: 5, RJ: 3 });

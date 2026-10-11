@@ -5,7 +5,15 @@ import { MarcadorCandidato, Sobretitulo } from "@/components/ui/text";
 import { AbasPainel } from "@/features/admin/abas";
 import { Filtros } from "@/features/admin/filters";
 import { BarraDividida, Grupos } from "@/features/admin/groups";
-import { GraficoAfinidadeDia, GraficoCruzamento, GraficoDistribuicao, GraficoParticipacoesDia, GraficoTemas, Indicadores } from "@/features/admin/graficos";
+import {
+  GraficoAfinidadeDia,
+  GraficoCruzamento,
+  GraficoDistribuicao,
+  GraficoParticipacoesDia,
+  GraficoRespostas,
+  GraficoTemas,
+  Indicadores,
+} from "@/features/admin/graficos";
 import { lerFiltros, lerMetrica } from "@/features/admin/ler-filtros";
 import { MapaPainel } from "@/features/admin/mapa";
 import { BotaoSair } from "@/features/admin/logout-button";
@@ -107,6 +115,7 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
             <GraficoCruzamento a={analises} candidatos={candidates} />
           </div>
           <GraficoTemas a={analises} candidatos={candidates} />
+          <GraficoRespostas a={analises} candidatos={candidates} />
 
           <h2 className="pt-2 text-lg font-semibold tracking-tight">Detalhe por grupo</h2>
           <div className="grid items-start gap-5 md:grid-cols-2">

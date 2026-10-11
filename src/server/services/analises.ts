@@ -19,6 +19,16 @@ export type Dia = Celula & { dia: string };
 export type Regiao = Celula & { codigo: string; nome: string };
 export type CruzamentoCelula = Celula & { genero: string; faixa: string };
 export type Tema = { perguntaId: string; tema: string; n: number; concordancia: Record<string, number | null> };
+export type RespostasPergunta = {
+  perguntaId: string;
+  tema: string;
+  texto: string;
+  total: number;
+  /** Na ordem da escala (valor 1 a 4), com o texto publicado de cada alternativa. */
+  alternativas: { valor: number; texto: string; n: number }[];
+  /** Alternativa (valor) em que cada candidato está; null sem posição documentada. */
+  posicoes: Record<string, number | null>;
+};
 
 export type Analises = {
   hoje: number;
@@ -34,6 +44,8 @@ export type Analises = {
   distribuicao: number[];
   cruzamento: CruzamentoCelula[];
   porTema: Tema[];
+  /** Quantas pessoas marcaram cada alternativa, por pergunta. */
+  respostasPorPergunta: RespostasPergunta[];
   porUf: Regiao[];
   /** Municípios da UF filtrada (vazio sem filtro de UF). */
   municipiosDaUf: Regiao[];
@@ -118,6 +130,25 @@ export async function calcularAnalises(
     return { perguntaId: q.id, tema: q.theme, n, concordancia };
   });
 
+  const respostasPorPergunta: RespostasPergunta[] = base.questions.map((q) => {
+    const linhas = temas.filter((t) => t.pergunta === q.id);
+    const posicoes: Record<string, number | null> = {};
+    for (const cid of candidatos) {
+      const p = base.positions.find((x) => x.questionId === q.id && x.candidateId === cid);
+      posicoes[cid] = p?.status === "documented" ? p.value : null;
+    }
+    return {
+      perguntaId: q.id,
+      tema: q.theme,
+      texto: q.text,
+      total: linhas.reduce((s, l) => s + num(l.n), 0),
+      alternativas: [...q.options]
+        .sort((a, b) => a.value - b.value)
+        .map((o) => ({ valor: o.value, texto: o.text, n: num(linhas.find((l) => num(l.valor) === o.value)?.n) })),
+      posicoes,
+    };
+  });
+
   const [r] = resumo;
   return {
     hoje: num(r?.hoje),
@@ -129,6 +160,7 @@ export async function calcularAnalises(
     distribuicao,
     cruzamento: cruz.map((c) => ({ genero: c.genero, faixa: c.faixa, ...celula(c.n, c.pa) })),
     porTema,
+    respostasPorPergunta,
     porUf: ufs.map((u) => ({ codigo: u.uf, nome: u.uf, ...celula(u.n, u.pa) })),
     municipiosDaUf: muns.map((m) => ({ codigo: String(m.codigo), nome: nomesMunicipios.get(m.codigo) ?? String(m.codigo), ...celula(m.n, m.pa) })),
   };
