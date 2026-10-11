@@ -15,6 +15,7 @@ import { GraficoAfinidade } from "./affinity-chart";
 import { ComoCalculamos } from "./how-calculated";
 import { PainelNoticias } from "./news-panel";
 import { PainelTemas } from "./themes-panel";
+import { PerguntaAPergunta } from "./pergunta-a-pergunta";
 
 const MENSAGENS_ENVIO: Record<StatusEnvio, string | null> = {
   enviando: null,
@@ -95,6 +96,7 @@ type Props = {
 export function TelaResultado({ resultado, envio, tituloRef, aoRefazer, aoRevisar }: Props) {
   const base = useId();
   const [aberta, setAberta] = useState<IdSecao | null>(null);
+  const [porPergunta, setPorPergunta] = useState(false);
   const alternar = (secao: IdSecao) => setAberta((atual) => (atual === secao ? null : secao));
   const semComparacao = resultado.comparableCount === 0;
   const mensagem = envio ? MENSAGENS_ENVIO[envio] : null;
@@ -139,7 +141,33 @@ export function TelaResultado({ resultado, envio, tituloRef, aoRefazer, aoRevisa
         </p>
       </div>
 
-      <ConviteCompartilhar />
+      <Botao
+        variante="secundario"
+        tamanho="lg"
+        aria-expanded={porPergunta}
+        aria-controls={`${base}-por-pergunta`}
+        onClick={() => setPorPergunta((v) => !v)}
+        className="mt-6 w-full"
+      >
+        <IconeLista />
+        {porPergunta ? "Ocultar pergunta a pergunta" : "Ver pergunta a pergunta"}
+        <IconeChevronBaixo className={`transition-transform duration-200 ${porPergunta ? "rotate-180" : ""}`} />
+      </Botao>
+
+      {porPergunta ? (
+        <section id={`${base}-por-pergunta`} aria-label="Pergunta a pergunta" className="animate-surgir mt-6">
+          <p className="mb-4 text-sm leading-relaxed text-muted">
+            Em cada pergunta, com quem a sua resposta combina mais e a resposta desse candidato.
+          </p>
+          <PerguntaAPergunta temas={resultado.themes} />
+          <ConviteCompartilhar
+            titulo="Será que seus amigos pensam como você?"
+            texto="Mande o teste e depois comparem as respostas. Leva 3 minutos e não precisa de cadastro. Seu resultado não vai junto."
+          />
+        </section>
+      ) : (
+        <ConviteCompartilhar />
+      )}
 
       <section aria-labelledby={`${base}-entenda`} className="mt-10">
         <h2 id={`${base}-entenda`} className="text-lg font-semibold tracking-tight">

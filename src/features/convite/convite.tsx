@@ -37,7 +37,15 @@ const IconeCopiar = () => (
 
 const semAssinatura = () => () => {};
 
-export function ConviteCompartilhar() {
+type PropsConvite = {
+  titulo?: string;
+  texto?: string;
+};
+
+export function ConviteCompartilhar({
+  titulo = "Conhece alguém em dúvida?",
+  texto = "Mande o teste. Leva 3 minutos e não precisa de cadastro. Seu resultado não vai junto.",
+}: PropsConvite = {}) {
   // O menu nativo de compartilhamento só existe em alguns navegadores (quase todos os celulares).
   const podeCompartilhar = useSyncExternalStore(semAssinatura, () => "share" in navigator, () => false);
   const [copiado, setCopiado] = useState(false);
@@ -64,9 +72,9 @@ export function ConviteCompartilhar() {
   return (
     <section aria-labelledby="convite-titulo" className="mt-8 rounded-3xl border border-line bg-surface/90 p-5 shadow-sm sm:p-6">
       <h2 id="convite-titulo" className="text-lg font-semibold tracking-tight">
-        Conhece alguém em dúvida?
+        {titulo}
       </h2>
-      <p className="mt-1 text-sm leading-relaxed text-muted">Mande o teste. Leva 3 minutos e não precisa de cadastro. Seu resultado não vai junto.</p>
+      <p className="mt-1 text-sm leading-relaxed text-muted">{texto}</p>
 
       <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
         <a href={LINK_WHATSAPP} target="_blank" rel="noopener noreferrer" className={classeBotao("primario", "md", "w-full sm:w-auto")}>

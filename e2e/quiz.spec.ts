@@ -49,6 +49,19 @@ test("fluxo completo: perfil, questionário, resultado e registro da participaç
   // Foto dos dois candidatos no resultado (a do mais próximo maior; iguais se o resultado for equilibrado).
   await expect(page.locator('figure img[src*="/candidatos/"]')).toHaveCount(2);
 
+  // Pergunta a pergunta: só com quem concorda mais (sem porcentagem) e convite no fim da lista.
+  await page.getByRole("button", { name: "Ver pergunta a pergunta" }).click();
+  const porPergunta = page.getByRole("region", { name: "Pergunta a pergunta" });
+  await expect(porPergunta.locator("li").filter({ hasText: "Nesta pergunta" })).toHaveCount(10);
+  for (const texto of await porPergunta.locator("ol > li").allInnerTexts()) {
+    expect(texto).toMatch(/Nesta pergunta, (você concorda (mais )?com|sua resposta fica entre os dois|os dois candidatos pensam igual|não há posição)/);
+    expect(texto).toContain("Sua resposta");
+    expect(texto).not.toMatch(/\d\s*%/);
+  }
+  await expect(page.getByRole("heading", { name: "Será que seus amigos pensam como você?" })).toBeVisible();
+  await page.getByRole("button", { name: "Ocultar pergunta a pergunta" }).click();
+  await expect(page.getByRole("heading", { name: "Conhece alguém em dúvida?" })).toBeVisible();
+
   // Detalhes ficam fechados até a pessoa pedir.
   await expect(page.getByText("Concordância absoluta.")).toHaveCount(0);
   await page.getByRole("button", { name: /Detalhes por tema/ }).click();
