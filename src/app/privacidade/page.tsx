@@ -7,6 +7,7 @@ import { responsavelPublico } from "@/server/responsavel-publico";
 export const metadata: Metadata = {
   title: "Privacidade e termos de uso",
   description: "Quais dados o site Em quem votar? coleta, para quê, por quanto tempo e como são protegidos.",
+  alternates: { canonical: "/privacidade/" },
 };
 
 const lista = "list-disc space-y-2 pl-5";

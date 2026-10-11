@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Em quem votar?",
-    url: "/",
     title: "Em quem votar? Descubra qual candidato pensa mais parecido com você",
     description: "10 perguntas rápidas, 3 minutos, sem cadastro. Baseado em posições públicas documentadas.",
   },

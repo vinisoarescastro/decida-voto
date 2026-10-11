@@ -244,3 +244,24 @@ test("prévia do link: imagem e textos para WhatsApp e redes sociais", async ({ 
   expect(imagem.status()).toBe(200);
   expect((await imagem.body()).length).toBeLessThan(300 * 1024);
 });
+
+test("buscadores: mapa do site, robots.txt, endereço oficial e dados estruturados", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const caminho of ["/", "/questionario/", "/metodologia/", "/privacidade/"]) {
+    expect(sitemap).toContain(`<loc>https://emquemvotar.digital${caminho}</loc>`);
+  }
+  expect(sitemap).not.toContain("/admin");
+
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toContain("Disallow: /admin/");
+  expect(robots).toContain("Sitemap: https://emquemvotar.digital/sitemap.xml");
+
+  for (const [caminho, oficial] of [["/?origem=convite", "https://emquemvotar.digital"], ["/metodologia/", "https://emquemvotar.digital/metodologia/"]]) {
+    await page.goto(caminho);
+    expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toMatch(new RegExp(`^${oficial}/?$`));
+  }
+
+  await page.goto("/");
+  const dados = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!);
+  expect(dados).toMatchObject({ "@type": "WebSite", name: "Em quem votar?", url: "https://emquemvotar.digital/" });
+});

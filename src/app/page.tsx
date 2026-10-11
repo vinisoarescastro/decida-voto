@@ -1,12 +1,33 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Fragment } from "react";
 import { Logo } from "@/components/layout/logo";
 import { BotaoLink } from "@/components/ui/button";
 import { candidates, questions } from "@/lib/data";
+import { URL_SITE } from "@/lib/site";
+
+// Endereço oficial (evita que http/https ou ?origem=convite contem como páginas diferentes nos buscadores).
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+// Dados estruturados (schema.org) para os buscadores entenderem o que é o site.
+const DADOS_ESTRUTURADOS = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Em quem votar?",
+  url: `${URL_SITE}/`,
+  inLanguage: "pt-BR",
+  description:
+    "Teste rápido e independente: responda 10 perguntas e descubra qual candidato do 2º turno presidencial de 2026 pensa mais parecido com você, com base em posições públicas documentadas.",
+};
 
 export default function Inicio() {
   return (
     <section className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center justify-center px-5 pt-14 text-center baixa:pt-8 muito-baixa:pt-4 sm:px-6 sm:pt-20 sm:baixa:pt-8 sm:muito-baixa:pt-4">
+      <script
+        type="application/ld+json"
+        // Conteúdo fixo, sem dados de usuário; "<" escapado como recomenda a documentação do Next.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(DADOS_ESTRUTURADOS).replace(/</g, "\\u003c") }}
+      />
       <div className="animate-surgir">
         <Logo className="h-24 baixa:h-20 muito-baixa:h-16 sm:h-32 sm:baixa:h-24 sm:muito-baixa:h-20" alt="Em quem votar?" />
       </div>
