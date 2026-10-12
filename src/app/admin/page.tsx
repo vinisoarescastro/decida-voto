@@ -1,8 +1,9 @@
 import { candidates, positions, questions } from "@/lib/data";
 import { formatPercent } from "@/lib/affinity";
 import { IconeInfo } from "@/components/ui/icon";
-import { MarcadorCandidato, Sobretitulo } from "@/components/ui/text";
+import { MarcadorCandidato } from "@/components/ui/text";
 import { AbasPainel } from "@/features/admin/abas";
+import { AvisoSomenteLeitura, CabecalhoPainel } from "@/features/admin/cabecalho";
 import { Filtros } from "@/features/admin/filters";
 import { BarraDividida, Grupos } from "@/features/admin/groups";
 import {
@@ -20,7 +21,6 @@ import {
 } from "@/features/admin/graficos";
 import { lerFiltros, lerMetrica } from "@/features/admin/ler-filtros";
 import { MapaPainel } from "@/features/admin/mapa";
-import { BotaoSair } from "@/features/admin/logout-button";
 import { FormularioResponsavel } from "@/features/admin/responsavel-form";
 import { exigirAdmin } from "@/server/auth";
 import { db } from "@/server/db/client";
@@ -31,7 +31,7 @@ import { calcularEstatisticas } from "@/server/services/estatisticas";
 import { lerResponsavel } from "@/server/services/responsavel";
 
 export default async function PaginaPainel({ searchParams }: PageProps<"/admin">) {
-  await exigirAdmin();
+  const usuario = await exigirAdmin({ tela: "Estatísticas" });
   const busca = await searchParams;
   const filtros = lerFiltros(busca);
   const metrica = lerMetrica(busca);
@@ -47,16 +47,10 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
 
   return (
     <div className="animate-surgir space-y-6 sm:space-y-8">
-      <header className="flex items-start justify-between gap-4">
-        <div>
-          <Sobretitulo>Área administrativa</Sobretitulo>
-          <h1 className="mt-2 text-[1.75rem] font-semibold tracking-tight sm:text-3xl">Painel</h1>
-          <p className="mt-1 text-sm text-muted">Estatísticas por grupo, sem nome, contato ou idade exata de quem respondeu.</p>
-        </div>
-        <BotaoSair />
-      </header>
+      <CabecalhoPainel usuario={usuario} titulo="Painel" descricao="Estatísticas por grupo, sem nome, contato ou idade exata de quem respondeu." />
 
       <AbasPainel atual="estatisticas" />
+      <AvisoSomenteLeitura usuario={usuario} />
 
       <p role="note" className="flex items-start gap-2.5 rounded-2xl bg-surface-2 px-4 py-3 text-xs leading-relaxed text-muted">
         <IconeInfo className="mt-0.5 shrink-0 text-ink" />
@@ -145,7 +139,7 @@ export default async function PaginaPainel({ searchParams }: PageProps<"/admin">
         </>
       )}
 
-      <FormularioResponsavel inicial={responsavel} />
+      <FormularioResponsavel inicial={responsavel} somenteLeitura={usuario.papel !== "master"} />
     </div>
   );
 }

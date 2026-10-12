@@ -1,5 +1,5 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
-import { adminSessoes, limitesRequisicao } from "../db/schema";
+import { adminSessoes, adminUsuarios, limitesRequisicao } from "../db/schema";
 import { consumir } from "../security/rate-limit";
 import { criarDbDeTeste, limpar } from "../test/db";
 import { criarSessao, encerrarSessao, SESSAO_MAXIMA_MS, SESSAO_OCIOSA_MS, validarSessao } from "./sessoes";
@@ -43,36 +43,49 @@ describe("token de questionário de uso único", () => {
 });
 
 describe("sessões do painel", () => {
-  it("valida uma sessão recém-criada e guarda só o hash do token", async () => {
-    const token = await criarSessao(db, agora);
-    expect(await validarSessao(db, token, new Date(agora.getTime() + 60_000))).toBe(true);
+  let dono = "";
+  beforeEach(async () => {
+    const [u] = await db.insert(adminUsuarios).values({ usuario: "dono", nome: "Dono", papel: "admin", senhaHash: "scrypt:x" }).returning();
+    dono = u.id;
+  });
+
+  it("valida uma sessão recém-criada, devolve quem está logado e guarda só o hash do token", async () => {
+    const token = await criarSessao(db, dono, agora);
+    expect(await validarSessao(db, token, new Date(agora.getTime() + 60_000))).toMatchObject({ id: dono, usuario: "dono", papel: "admin" });
     const [s] = await db.select().from(adminSessoes);
     expect(s.tokenHash).not.toBe(token);
     expect(s.tokenHash).toMatch(/^[0-9a-f]{64}$/);
   });
 
   it("recusa token desconhecido ou ausente", async () => {
-    expect(await validarSessao(db, undefined)).toBe(false);
-    expect(await validarSessao(db, "inexistente")).toBe(false);
+    expect(await validarSessao(db, undefined)).toBeNull();
+    expect(await validarSessao(db, "inexistente")).toBeNull();
   });
 
   it("encerra por inatividade e por tempo máximo", async () => {
-    const ociosa = await criarSessao(db, agora);
-    expect(await validarSessao(db, ociosa, new Date(agora.getTime() + SESSAO_OCIOSA_MS + 1000))).toBe(false);
+    const ociosa = await criarSessao(db, dono, agora);
+    expect(await validarSessao(db, ociosa, new Date(agora.getTime() + SESSAO_OCIOSA_MS + 1000))).toBeNull();
 
-    const longa = await criarSessao(db, agora);
+    const longa = await criarSessao(db, dono, agora);
     let t = agora.getTime();
     // uso contínuo a cada 20 min não ultrapassa o limite máximo de 8 h
     while (t + 20 * 60_000 < agora.getTime() + SESSAO_MAXIMA_MS) {
       t += 20 * 60_000;
-      expect(await validarSessao(db, longa, new Date(t))).toBe(true);
+      expect(await validarSessao(db, longa, new Date(t))).not.toBeNull();
     }
-    expect(await validarSessao(db, longa, new Date(agora.getTime() + SESSAO_MAXIMA_MS + 1000))).toBe(false);
+    expect(await validarSessao(db, longa, new Date(agora.getTime() + SESSAO_MAXIMA_MS + 1000))).toBeNull();
   });
 
   it("encerra a sessão no logout", async () => {
-    const token = await criarSessao(db, agora);
+    const token = await criarSessao(db, dono, agora);
     await encerrarSessao(db, token);
-    expect(await validarSessao(db, token, agora)).toBe(false);
+    expect(await validarSessao(db, token, agora)).toBeNull();
+  });
+
+  it("derruba a sessão de quem foi desativado", async () => {
+    const token = await criarSessao(db, dono, agora);
+    await db.update(adminUsuarios).set({ ativo: false });
+    expect(await validarSessao(db, token, agora)).toBeNull();
+    expect(await db.select().from(adminSessoes)).toHaveLength(0);
   });
 });

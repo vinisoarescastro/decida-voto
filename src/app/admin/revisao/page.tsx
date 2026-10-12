@@ -3,9 +3,8 @@ import { aplicarRascunhos, camposAlterados, hojeEmBrasilia, rascunhoDoPublicado,
 import { classeBotao } from "@/components/ui/button";
 import { Alerta } from "@/components/ui/field";
 import { IconeInfo } from "@/components/ui/icon";
-import { Sobretitulo } from "@/components/ui/text";
 import { AbasPainel } from "@/features/admin/abas";
-import { BotaoSair } from "@/features/admin/logout-button";
+import { AvisoSomenteLeitura, CabecalhoPainel } from "@/features/admin/cabecalho";
 import { RevisaoPergunta } from "@/features/admin/revisao-form";
 import { ListaFontes } from "@/features/result/evidence-list";
 import { exigirAdmin } from "@/server/auth";
@@ -13,7 +12,8 @@ import { db } from "@/server/db/client";
 import { lerRascunhos } from "@/server/services/revisao";
 
 export default async function PaginaRevisao() {
-  await exigirAdmin();
+  const usuario = await exigirAdmin({ tela: "Revisão de conteúdo" });
+  const somenteLeitura = usuario.papel !== "master";
   const base = { questions: questionsFile, positions: positionsFile };
   const registros = await lerRascunhos(db());
   const rascunhos = Object.fromEntries(Object.entries(registros).map(([id, r]) => [id, r.rascunho]));
@@ -26,16 +26,10 @@ export default async function PaginaRevisao() {
 
   return (
     <div className="animate-surgir space-y-6 sm:space-y-8">
-      <header className="flex items-start justify-between gap-4">
-        <div>
-          <Sobretitulo>Área administrativa</Sobretitulo>
-          <h1 className="mt-2 text-[1.75rem] font-semibold tracking-tight sm:text-3xl">Revisão de conteúdo</h1>
-          <p className="mt-1 text-sm text-muted">Perguntas, alternativas e a posição atribuída a cada candidato.</p>
-        </div>
-        <BotaoSair />
-      </header>
+      <CabecalhoPainel usuario={usuario} titulo="Revisão de conteúdo" descricao="Perguntas, alternativas e a posição atribuída a cada candidato." />
 
       <AbasPainel atual="revisao" />
+      <AvisoSomenteLeitura usuario={usuario} />
 
       <div role="note" className="flex items-start gap-2.5 rounded-2xl bg-surface-2 px-4 py-3 text-xs leading-relaxed text-muted">
         <IconeInfo className="mt-0.5 shrink-0 text-ink" />
@@ -74,6 +68,7 @@ export default async function PaginaRevisao() {
               candidatos={candidates}
               inicial={registro?.rascunho ?? null}
               desatualizado={desatualizado}
+              somenteLeitura={somenteLeitura}
               fontes={Object.fromEntries(candidates.map((c) => [c.id, <ListaFontes key={c.id} fontes={ref.posicoes[c.id].evidence} />]))}
             />
           );

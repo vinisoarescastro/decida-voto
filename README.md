@@ -53,7 +53,7 @@ No `.env` de desenvolvimento, use:
 - `DATABASE_URL=postgres://postgres:dev@127.0.0.1:55433/decida_voto`
 - `APP_ORIGIN=http://localhost:3000`
 - `FORM_TOKEN_SECRET` e `RATE_LIMIT_SECRET` com valores aleatórios (`openssl rand -hex 32`)
-- `ADMIN_USERNAME` e `ADMIN_PASSWORD_HASH` (gere com `npm run admin:hash`)
+- `ADMIN_USERNAME` e `ADMIN_PASSWORD_HASH` (gere com `npm run admin:hash`): conta inicial, que vira o primeiro master no primeiro login. Depois, os acessos são criados na aba "Usuários" do painel
 
 Acesse sempre por `http://localhost:3000`, e não por `127.0.0.1`: envios de outra origem são recusados.
 

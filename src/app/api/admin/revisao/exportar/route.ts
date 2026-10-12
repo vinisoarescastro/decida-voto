@@ -1,10 +1,10 @@
-import { cookies } from "next/headers";
 import { positionsFile, questionsFile } from "@/lib/data";
 import { aplicarRascunhos, hojeEmBrasilia, serializarArquivo, validarArquivos } from "@/lib/revisao";
+import { autorizarApi } from "@/server/auth";
 import { db } from "@/server/db/client";
 import { json } from "@/server/http";
+import { registrar } from "@/server/services/auditoria";
 import { lerRascunhos } from "@/server/services/revisao";
-import { COOKIE_ADMIN, validarSessao } from "@/server/services/sessoes";
 
 const ARQUIVOS = { perguntas: "questions.json", posicoes: "positions.json" } as const;
 
@@ -13,8 +13,9 @@ const ARQUIVOS = { perguntas: "questions.json", posicoes: "positions.json" } as 
  * Para publicar, o arquivo substitui o de src/data e passa pelos testes e pelo build.
  */
 export async function GET(req: Request) {
-  const token = (await cookies()).get(COOKIE_ADMIN)?.value;
-  if (!(await validarSessao(db(), token))) return json(401, { erro: "Sua sessão expirou. Entre novamente." });
+  // Só leitura: master e admin podem baixar.
+  const a = await autorizarApi(req);
+  if (a.negado) return a.negado;
 
   const arquivo = new URL(req.url).searchParams.get("arquivo");
   if (arquivo !== "perguntas" && arquivo !== "posicoes") return json(400, { erro: "Arquivo inválido." });
@@ -25,6 +26,7 @@ export async function GET(req: Request) {
   const problemas = validarArquivos(saida);
   if (problemas.length > 0) return json(422, { erro: "Os arquivos não passaram na validação.", problemas });
 
+  await registrar(db(), a.usuario, "exportou-revisao", ARQUIVOS[arquivo]);
   return new Response(serializarArquivo(arquivo === "perguntas" ? saida.questions : saida.positions), {
     headers: {
       "Content-Type": "application/json; charset=utf-8",

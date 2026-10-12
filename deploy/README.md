@@ -30,7 +30,7 @@ Preencha o `.env`:
 | `POSTGRES_PASSWORD` | `openssl rand -hex 24` (só letras e números) |
 | `FORM_TOKEN_SECRET`, `RATE_LIMIT_SECRET` | `openssl rand -hex 32` (um valor diferente para cada) |
 | `APP_ORIGIN` | Endereço público exato, ex.: `https://www.seudominio.com.br` |
-| `ADMIN_USERNAME` | Nome de usuário do painel |
+| `ADMIN_USERNAME` | Usuário da conta inicial do painel. No primeiro login ela vira o primeiro master; depois, os acessos são gerenciados na aba "Usuários" (master altera, admin só visualiza) e esta conta do `.env` deixa de valer |
 | `ADMIN_PASSWORD_HASH` | `docker compose run --rm -it migrate npm run -s admin:hash` (digite a senha; mínimo 12 caracteres) |
 | `PARTICIPACOES_EXCLUIR_APOS` | Data de exclusão automática dos dados. Mantenha igual a `RETENCAO_PARTICIPACOES` em `src/lib/site.ts`. |
 

@@ -20,6 +20,8 @@ type Props = {
   desatualizado: boolean;
   /** Fontes de cada candidato, já renderizadas no servidor. */
   fontes: Record<string, ReactNode>;
+  /** Admin (só visualização): campos desabilitados e sem botões de salvar. O servidor também recusa. */
+  somenteLeitura?: boolean;
 };
 
 // Seleção de alternativa por candidato: a cor do marcador identifica o candidato, sempre com o nome ao lado.
@@ -31,7 +33,7 @@ const SELECAO_CANDIDATO = [
 const CONFIANCA = { alta: "Alta", media: "Média" } as const;
 
 /** Revisão de uma pergunta: texto, alternativas, alternativa de cada candidato e justificativas. */
-export function RevisaoPergunta({ numero, referencia, candidatos, inicial, desatualizado, fontes }: Props) {
+export function RevisaoPergunta({ numero, referencia, candidatos, inicial, desatualizado, fontes, somenteLeitura = false }: Props) {
   const router = useRouter();
   const id = useId();
   const publicado = useMemo(() => rascunhoDoPublicado(referencia), [referencia]);
@@ -166,208 +168,212 @@ export function RevisaoPergunta({ numero, referencia, candidatos, inicial, desat
         <IconeChevronBaixo className="mt-1 shrink-0 text-muted transition-transform duration-200 group-open/pergunta:rotate-180" />
       </summary>
 
-      <form onSubmit={salvar} noValidate className="space-y-8 border-t border-line px-5 pb-6 pt-5 sm:px-6">
-        {desatualizado && (
-          <p className="flex items-start gap-2 rounded-2xl bg-danger-soft px-4 py-3 text-sm text-danger">
-            <IconeAlerta className="mt-0.5 shrink-0" />
-            <span>
-              Este rascunho foi salvo sobre uma versão anterior do conteúdo publicado. Compare com o texto atual (indicado em
-              “Publicado”) antes de exportar.
-            </span>
-          </p>
-        )}
+      <form onSubmit={salvar} noValidate className="border-t border-line px-5 pb-6 pt-5 sm:px-6">
+        <fieldset disabled={somenteLeitura} className="min-w-0 space-y-8">
+          {desatualizado && (
+            <p className="flex items-start gap-2 rounded-2xl bg-danger-soft px-4 py-3 text-sm text-danger">
+              <IconeAlerta className="mt-0.5 shrink-0" />
+              <span>
+                Este rascunho foi salvo sobre uma versão anterior do conteúdo publicado. Compare com o texto atual (indicado em
+                “Publicado”) antes de exportar.
+              </span>
+            </p>
+          )}
 
-        <fieldset className="space-y-4">
-          <legend className="text-sm font-semibold">Pergunta</legend>
-          <CampoTexto {...estado("pergunta.theme")} rotulo="Tema" valor={valores.pergunta.theme} original={publicado.pergunta.theme} maximo={60} onChange={(v) => mudarPergunta("theme", v)} />
-          <CampoTexto {...estado("pergunta.text")} rotulo="Pergunta" valor={valores.pergunta.text} original={publicado.pergunta.text} maximo={200} multilinha onChange={(v) => mudarPergunta("text", v)} />
-          <CampoTexto
-            {...estado("pergunta.context")}
-            rotulo="Texto de apoio (aparece abaixo da pergunta)"
-            valor={valores.pergunta.context}
-            original={publicado.pergunta.context}
-            maximo={400}
-            multilinha
-            onChange={(v) => mudarPergunta("context", v)}
-          />
-        </fieldset>
+          <fieldset className="space-y-4">
+            <legend className="text-sm font-semibold">Pergunta</legend>
+            <CampoTexto {...estado("pergunta.theme")} rotulo="Tema" valor={valores.pergunta.theme} original={publicado.pergunta.theme} maximo={60} onChange={(v) => mudarPergunta("theme", v)} />
+            <CampoTexto {...estado("pergunta.text")} rotulo="Pergunta" valor={valores.pergunta.text} original={publicado.pergunta.text} maximo={200} multilinha onChange={(v) => mudarPergunta("text", v)} />
+            <CampoTexto
+              {...estado("pergunta.context")}
+              rotulo="Texto de apoio (aparece abaixo da pergunta)"
+              valor={valores.pergunta.context}
+              original={publicado.pergunta.context}
+              maximo={400}
+              multilinha
+              onChange={(v) => mudarPergunta("context", v)}
+            />
+          </fieldset>
 
-        <fieldset className="space-y-3">
-          <legend className="text-sm font-semibold">Alternativas e candidatos</legend>
-          <p className="text-sm text-muted">
-            Edite o texto e marque em qual alternativa cada candidato está. Os dois podem ficar na mesma. No questionário, a
-            ordem é sorteada; aqui elas aparecem na ordem da escala (1 a 4).
-          </p>
-          {opcoes.map((o) => {
-            const caminho = `pergunta.options.${o.indice}.text`;
-            return (
-              <div key={o.id} className="rounded-2xl border border-line p-4">
-                <CampoTexto
-                  {...estado(caminho)}
-                  rotulo={`Alternativa ${o.value}`}
-                  valor={valores.pergunta.options[o.indice].text}
-                  original={publicado.pergunta.options[o.indice].text}
-                  maximo={200}
-                  multilinha
-                  onChange={(v) => mudarAlternativa(o.indice, v)}
-                />
-                <p className="mt-3 text-xs font-medium text-muted">Candidatos nesta alternativa</p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {candidatos.map((c, i) => (
-                    <OpcaoCandidato
-                      key={c.id}
-                      nome={`${id}-cand-${c.id}`}
-                      indice={i}
-                      marcado={valores.posicoes[c.id].value === o.value}
-                      onChange={() => mudarPosicao(c.id, { value: o.value })}
-                    >
-                      {c.name}
-                    </OpcaoCandidato>
-                  ))}
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-semibold">Alternativas e candidatos</legend>
+            <p className="text-sm text-muted">
+              Edite o texto e marque em qual alternativa cada candidato está. Os dois podem ficar na mesma. No questionário, a
+              ordem é sorteada; aqui elas aparecem na ordem da escala (1 a 4).
+            </p>
+            {opcoes.map((o) => {
+              const caminho = `pergunta.options.${o.indice}.text`;
+              return (
+                <div key={o.id} className="rounded-2xl border border-line p-4">
+                  <CampoTexto
+                    {...estado(caminho)}
+                    rotulo={`Alternativa ${o.value}`}
+                    valor={valores.pergunta.options[o.indice].text}
+                    original={publicado.pergunta.options[o.indice].text}
+                    maximo={200}
+                    multilinha
+                    onChange={(v) => mudarAlternativa(o.indice, v)}
+                  />
+                  <p className="mt-3 text-xs font-medium text-muted">Candidatos nesta alternativa</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {candidatos.map((c, i) => (
+                      <OpcaoCandidato
+                        key={c.id}
+                        nome={`${id}-cand-${c.id}`}
+                        indice={i}
+                        marcado={valores.posicoes[c.id].value === o.value}
+                        onChange={() => mudarPosicao(c.id, { value: o.value })}
+                      >
+                        {c.name}
+                      </OpcaoCandidato>
+                    ))}
+                  </div>
                 </div>
+              );
+            })}
+            <div className="rounded-2xl border border-dashed border-line-strong p-4">
+              <p className="text-sm font-medium">Sem posição documentada</p>
+              <p className="mt-1 text-xs text-muted">Use quando as fontes não permitem afirmar a posição. O tema não conta na afinidade desse candidato.</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {candidatos.map((c, i) => (
+                  <OpcaoCandidato key={c.id} nome={`${id}-cand-${c.id}`} indice={i} marcado={valores.posicoes[c.id].value === null} onChange={() => mudarPosicao(c.id, { value: null })}>
+                    {c.name}
+                  </OpcaoCandidato>
+                ))}
               </div>
+            </div>
+            {candidatos.map((c) => (
+              <ErroCampo key={c.id} id={campoId(`posicoes.${c.id}.value`)} texto={erros[`posicoes.${c.id}.value`] && `${c.name}: ${erros[`posicoes.${c.id}.value`]}`} />
+            ))}
+          </fieldset>
+
+          {candidatos.map((c, i) => {
+            const p = valores.posicoes[c.id];
+            const pub = publicado.posicoes[c.id];
+            const base = `posicoes.${c.id}`;
+            const marcada = textoDaAlternativa(p.value);
+            const textoPublicado = pub.value === null ? "sem posição documentada" : `alternativa ${pub.value}`;
+            return (
+              <fieldset key={c.id} className="space-y-4">
+                <legend className="flex items-center gap-2 text-sm font-semibold">
+                  <MarcadorCandidato indice={i} />
+                  Posição de {c.name}
+                </legend>
+                <div className="rounded-2xl bg-surface-2 px-4 py-3 text-sm">
+                  {p.value === null ? (
+                    <span>Sem posição documentada.</span>
+                  ) : (
+                    <span>
+                      <strong>Alternativa {p.value}:</strong> {marcada}
+                    </span>
+                  )}
+                  {alterados.has(`${base}.value`) && <span className="mt-1 block text-xs text-muted">Alterado. Publicado: {textoPublicado}.</span>}
+                </div>
+
+                <div>
+                  <label htmlFor={campoId(`${base}.confidence`)} className={classeRotulo}>
+                    Confiança
+                  </label>
+                  <Selecao
+                    id={campoId(`${base}.confidence`)}
+                    value={p.value === null ? "" : (p.confidence ?? "")}
+                    disabled={p.value === null}
+                    onChange={(e) => mudarPosicao(c.id, { confidence: (e.target.value || null) as PosicaoRascunho["confidence"] })}
+                    aria-invalid={Boolean(erros[`${base}.confidence`])}
+                    aria-describedby={erros[`${base}.confidence`] ? `${campoId(`${base}.confidence`)}-erro` : undefined}
+                    className="mt-2 sm:max-w-60"
+                  >
+                    <option value="">{p.value === null ? "Não se aplica" : "Escolha"}</option>
+                    {Object.entries(CONFIANCA).map(([v, r]) => (
+                      <option key={v} value={v}>
+                        {r}
+                      </option>
+                    ))}
+                  </Selecao>
+                  <ErroCampo id={`${campoId(`${base}.confidence`)}-erro`} texto={erros[`${base}.confidence`]} />
+                  <Alteracao alterado={alterados.has(`${base}.confidence`)} original={pub.confidence ? CONFIANCA[pub.confidence] : "não se aplica"} />
+                </div>
+
+                <CampoTexto {...estado(`${base}.summary`)} rotulo="Resumo da posição" valor={p.summary} original={pub.summary} maximo={1500} multilinha onChange={(v) => mudarPosicao(c.id, { summary: v })} />
+                <CampoTexto
+                  {...estado(`${base}.rationale`)}
+                  rotulo="Justificativa da alternativa escolhida"
+                  valor={p.rationale}
+                  original={pub.rationale}
+                  maximo={3000}
+                  multilinha
+                  onChange={(v) => mudarPosicao(c.id, { rationale: v })}
+                />
+                {alterados.has(`${base}.value`) && !alterados.has(`${base}.rationale`) && (
+                  <p className="text-xs text-muted">A alternativa mudou: confira se o resumo e a justificativa ainda fazem sentido.</p>
+                )}
+
+                <MaisDetalhes rotulo={`Fontes cadastradas (${referencia.posicoes[c.id].evidence.length})`}>
+                  {referencia.posicoes[c.id].evidence.length > 0 ? fontes[c.id] : <p className="text-sm text-muted">Nenhuma fonte cadastrada.</p>}
+                </MaisDetalhes>
+              </fieldset>
             );
           })}
-          <div className="rounded-2xl border border-dashed border-line-strong p-4">
-            <p className="text-sm font-medium">Sem posição documentada</p>
-            <p className="mt-1 text-xs text-muted">Use quando as fontes não permitem afirmar a posição. O tema não conta na afinidade desse candidato.</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {candidatos.map((c, i) => (
-                <OpcaoCandidato key={c.id} nome={`${id}-cand-${c.id}`} indice={i} marcado={valores.posicoes[c.id].value === null} onChange={() => mudarPosicao(c.id, { value: null })}>
-                  {c.name}
-                </OpcaoCandidato>
-              ))}
-            </div>
-          </div>
-          {candidatos.map((c) => (
-            <ErroCampo key={c.id} id={campoId(`posicoes.${c.id}.value`)} texto={erros[`posicoes.${c.id}.value`] && `${c.name}: ${erros[`posicoes.${c.id}.value`]}`} />
-          ))}
-        </fieldset>
 
-        {candidatos.map((c, i) => {
-          const p = valores.posicoes[c.id];
-          const pub = publicado.posicoes[c.id];
-          const base = `posicoes.${c.id}`;
-          const marcada = textoDaAlternativa(p.value);
-          const textoPublicado = pub.value === null ? "sem posição documentada" : `alternativa ${pub.value}`;
-          return (
-            <fieldset key={c.id} className="space-y-4">
-              <legend className="flex items-center gap-2 text-sm font-semibold">
-                <MarcadorCandidato indice={i} />
-                Posição de {c.name}
-              </legend>
-              <div className="rounded-2xl bg-surface-2 px-4 py-3 text-sm">
-                {p.value === null ? (
-                  <span>Sem posição documentada.</span>
-                ) : (
-                  <span>
-                    <strong>Alternativa {p.value}:</strong> {marcada}
+          <fieldset className="space-y-4 rounded-2xl border border-line p-4">
+            <legend className="px-1 text-sm font-semibold">Revisão</legend>
+            <label className="flex cursor-pointer items-start gap-3 text-sm">
+              <input
+                type="checkbox"
+                checked={valores.revisada}
+                onChange={(e) => setValores((v) => ({ ...v, revisada: e.target.checked }))}
+                className="mt-0.5 size-5 shrink-0 cursor-pointer accent-ink"
+              />
+              <span>
+                <strong className="font-medium">Pergunta revisada.</strong> Conferi as fontes, a alternativa de cada candidato e
+                apliquei o mesmo critério aos dois.
+              </span>
+            </label>
+            <div>
+              <label htmlFor={campoId("nota")} className={classeRotulo}>
+                Nota da revisão
+              </label>
+              <p className="mt-1 text-xs text-muted">Uso interno, não aparece no site. Registre o motivo das mudanças. Não inclua dados pessoais.</p>
+              <AreaTexto
+                id={campoId("nota")}
+                value={valores.nota}
+                maxLength={2000}
+                onChange={(e) => {
+                  setValores((v) => ({ ...v, nota: e.target.value }));
+                  limparErro("nota");
+                }}
+                aria-invalid={Boolean(erros.nota)}
+                aria-describedby={erros.nota ? `${campoId("nota")}-erro` : undefined}
+                className="mt-2"
+              />
+              <ErroCampo id={`${campoId("nota")}-erro`} texto={erros.nota} />
+            </div>
+          </fieldset>
+
+          {erroGeral && <Alerta>{erroGeral}</Alerta>}
+
+          {!somenteLeitura && (
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+              <p role="status" className="text-sm text-muted sm:mr-auto">
+                {aviso && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconeCheck tamanho={16} className="text-ink" />
+                    {aviso}
                   </span>
                 )}
-                {alterados.has(`${base}.value`) && <span className="mt-1 block text-xs text-muted">Alterado. Publicado: {textoPublicado}.</span>}
-              </div>
-
-              <div>
-                <label htmlFor={campoId(`${base}.confidence`)} className={classeRotulo}>
-                  Confiança
-                </label>
-                <Selecao
-                  id={campoId(`${base}.confidence`)}
-                  value={p.value === null ? "" : (p.confidence ?? "")}
-                  disabled={p.value === null}
-                  onChange={(e) => mudarPosicao(c.id, { confidence: (e.target.value || null) as PosicaoRascunho["confidence"] })}
-                  aria-invalid={Boolean(erros[`${base}.confidence`])}
-                  aria-describedby={erros[`${base}.confidence`] ? `${campoId(`${base}.confidence`)}-erro` : undefined}
-                  className="mt-2 sm:max-w-60"
-                >
-                  <option value="">{p.value === null ? "Não se aplica" : "Escolha"}</option>
-                  {Object.entries(CONFIANCA).map(([v, r]) => (
-                    <option key={v} value={v}>
-                      {r}
-                    </option>
-                  ))}
-                </Selecao>
-                <ErroCampo id={`${campoId(`${base}.confidence`)}-erro`} texto={erros[`${base}.confidence`]} />
-                <Alteracao alterado={alterados.has(`${base}.confidence`)} original={pub.confidence ? CONFIANCA[pub.confidence] : "não se aplica"} />
-              </div>
-
-              <CampoTexto {...estado(`${base}.summary`)} rotulo="Resumo da posição" valor={p.summary} original={pub.summary} maximo={1500} multilinha onChange={(v) => mudarPosicao(c.id, { summary: v })} />
-              <CampoTexto
-                {...estado(`${base}.rationale`)}
-                rotulo="Justificativa da alternativa escolhida"
-                valor={p.rationale}
-                original={pub.rationale}
-                maximo={3000}
-                multilinha
-                onChange={(v) => mudarPosicao(c.id, { rationale: v })}
-              />
-              {alterados.has(`${base}.value`) && !alterados.has(`${base}.rationale`) && (
-                <p className="text-xs text-muted">A alternativa mudou: confira se o resumo e a justificativa ainda fazem sentido.</p>
+              </p>
+              {salvos && (
+                <Botao variante="discreto" tamanho="sm" onClick={descartar} disabled={enviando}>
+                  Descartar rascunho
+                </Botao>
               )}
-
-              <MaisDetalhes rotulo={`Fontes cadastradas (${referencia.posicoes[c.id].evidence.length})`}>
-                {referencia.posicoes[c.id].evidence.length > 0 ? fontes[c.id] : <p className="text-sm text-muted">Nenhuma fonte cadastrada.</p>}
-              </MaisDetalhes>
-            </fieldset>
-          );
-        })}
-
-        <fieldset className="space-y-4 rounded-2xl border border-line p-4">
-          <legend className="px-1 text-sm font-semibold">Revisão</legend>
-          <label className="flex cursor-pointer items-start gap-3 text-sm">
-            <input
-              type="checkbox"
-              checked={valores.revisada}
-              onChange={(e) => setValores((v) => ({ ...v, revisada: e.target.checked }))}
-              className="mt-0.5 size-5 shrink-0 cursor-pointer accent-ink"
-            />
-            <span>
-              <strong className="font-medium">Pergunta revisada.</strong> Conferi as fontes, a alternativa de cada candidato e
-              apliquei o mesmo critério aos dois.
-            </span>
-          </label>
-          <div>
-            <label htmlFor={campoId("nota")} className={classeRotulo}>
-              Nota da revisão
-            </label>
-            <p className="mt-1 text-xs text-muted">Uso interno, não aparece no site. Registre o motivo das mudanças. Não inclua dados pessoais.</p>
-            <AreaTexto
-              id={campoId("nota")}
-              value={valores.nota}
-              maxLength={2000}
-              onChange={(e) => {
-                setValores((v) => ({ ...v, nota: e.target.value }));
-                limparErro("nota");
-              }}
-              aria-invalid={Boolean(erros.nota)}
-              aria-describedby={erros.nota ? `${campoId("nota")}-erro` : undefined}
-              className="mt-2"
-            />
-            <ErroCampo id={`${campoId("nota")}-erro`} texto={erros.nota} />
-          </div>
-        </fieldset>
-
-        {erroGeral && <Alerta>{erroGeral}</Alerta>}
-
-        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
-          <p role="status" className="text-sm text-muted sm:mr-auto">
-            {aviso && (
-              <span className="inline-flex items-center gap-1.5">
-                <IconeCheck tamanho={16} className="text-ink" />
-                {aviso}
-              </span>
-            )}
-          </p>
-          {salvos && (
-            <Botao variante="discreto" tamanho="sm" onClick={descartar} disabled={enviando}>
-              Descartar rascunho
-            </Botao>
+              <Botao type="submit" tamanho="sm" disabled={enviando || !naoSalvo} className="sm:min-w-28">
+                {enviando && <Girando />}
+                {enviando ? "Salvando" : "Salvar"}
+              </Botao>
+            </div>
           )}
-          <Botao type="submit" tamanho="sm" disabled={enviando || !naoSalvo} className="sm:min-w-28">
-            {enviando && <Girando />}
-            {enviando ? "Salvando" : "Salvar"}
-          </Botao>
-        </div>
+        </fieldset>
       </form>
     </details>
   );

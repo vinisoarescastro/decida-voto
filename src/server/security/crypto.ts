@@ -1,4 +1,4 @@
-import { createHash, createHmac, randomBytes, scrypt as scryptCb, timingSafeEqual, type ScryptOptions } from "node:crypto";
+import { createHash, createHmac, randomBytes, randomInt, scrypt as scryptCb, timingSafeEqual, type ScryptOptions } from "node:crypto";
 
 // Funções criptográficas puras (sem acesso a banco ou ambiente), testáveis isoladamente.
 
@@ -91,3 +91,13 @@ export async function verificarSenha(senha: string, hashArmazenado: string): Pro
 }
 
 export const novoTokenSessao = () => randomBytes(32).toString("base64url");
+
+/**
+ * Senha provisória legível para ditar ou colar (ex.: "k7mp-x3qa-9wtz"): 12 caracteres sorteados de um
+ * alfabeto sem os que se confundem (0/o, 1/l/i), cerca de 60 bits de entropia. Vale só até a primeira troca.
+ */
+const ALFABETO_PROVISORIA = "abcdefghjkmnpqrstuvwxyz23456789";
+export function gerarSenhaProvisoria(): string {
+  const c = Array.from({ length: 12 }, () => ALFABETO_PROVISORIA[randomInt(ALFABETO_PROVISORIA.length)]);
+  return [c.slice(0, 4), c.slice(4, 8), c.slice(8)].map((g) => g.join("")).join("-");
+}

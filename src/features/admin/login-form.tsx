@@ -42,7 +42,7 @@ export function FormularioLogin() {
     <form onSubmit={entrar} className="mt-8 space-y-5">
       <div>
         <label htmlFor="usuario" className={classeRotulo}>
-          Usuário
+          Usuário ou e-mail
         </label>
         <Campo id="usuario" autoComplete="username" autoCapitalize="none" required value={usuario} onChange={(e) => setUsuario(e.target.value)} className="mt-2" />
       </div>

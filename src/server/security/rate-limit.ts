@@ -14,6 +14,7 @@ export const REGRAS = {
   envioGlobalHora: { escopo: "envio-global-hora", limite: 5000, janelaSegundos: 3600 },
   loginPorIp: { escopo: "login-ip", limite: 10, janelaSegundos: 900 },
   loginPorUsuario: { escopo: "login-usuario", limite: 20, janelaSegundos: 3600 },
+  trocaSenhaPorUsuario: { escopo: "senha-usuario", limite: 10, janelaSegundos: 900 },
 } satisfies Record<string, Regra>;
 
 export async function consumir(

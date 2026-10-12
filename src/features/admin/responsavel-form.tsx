@@ -10,7 +10,7 @@ import { errosDoResponsavel, responsavelSchema, type Responsavel } from "@/lib/r
 type Erros = Partial<Record<keyof Responsavel, string>>;
 
 /** Nome e e-mail do responsável pelos dados, exibidos em Privacidade e Metodologia. */
-export function FormularioResponsavel({ inicial }: { inicial: Responsavel }) {
+export function FormularioResponsavel({ inicial, somenteLeitura = false }: { inicial: Responsavel; somenteLeitura?: boolean }) {
   const router = useRouter();
   const id = useId();
   const [valores, setValores] = useState(inicial);
@@ -73,62 +73,67 @@ export function FormularioResponsavel({ inicial }: { inicial: Responsavel }) {
         (LGPD). A alteração vale na hora.
       </p>
 
-      <form onSubmit={salvar} noValidate className="mt-5 space-y-4">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label htmlFor={`${id}-nome`} className={classeRotulo}>
-              Nome do responsável
-            </label>
-            <Campo
-              id={`${id}-nome`}
-              autoComplete="name"
-              maxLength={120}
-              value={valores.nome}
-              onChange={(e) => mudar("nome", e.target.value)}
-              aria-invalid={Boolean(erros.nome)}
-              aria-describedby={erros.nome ? `${id}-nome-erro` : undefined}
-              className="mt-2"
-            />
-            <ErroCampo id={`${id}-nome-erro`} texto={erros.nome} />
+      <form onSubmit={salvar} noValidate className="mt-5">
+        {/* Admin (só visualização): o fieldset desabilita todos os campos; o servidor também recusa a gravação. */}
+        <fieldset disabled={somenteLeitura} className="min-w-0 space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor={`${id}-nome`} className={classeRotulo}>
+                Nome do responsável
+              </label>
+              <Campo
+                id={`${id}-nome`}
+                autoComplete="name"
+                maxLength={120}
+                value={valores.nome}
+                onChange={(e) => mudar("nome", e.target.value)}
+                aria-invalid={Boolean(erros.nome)}
+                aria-describedby={erros.nome ? `${id}-nome-erro` : undefined}
+                className="mt-2"
+              />
+              <ErroCampo id={`${id}-nome-erro`} texto={erros.nome} />
+            </div>
+            <div>
+              <label htmlFor={`${id}-email`} className={classeRotulo}>
+                E-mail de contato
+              </label>
+              <Campo
+                id={`${id}-email`}
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                spellCheck={false}
+                maxLength={254}
+                value={valores.email}
+                onChange={(e) => mudar("email", e.target.value)}
+                aria-invalid={Boolean(erros.email)}
+                aria-describedby={erros.email ? `${id}-email-erro` : undefined}
+                className="mt-2"
+              />
+              <ErroCampo id={`${id}-email-erro`} texto={erros.email} />
+            </div>
           </div>
-          <div>
-            <label htmlFor={`${id}-email`} className={classeRotulo}>
-              E-mail de contato
-            </label>
-            <Campo
-              id={`${id}-email`}
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              autoCapitalize="none"
-              spellCheck={false}
-              maxLength={254}
-              value={valores.email}
-              onChange={(e) => mudar("email", e.target.value)}
-              aria-invalid={Boolean(erros.email)}
-              aria-describedby={erros.email ? `${id}-email-erro` : undefined}
-              className="mt-2"
-            />
-            <ErroCampo id={`${id}-email-erro`} texto={erros.email} />
-          </div>
-        </div>
 
-        {erroGeral && <Alerta>{erroGeral}</Alerta>}
+          {erroGeral && <Alerta>{erroGeral}</Alerta>}
 
-        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
-          <p role="status" className="text-sm text-muted">
-            {salvo && (
-              <span className="inline-flex items-center gap-1.5">
-                <IconeCheck tamanho={16} className="text-ink" />
-                Salvo. As páginas públicas já mostram os novos dados.
-              </span>
-            )}
-          </p>
-          <Botao type="submit" tamanho="sm" disabled={enviando || !alterado} className="sm:min-w-28">
-            {enviando && <Girando />}
-            {enviando ? "Salvando" : "Salvar"}
-          </Botao>
-        </div>
+          {!somenteLeitura && (
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+              <p role="status" className="text-sm text-muted">
+                {salvo && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconeCheck tamanho={16} className="text-ink" />
+                    Salvo. As páginas públicas já mostram os novos dados.
+                  </span>
+                )}
+              </p>
+              <Botao type="submit" tamanho="sm" disabled={enviando || !alterado} className="sm:min-w-28">
+                {enviando && <Girando />}
+                {enviando ? "Salvando" : "Salvar"}
+              </Botao>
+            </div>
+          )}
+        </fieldset>
       </form>
     </section>
   );

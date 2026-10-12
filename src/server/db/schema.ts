@@ -7,6 +7,7 @@ import {
   foreignKey,
   index,
   integer,
+  bigint,
   jsonb,
   numeric,
   pgEnum,
@@ -148,14 +149,56 @@ export const revisaoPerguntas = pgTable("revisao_perguntas", {
   atualizadoEm: timestamp("atualizado_em", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const papelAdminEnum = pgEnum("papel_admin", ["master", "admin"]);
+
+/**
+ * Pessoas com acesso ao painel. "master" altera tudo (inclusive usuários); "admin" só visualiza.
+ * Usuário e e-mail são guardados em minúsculas; o e-mail é opcional e também serve para entrar.
+ * A senha provisória (gerada pelo master) obriga a troca no primeiro acesso e vence em 24 horas.
+ */
+export const adminUsuarios = pgTable("admin_usuarios", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  usuario: varchar("usuario", { length: 40 }).notNull().unique("admin_usuarios_usuario_uk"),
+  nome: varchar("nome", { length: 80 }).notNull(),
+  email: varchar("email", { length: 254 }).unique("admin_usuarios_email_uk"),
+  papel: papelAdminEnum("papel").notNull().default("admin"),
+  senhaHash: varchar("senha_hash", { length: 300 }).notNull(),
+  senhaProvisoria: boolean("senha_provisoria").notNull().default(false),
+  provisoriaExpiraEm: timestamp("provisoria_expira_em", { withTimezone: true }),
+  ativo: boolean("ativo").notNull().default(true),
+  criadoEm: timestamp("criado_em", { withTimezone: true }).notNull().defaultNow(),
+  atualizadoEm: timestamp("atualizado_em", { withTimezone: true }).notNull().defaultNow(),
+  ultimoAcessoEm: timestamp("ultimo_acesso_em", { withTimezone: true }),
+});
+
+/**
+ * Auditoria do painel: entradas, telas visualizadas e alterações. Guarda o nome de usuário da época
+ * (o registro sobrevive à exclusão da pessoa) e nunca guarda senha, IP ou dados das participações.
+ */
+export const adminAuditoria = pgTable(
+  "admin_auditoria",
+  {
+    id: bigint("id", { mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
+    quando: timestamp("quando", { withTimezone: true }).notNull().defaultNow(),
+    usuarioId: uuid("usuario_id").references(() => adminUsuarios.id, { onDelete: "set null" }),
+    usuario: varchar("usuario", { length: 40 }).notNull(),
+    acao: varchar("acao", { length: 40 }).notNull(),
+    detalhe: varchar("detalhe", { length: 200 }).notNull().default(""),
+  },
+  (t) => [index("admin_auditoria_quando_idx").on(t.quando), index("admin_auditoria_usuario_idx").on(t.usuarioId, t.quando)],
+);
+
 /** Sessões do painel administrativo. Guarda só o hash do token do cookie. */
 export const adminSessoes = pgTable(
   "admin_sessoes",
   {
     tokenHash: char("token_hash", { length: 64 }).primaryKey(),
+    usuarioId: uuid("usuario_id")
+      .notNull()
+      .references(() => adminUsuarios.id, { onDelete: "cascade" }),
     criadaEm: timestamp("criada_em", { withTimezone: true }).notNull().defaultNow(),
     expiraEm: timestamp("expira_em", { withTimezone: true }).notNull(),
     ultimoAcesso: timestamp("ultimo_acesso", { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [index("admin_sessoes_expira_idx").on(t.expiraEm)],
+  (t) => [index("admin_sessoes_expira_idx").on(t.expiraEm), index("admin_sessoes_usuario_idx").on(t.usuarioId)],
 );
